@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liridon & Aurela — 10 Gusht, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0A0A;
+  --charcoal:#161513;
+  --gold:#C9A961;
+  --gold-bright:#E8C874;
+  --ivory:#F5F0E6;
+  --line:rgba(201,169,97,.35);
+  --display:'Cinzel', serif;
+  --sans:'Jost', sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--black); color:var(--ivory); font-family:var(--sans); overflow-x:hidden; -webkit-font-smoothing:antialiased;}
+a{color:inherit; text-decoration:none;}
+::selection{background:var(--gold); color:var(--black);}
+
+/* ===== GATE REVEAL ===== */
+.gate-scene{position:relative; height:100svh; overflow:hidden; background:radial-gradient(120% 100% at 50% 50%, #1c1a16 0%, var(--black) 75%);}
+.gate-scene::before{content:""; position:absolute; inset:0; background:
+  repeating-linear-gradient(90deg, transparent 0 78px, rgba(201,169,97,.04) 78px 79px);
+  pointer-events:none;}
+
+.gate-panel{position:absolute; top:0; bottom:0; width:52%; background:
+  linear-gradient(180deg, var(--charcoal) 0%, var(--black) 100%);
+  z-index:5; transition:transform 1.1s cubic-bezier(.7,0,.15,1); border:1px solid var(--line);}
+.gate-panel.left{left:0; transform-origin:left; box-shadow:6px 0 40px rgba(0,0,0,.6);}
+.gate-panel.right{right:0; transform-origin:right; box-shadow:-6px 0 40px rgba(0,0,0,.6);}
+.gate-panel.open.left{transform:translateX(-100%);}
+.gate-panel.open.right{transform:translateX(100%);}
+.gate-panel .fan{position:absolute; top:50%; width:180px; height:180px; transform:translateY(-50%); opacity:.5;}
+.gate-panel.left .fan{right:-40px;}
+.gate-panel.right .fan{left:-40px; transform:translateY(-50%) scaleX(-1);}
+.gate-panel .rule{position:absolute; top:14%; bottom:14%; width:1px; background:var(--line);}
+.gate-panel.left .rule{right:24px;}
+.gate-panel.right .rule{left:24px;}
+
+.gate-cta{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:6; text-align:center; cursor:pointer; transition:opacity .5s ease, visibility .5s ease;}
+.gate-cta.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+.gate-cta .eyebrow{font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold); margin-bottom:18px;}
+.gate-cta .initials{font-family:var(--display); font-size:clamp(3rem,14vw,5rem); font-weight:500; color:var(--gold-bright); letter-spacing:.05em;}
+.gate-cta .initials .amp{color:var(--ivory); font-size:.6em; margin:0 .2em;}
+.gate-cta .cta-line{margin-top:22px; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--ivory); opacity:.6;}
+.gate-cta .ring{width:56px; height:56px; margin:20px auto 0; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center;}
+.gate-cta .ring::before{content:""; width:8px; height:8px; border-right:1px solid var(--gold); border-bottom:1px solid var(--gold); transform:rotate(45deg) translate(-1px,-1px);}
+
+.reveal-content{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px; opacity:0; transition:opacity 1s ease .6s; z-index:3;}
+.reveal-content.show{opacity:1;}
+.sunburst{position:absolute; width:min(90vw,520px); aspect-ratio:1; opacity:.18; z-index:0;}
+.eyebrow2{font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold); margin-bottom:26px; position:relative; z-index:1;}
+.names2{font-family:var(--display); font-weight:600; font-size:clamp(2.4rem,10vw,3.8rem); letter-spacing:.03em; color:var(--ivory); position:relative; z-index:1;}
+.names2 .amp{display:block; color:var(--gold-bright); font-size:.5em; margin:14px 0;}
+.date-block{margin-top:34px; position:relative; z-index:1;}
+.date-block .line{width:1px; height:30px; background:var(--gold); margin:0 auto 14px;}
+.date-block strong{display:block; font-family:var(--display); font-size:22px; letter-spacing:.1em; color:var(--gold-bright);}
+.scroll-cue2{position:absolute; bottom:28px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); opacity:.7; z-index:1;}
+
+/* ===== CONTENT ===== */
+.content{position:relative; background:var(--charcoal); z-index:2; border-top:1px solid var(--line);}
+section.block{padding:88px 24px; max-width:520px; margin:0 auto;}
+.kicker{font-size:10px; letter-spacing:.36em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:14px;}
+.block-title{font-family:var(--display); font-weight:500; font-size:clamp(1.6rem,5.6vw,2.1rem); text-align:center; color:var(--ivory); margin-bottom:44px; letter-spacing:.02em;}
+.reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+.countdown{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; max-width:440px; margin:0 auto; background:var(--line);}
+.countdown-unit{background:var(--black); padding:20px 4px 16px; text-align:center;}
+.countdown-num{font-family:var(--display); font-variant-numeric:tabular-nums; font-size:clamp(1.5rem,5.6vw,2rem); color:var(--gold-bright);}
+.countdown-label{margin-top:8px; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--ivory); opacity:.5;}
+
+.schedule{max-width:420px; margin:0 auto;}
+.schedule-item{display:grid; grid-template-columns:70px 1fr; gap:18px; padding:18px 0; border-bottom:1px solid var(--line);}
+.schedule-item:last-child{border-bottom:none;}
+.schedule-time{font-family:var(--display); font-size:15px; color:var(--gold-bright); letter-spacing:.05em;}
+.schedule-event{font-size:13px; opacity:.75; padding-top:1px;}
+
+.location-card{border:1px solid var(--line); text-align:center; padding:0;}
+.location-map{width:100%; aspect-ratio:16/10; border:0; display:block; filter:grayscale(.4) contrast(1.05) brightness(.9);}
+.location-body{padding:26px 22px 30px;}
+.venue-name{font-family:var(--display); font-size:20px; color:var(--gold-bright); letter-spacing:.03em;}
+.venue-address{margin-top:8px; font-size:13px; opacity:.65;}
+.directions-btn{display:inline-block; margin-top:22px; padding:13px 34px; border:1px solid var(--gold); color:var(--gold-bright); font-size:11px; letter-spacing:.24em; text-transform:uppercase;}
+
+footer{text-align:center; padding:50px 24px 60px; font-family:var(--display); color:var(--gold); opacity:.6; font-size:13px; letter-spacing:.08em;}
+
+@media (prefers-reduced-motion:reduce){ .gate-panel{transition:none;} }
+</style>
+</head>
+<body>
+
+<section class="gate-scene">
+  <svg class="sunburst" id="sunburst" viewBox="0 0 400 400" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></svg>
+
+  <div class="gate-panel left" id="gateLeft">
+    <div class="rule"></div>
+    <svg class="fan" viewBox="0 0 180 180" id="fanLeft"></svg>
+  </div>
+  <div class="gate-panel right" id="gateRight">
+    <div class="rule"></div>
+    <svg class="fan" viewBox="0 0 180 180" id="fanRight"></svg>
+  </div>
+
+  <div class="gate-cta" id="gateCta" role="button" tabindex="0" aria-label="Hap ftesën">
+    <p class="eyebrow">Ju Ftojmë</p>
+    <div class="initials"><span id="i1">L</span><span class="amp">&amp;</span><span id="i2">A</span></div>
+    <div class="ring"></div>
+    <p class="cta-line">Prekni për të hapur</p>
+  </div>
+
+  <div class="reveal-content" id="revealContent">
+    <p class="eyebrow2">Së bashku me familjet e tyre</p>
+    <h1 class="names2"><span id="groomName">Liridon</span><span class="amp">&amp;</span><span id="brideName">Aurela</span></h1>
+    <div class="date-block"><div class="line"></div><strong id="weddingDate">10 Gusht, 2026</strong></div>
+    <div class="scroll-cue2">Shfleto ↓</div>
+  </div>
+</section>
+
+<div class="content">
+  <section class="block">
+    <p class="kicker reveal">Dita e Madhe</p>
+    <h2 class="block-title reveal">Numërojmë Mbrapsht</h2>
+    <div class="countdown reveal">
+      <div class="countdown-unit"><div class="countdown-num" id="cd-d">00</div><div class="countdown-label">Ditë</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-h">00</div><div class="countdown-label">Orë</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-m">00</div><div class="countdown-label">Min</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-s">00</div><div class="countdown-label">Sek</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="kicker reveal">Agjenda e Mbrëmjes</p>
+    <h2 class="block-title reveal">Programi</h2>
+    <div class="schedule" id="scheduleList"></div>
+  </section>
+
+  <section class="block">
+    <p class="kicker reveal">Na Gjeni Këtu</p>
+    <h2 class="block-title reveal">Lokacioni</h2>
+    <div class="location-card reveal">
+      <iframe class="location-map" id="map" loading="lazy" title="Harta" src=""></iframe>
+      <div class="location-body">
+        <p class="venue-name" id="venueName">Restaurant Hareja</p>
+        <p class="venue-address" id="venueAddress">Rruga Besnik Restelica, Podujevë</p>
+        <a class="directions-btn" id="directions" href="#" target="_blank" rel="noopener">Merr Udhëzime</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">Me Dashuri, Liridon &amp; Aurela</footer>
+</div>
+
+<script>
+var CONFIG = {
+  groom:"Liridon", bride:"Aurela",
+  weddingDateDisplay:"10 Gusht, 2026",
+  weddingDateISO:"2026-08-10T17:00:00",
+  schedule:[
+    {time:"17:00", event:"Pritja e të ftuarve"},
+    {time:"18:00", event:"Ceremonia e kurorëzimit"},
+    {time:"19:00", event:"Fotografi me çiftin"},
+    {time:"20:00", event:"Darka e dasmës"},
+    {time:"22:00", event:"Vallëzimi i parë dhe festa"}
+  ],
+  venueName:"Restaurant Hareja",
+  venueAddress:"Rruga Besnik Restelica, Podujevë",
+  mapQuery:"Restaurant Hareja",
+  directionsQuery:"Restaurant Hareja, Podujevë"
+};
+
+document.getElementById("i1").textContent=CONFIG.groom[0];
+document.getElementById("i2").textContent=CONFIG.bride[0];
+document.getElementById("groomName").textContent=CONFIG.groom;
+document.getElementById("brideName").textContent=CONFIG.bride;
+document.getElementById("weddingDate").textContent=CONFIG.weddingDateDisplay;
+document.title=CONFIG.groom+" & "+CONFIG.bride;
+
+var list=document.getElementById("scheduleList");
+CONFIG.schedule.forEach(function(item){
+  var row=document.createElement("div");
+  row.className="schedule-item reveal";
+  row.innerHTML='<div class="schedule-time">'+item.time+'</div><div class="schedule-event">'+item.event+'</div>';
+  list.appendChild(row);
+});
+
+document.getElementById("venueName").textContent=CONFIG.venueName;
+document.getElementById("venueAddress").textContent=CONFIG.venueAddress;
+document.getElementById("map").src="https://maps.google.com/maps?q="+encodeURIComponent(CONFIG.mapQuery)+"&t=&z=15&output=embed";
+document.getElementById("directions").href="https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(CONFIG.directionsQuery);
+document.getElementById("footer").textContent="Me Dashuri, "+CONFIG.groom+" & "+CONFIG.bride;
+
+/* Art Deco fan + sunburst SVG generator */
+function fanRays(cx, cy, r1, r2, count, color){
+  var s="";
+  for(var i=0;i<count;i++){
+    var a=(Math.PI/(count-1))*i - Math.PI/2;
+    var x1=cx+Math.cos(a)*r1, y1=cy+Math.sin(a)*r1;
+    var x2=cx+Math.cos(a)*r2, y2=cy+Math.sin(a)*r2;
+    s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+color+'" stroke-width="1"/>';
+  }
+  return s;
+}
+document.getElementById("fanLeft").innerHTML = fanRays(20,90,10,150,11,"#C9A961");
+document.getElementById("fanRight").innerHTML = fanRays(160,90,10,150,11,"#C9A961");
+
+function sunburstRays(cx, cy, r1, r2, count, color){
+  var s="";
+  for(var i=0;i<count;i++){
+    var a=(Math.PI*2/count)*i;
+    var x1=cx+Math.cos(a)*r1, y1=cy+Math.sin(a)*r1;
+    var x2=cx+Math.cos(a)*r2, y2=cy+Math.sin(a)*r2;
+    s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+color+'" stroke-width="1"/>';
+  }
+  return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r1+'" fill="none" stroke="'+color+'" stroke-width="1"/>' + s;
+}
+document.getElementById("sunburst").innerHTML = sunburstRays(200,200,90,195,32,"#C9A961");
+
+var gateLeft=document.getElementById("gateLeft");
+var gateRight=document.getElementById("gateRight");
+var gateCta=document.getElementById("gateCta");
+var revealContent=document.getElementById("revealContent");
+var opened=false;
+
+function openGate(){
+  if(opened) return;
+  opened=true;
+  gateLeft.classList.add("open");
+  gateRight.classList.add("open");
+  gateCta.classList.add("hidden");
+  setTimeout(function(){ revealContent.classList.add("show"); }, 500);
+  if(navigator.vibrate){ try{navigator.vibrate(15);}catch(e){} }
+}
+gateCta.addEventListener("click", openGate);
+gateCta.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openGate(); } });
+setTimeout(openGate, 1000);
+
+var reveals=document.querySelectorAll(".reveal");
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+  },{threshold:.2, rootMargin:"0px 0px -8% 0px"});
+  reveals.forEach(function(el){ io.observe(el); });
+} else { reveals.forEach(function(el){ el.classList.add("in"); }); }
+
+var WEDDING_DATE=new Date(CONFIG.weddingDateISO);
+function pad(n){ return String(n).padStart(2,"0"); }
+function tick(){
+  var diff=WEDDING_DATE-new Date();
+  if(diff<0) diff=0;
+  document.getElementById("cd-d").textContent=Math.floor(diff/86400000);
+  document.getElementById("cd-h").textContent=pad(Math.floor(diff/3600000)%24);
+  document.getElementById("cd-m").textContent=pad(Math.floor(diff/60000)%60);
+  document.getElementById("cd-s").textContent=pad(Math.floor(diff/1000)%60);
+}
+tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
