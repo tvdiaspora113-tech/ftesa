@@ -395,25 +395,45 @@
     transform:translateY(28px);
   }
 
-  /* ============ SEKSIONI: MOMENTET TONA (POLAROID) ============ */
-  
+  /* ============ SEKSIONI: MOMENTET TONA ============ */
+
   .moments-grid {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 46px;
     align-items: center;
     margin-top: 10px;
   }
 
-  .polaroid-frame {
-    background: #ffffff;
-    padding: 14px 14px 35px 14px;
-    box-shadow: 0 12px 28px rgba(36, 31, 22, 0.12), 0 2px 6px rgba(36, 31, 22, 0.06);
-    border: 1px solid rgba(184, 146, 63, 0.15);
-    max-width: 290px;
+  .moment-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 280px;
     width: 100%;
-    transition: transform 0.4s ease;
   }
+
+  .polaroid-frame {
+    position: relative;
+    background: linear-gradient(180deg, #fffefb 0%, #fbf6ea 100%);
+    padding: 16px 16px 20px 16px;
+    box-shadow: 0 18px 34px -14px rgba(36, 31, 22, 0.28), 0 2px 6px rgba(36, 31, 22, 0.08);
+    border: 1px solid rgba(184, 146, 63, 0.25);
+    width: 100%;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .polaroid-frame::before,
+  .polaroid-frame::after{
+    content:"";
+    position:absolute;
+    width:13px; height:13px;
+    border:1px solid var(--gold);
+    opacity:.55;
+  }
+  .polaroid-frame::before{ top:6px; left:6px; border-right:0; border-bottom:0; }
+  .polaroid-frame::after{ bottom:6px; right:6px; border-left:0; border-top:0; }
 
   .polaroid-frame img {
     width: 100%;
@@ -421,18 +441,40 @@
     object-fit:cover;
     display: block;
     background: var(--cream-2);
+    filter: sepia(.12) saturate(1.08) contrast(1.02);
   }
 
   /* Rrotullimi i lehtë i fotove për stil sa më organik/realist */
-  .polaroid-frame:nth-child(odd) {
-    transform: rotate(-2.5deg);
+  .moment-item:nth-child(odd) .polaroid-frame {
+    transform: rotate(-2.2deg);
   }
-  .polaroid-frame:nth-child(even) {
-    transform: rotate(2.5deg);
+  .moment-item:nth-child(even) .polaroid-frame {
+    transform: rotate(2.2deg);
   }
-  .polaroid-frame:hover {
-    transform: rotate(0deg) scale(1.02);
+  .moment-item:hover .polaroid-frame {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 24px 42px -14px rgba(36, 31, 22, 0.34), 0 2px 6px rgba(36, 31, 22, 0.1);
     z-index: 5;
+  }
+
+  .moment-caption{
+    margin-top: 16px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: .02em;
+    color: var(--emerald);
+    text-align: center;
+  }
+  .moment-caption .caption-num{
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 9.5px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--Aurela);
+    margin-bottom: 5px;
   }
 
   /* ============ SAVE THE DATE & KALENDARI ============ */
@@ -448,29 +490,36 @@
     margin: 0 auto 35px;
   }
 
-  .std-header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 5px;
+  .std-title-wrap{
+    text-align: center;
+    margin-bottom: 4px;
   }
 
-  .chandelier-icon {
-    width: 28px;
-    height: 35px;
-    opacity: 0.65;
+  .std-ornament{
+    display: block;
+    width: 76px;
+    height: auto;
+    margin: 0 auto 10px;
+    opacity: 0.85;
   }
 
   .std-title {
     font-family: var(--serif);
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 400;
     letter-spacing: 0.08em;
     color: var(--gold);
     text-transform: uppercase;
     line-height: 1.1;
     text-align: center;
+  }
+
+  .std-divider{
+    width: 1px;
+    height: 28px;
+    background: linear-gradient(var(--gold), transparent);
+    margin: 16px auto 22px;
+    opacity: 0.6;
   }
 
   .std-month-year {
@@ -480,20 +529,28 @@
     text-transform: uppercase;
     color: var(--Aurela);
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
     font-weight: 500;
+  }
+
+  .calendar-card{
+    max-width: 300px;
+    margin: 0 auto;
+    background: var(--cream-2);
+    border: 1px solid rgba(184, 146, 63, 0.32);
+    border-radius: 3px;
+    padding: 26px 18px 22px;
+    box-shadow: 0 16px 34px -16px rgba(36, 31, 22, 0.22);
   }
 
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    row-gap: 12px;
+    row-gap: 14px;
     column-gap: 4px;
-    max-width: 290px;
-    margin: 0 auto;
     text-align: center;
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 13.5px;
   }
 
   .calendar-day-label {
@@ -503,7 +560,7 @@
     font-weight: 600;
     color: var(--ink);
     opacity: 0.4;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
   }
 
   .calendar-number {
@@ -522,8 +579,8 @@
   }
 
   .calendar-number.highlighted-wedding-date {
-    color: var(--cream);
-    font-weight: 600;
+    color: var(--gold);
+    font-weight: 700;
     opacity: 1;
     z-index: 1;
   }
@@ -531,13 +588,21 @@
   .calendar-number.highlighted-wedding-date::before {
     content: "";
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background: var(--gold);
-    border: 1px solid var(--gold-light);
-    border-radius: 50%;
+    width: 38px;
+    height: 34px;
     z-index: -1;
-    box-shadow: 0 4px 10px rgba(184, 146, 63, 0.35);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><path d='M20 2 C30 2 37 8 37 18 C37 29 28 34 19 34 C9 34 3 27 3 17 C3 7 11 2 20 2 Z' fill='none' stroke='%23B8923F' stroke-width='2.2' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .calendar-note{
+    margin-top: 20px;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--Aurela);
   }
 
   /* ============ COUNTDOWN ============ */
@@ -682,7 +747,7 @@
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     .scene-hint .line, .chevron, .polaroid-frame{animation:none; transition:none;}
-    .polaroid-frame:hover{transform:none;}
+    .moment-item:hover .polaroid-frame{transform:none;}
   }
 </style>
 </head>
@@ -744,13 +809,20 @@
 
   <!-- ===================== NEW SECTION: MOMENTET TONA ===================== -->
   <section class="block" aria-labelledby="momentsTitle">
+    <p class="kicker reveal">Kujtimet Tona</p>
     <h2 class="block-title reveal" id="momentsTitle">Momentet Tona</h2>
     <div class="moments-grid">
-      <div class="polaroid-frame reveal">
-        <img src="foto.jpg" alt="Momenti i parë">
+      <div class="moment-item reveal">
+        <div class="polaroid-frame">
+          <img src="foto.jpg" alt="Momenti i parë">
+        </div>
+        <p class="moment-caption"><span class="caption-num">I.</span>Fillimi</p>
       </div>
-      <div class="polaroid-frame reveal">
-        <img src="foto.jpg" alt="Momenti i dytë">
+      <div class="moment-item reveal">
+        <div class="polaroid-frame">
+          <img src="foto.jpg" alt="Momenti i dytë">
+        </div>
+        <p class="moment-caption"><span class="caption-num">II.</span>Sot</p>
       </div>
     </div>
   </section>
@@ -759,81 +831,78 @@
   <section class="block" aria-labelledby="stdTitle">
     <p class="std-message reveal">Prania juaj do të na gëzonte pa masë. Ju lutemi të konfirmoni pjesëmarrjen deri më datë 1 Gusht.</p>
     
-    <div class="std-header-container reveal">
-      <svg class="chandelier-icon" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2V8M12 8C9.5 8 7 9.5 7 12M12 8C14.5 8 17 9.5 17 12M7 12C5 12 3 13.5 3 16M17 12C19 12 21 13.5 21 16M7 12V15M17 12V15M12 8V18M3 16C3 19 6 21 12 21M21 16C21 19 18 21 12 21M12 21V25" stroke="#C5A059" stroke-width="1.2" stroke-linecap="round"/>
-        <circle cx="3" cy="16" r="1.5" fill="#B8923F"/>
-        <circle cx="7" cy="15" r="1" fill="#B8923F"/>
-        <circle cx="12" cy="18" r="1.5" fill="#B8923F"/>
-        <circle cx="17" cy="15" r="1" fill="#B8923F"/>
-        <circle cx="21" cy="16" r="1.5" fill="#B8923F"/>
+    <div class="std-title-wrap reveal">
+      <svg class="std-ornament" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M50 15 C40 15 30 12 22 6" stroke="#B8923F" stroke-width="1"/>
+        <path d="M50 15 C60 15 70 12 78 6" stroke="#B8923F" stroke-width="1"/>
+        <ellipse cx="26" cy="8" rx="3" ry="1.6" fill="#C98A93" transform="rotate(-30 26 8)"/>
+        <ellipse cx="34" cy="10" rx="3" ry="1.6" fill="#C98A93" transform="rotate(-20 34 10)"/>
+        <ellipse cx="42" cy="12" rx="3" ry="1.6" fill="#C98A93" transform="rotate(-10 42 12)"/>
+        <ellipse cx="74" cy="8" rx="3" ry="1.6" fill="#C98A93" transform="rotate(30 74 8)"/>
+        <ellipse cx="66" cy="10" rx="3" ry="1.6" fill="#C98A93" transform="rotate(20 66 10)"/>
+        <ellipse cx="58" cy="12" rx="3" ry="1.6" fill="#C98A93" transform="rotate(10 58 12)"/>
+        <circle cx="50" cy="15" r="2" fill="#B8923F"/>
       </svg>
-      
       <h2 class="std-title" id="stdTitle">Save the Date</h2>
-      
-      <svg class="chandelier-icon" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2V8M12 8C9.5 8 7 9.5 7 12M12 8C14.5 8 17 9.5 17 12M7 12C5 12 3 13.5 3 16M17 12C19 12 21 13.5 21 16M7 12V15M17 12V15M12 8V18M3 16C3 19 6 21 12 21M21 16C21 19 18 21 12 21M12 21V25" stroke="#C5A059" stroke-width="1.2" stroke-linecap="round"/>
-        <circle cx="3" cy="16" r="1.5" fill="#B8923F"/>
-        <circle cx="7" cy="15" r="1" fill="#B8923F"/>
-        <circle cx="12" cy="18" r="1.5" fill="#B8923F"/>
-        <circle cx="17" cy="15" r="1" fill="#B8923F"/>
-        <circle cx="21" cy="16" r="1.5" fill="#B8923F"/>
-      </svg>
+      <div class="std-divider"></div>
     </div>
-    
+
     <p class="std-month-year reveal">Gusht 2026</p>
-    
-    <div class="calendar-grid reveal">
-      <div class="calendar-day-label">Hë</div>
-      <div class="calendar-day-label">Ma</div>
-      <div class="calendar-day-label">Më</div>
-      <div class="calendar-day-label">En</div>
-      <div class="calendar-day-label">Pr</div>
-      <div class="calendar-day-label">Sh</div>
-      <div class="calendar-day-label">Di</div>
-      
-      <div class="calendar-number empty"></div>
-      <div class="calendar-number empty"></div>
-      <div class="calendar-number empty"></div>
-      <div class="calendar-number empty"></div>
-      <div class="calendar-number empty"></div>
-      <div class="calendar-number">01</div>
-      <div class="calendar-number">02</div>
-      
-      <div class="calendar-number">03</div>
-      <div class="calendar-number">04</div>
-      <div class="calendar-number">05</div>
-      <div class="calendar-number">06</div>
-      <div class="calendar-number">07</div>
-      <div class="calendar-number">08</div>
-      <div class="calendar-number">09</div>
-      
-      <div class="calendar-number highlighted-wedding-date">10</div>
-      <div class="calendar-number">11</div>
-      <div class="calendar-number">12</div>
-      <div class="calendar-number">13</div>
-      <div class="calendar-number">14</div>
-      <div class="calendar-number">15</div>
-      <div class="calendar-number">16</div>
-      
-      <div class="calendar-number">17</div>
-      <div class="calendar-number">18</div>
-      <div class="calendar-number">19</div>
-      <div class="calendar-number">20</div>
-      <div class="calendar-number">21</div>
-      <div class="calendar-number">22</div>
-      <div class="calendar-number">23</div>
-      
-      <div class="calendar-number">24</div>
-      <div class="calendar-number">25</div>
-      <div class="calendar-number">26</div>
-      <div class="calendar-number">27</div>
-      <div class="calendar-number">28</div>
-      <div class="calendar-number">29</div>
-      <div class="calendar-number">30</div>
-      
-      <div class="calendar-number">31</div>
+
+    <div class="calendar-card reveal">
+      <div class="calendar-grid">
+        <div class="calendar-day-label">Hë</div>
+        <div class="calendar-day-label">Ma</div>
+        <div class="calendar-day-label">Më</div>
+        <div class="calendar-day-label">En</div>
+        <div class="calendar-day-label">Pr</div>
+        <div class="calendar-day-label">Sh</div>
+        <div class="calendar-day-label">Di</div>
+
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number">01</div>
+        <div class="calendar-number">02</div>
+
+        <div class="calendar-number">03</div>
+        <div class="calendar-number">04</div>
+        <div class="calendar-number">05</div>
+        <div class="calendar-number">06</div>
+        <div class="calendar-number">07</div>
+        <div class="calendar-number">08</div>
+        <div class="calendar-number">09</div>
+
+        <div class="calendar-number highlighted-wedding-date">10</div>
+        <div class="calendar-number">11</div>
+        <div class="calendar-number">12</div>
+        <div class="calendar-number">13</div>
+        <div class="calendar-number">14</div>
+        <div class="calendar-number">15</div>
+        <div class="calendar-number">16</div>
+
+        <div class="calendar-number">17</div>
+        <div class="calendar-number">18</div>
+        <div class="calendar-number">19</div>
+        <div class="calendar-number">20</div>
+        <div class="calendar-number">21</div>
+        <div class="calendar-number">22</div>
+        <div class="calendar-number">23</div>
+
+        <div class="calendar-number">24</div>
+        <div class="calendar-number">25</div>
+        <div class="calendar-number">26</div>
+        <div class="calendar-number">27</div>
+        <div class="calendar-number">28</div>
+        <div class="calendar-number">29</div>
+        <div class="calendar-number">30</div>
+
+        <div class="calendar-number">31</div>
+      </div>
     </div>
+    <p class="calendar-note reveal">10 Gusht — dita jonë e madhe</p>
   </section>
 
   <!-- ===================== COUNTDOWN ===================== -->
