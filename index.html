@@ -12,11 +12,11 @@
     --ink:#241f16;
     --cream:#FBF5EA;
     --cream-2:#F3EADA;
-    --emerald:#1F3B2E;
-    --emerald-dark:#122019;
-    --Aurela:#C98A93;
-    --gold:#B8923F;
-    --gold-light:#E3CB93;
+    --emerald:#7C1024;
+    --emerald-dark:#450A16;
+    --Aurela:#E23A54;
+    --gold:#D4A017;
+    --gold-light:#F5D77A;
     --serif:'Cormorant Garamond', serif;
     --sans:'Jost', sans-serif;
   }
@@ -51,9 +51,9 @@
     height:100vh;
     height:100svh;
     background:
-      radial-gradient(60% 38% at 12% 88%, rgba(201,138,147,.14), transparent 62%),
-      radial-gradient(52% 34% at 90% 10%, rgba(227,203,147,.12), transparent 60%),
-      radial-gradient(120% 100% at 50% 0%, #2b5142 0%, #1c3a2e 45%, var(--emerald-dark) 78%);
+      radial-gradient(60% 38% at 12% 88%, rgba(226,58,84,.20), transparent 62%),
+      radial-gradient(52% 34% at 90% 10%, rgba(245,215,122,.18), transparent 60%),
+      radial-gradient(120% 100% at 50% 0%, #9c1a2f 0%, #6e0f20 45%, var(--emerald-dark) 78%);
     overflow:hidden;
   }
 
@@ -78,7 +78,7 @@
   .scene-frame{
     position:absolute;
     inset:20px;
-    border:1px solid rgba(227,203,147,.22);
+    border:1px solid rgba(245,215,122,.28);
     pointer-events:none;
     z-index:2;
   }
@@ -86,7 +86,7 @@
     position:absolute;
     width:20px; height:20px;
     border:1.5px solid var(--gold-light);
-    opacity:.6;
+    opacity:.7;
   }
   .scene-frame .corner-tl{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
   .scene-frame .corner-tr{ top:-1px; right:-1px; border-left:0; border-bottom:0; }
@@ -118,7 +118,7 @@
     flex-direction:column;
     align-items:center;
     gap:10px;
-    opacity:.75;
+    opacity:.85;
     transition:opacity .4s ease;
     z-index:4;
   }
@@ -142,23 +142,23 @@
     border-radius:6px;
     box-shadow:
       0 30px 60px -20px rgba(0,0,0,.55),
-      0 4px 0 rgba(184,146,63,.15) inset;
-    border:1px solid rgba(184,146,63,.35);
+      0 4px 0 rgba(212,160,23,.18) inset;
+    border:1px solid rgba(212,160,23,.4);
   }
 
   .envelope-back::before{
     content:"";
     position:absolute; inset:0;
     background:
-      linear-gradient(35deg, transparent 48%, rgba(184,146,63,.14) 50%, transparent 52%),
-      linear-gradient(-35deg, transparent 48%, rgba(184,146,63,.14) 50%, transparent 52%);
+      linear-gradient(35deg, transparent 48%, rgba(212,160,23,.16) 50%, transparent 52%),
+      linear-gradient(-35deg, transparent 48%, rgba(212,160,23,.16) 50%, transparent 52%);
     border-radius:6px;
   }
 
   .envelope-back::after{
     content:"";
     position:absolute; inset:9px;
-    border:1px solid rgba(184,146,63,.3);
+    border:1px solid rgba(212,160,23,.35);
     border-radius:3px;
     pointer-events:none;
   }
@@ -172,7 +172,7 @@
     font-size:13px;
     letter-spacing:.14em;
     color:var(--gold);
-    opacity:.7;
+    opacity:.8;
   }
   .envelope-monogram-print::before,
   .envelope-monogram-print::after{
@@ -180,7 +180,7 @@
     display:inline-block;
     width:16px; height:1px;
     background:var(--gold);
-    opacity:.55;
+    opacity:.6;
     vertical-align:middle;
     margin:0 8px 2px;
   }
@@ -200,7 +200,7 @@
   .envelope-flap::after{
     content:"";
     position:absolute; inset:0;
-    background:linear-gradient(200deg, transparent 40%, rgba(184,146,63,.12) 100%);
+    background:linear-gradient(200deg, transparent 40%, rgba(212,160,23,.14) 100%);
   }
 
   .wax-seal{
@@ -211,10 +211,10 @@
     transform:translate(-50%,-50%);
     border-radius:50%;
     background:
-      radial-gradient(circle at 32% 28%, #9a3f3a 0%, #7c2e2b 38%, #5c1f1e 72%, #451614 100%);
+      radial-gradient(circle at 32% 28%, #E23A54 0%, #B81E38 38%, #7C1024 72%, #5C0C1A 100%);
     box-shadow:
       0 6px 14px rgba(0,0,0,.4),
-      inset 0 2px 3px rgba(255,255,255,.25),
+      inset 0 2px 3px rgba(255,255,255,.3),
       inset 0 -6px 10px rgba(0,0,0,.45),
       inset 0 0 0 3px rgba(0,0,0,.14);
     display:flex;
@@ -230,9 +230,9 @@
     border-radius:50%;
     background:transparent;
     box-shadow:
-      2px -2px 0 -1px rgba(90,25,24,.5),
-      -3px 3px 0 -2px rgba(90,25,24,.4),
-      3px 4px 0 -2px rgba(90,25,24,.4);
+      2px -2px 0 -1px rgba(124,16,36,.5),
+      -3px 3px 0 -2px rgba(124,16,36,.4),
+      3px 4px 0 -2px rgba(124,16,36,.4);
   }
 
   .wax-seal::after{
@@ -244,7 +244,7 @@
     animation:sealInvite 2.4s ease-out infinite;
   }
   @keyframes sealInvite{
-    0%{ opacity:.55; transform:scale(1); }
+    0%{ opacity:.6; transform:scale(1); }
     100%{ opacity:0; transform:scale(1.35); }
   }
   .envelope.is-opened .wax-seal::after{ animation:none; opacity:0; }
@@ -254,7 +254,7 @@
     font-style:italic;
     font-weight:500;
     font-size:22px;
-    color:rgba(255,232,196,.92);
+    color:rgba(255,238,204,.95);
     letter-spacing:.02em;
     text-shadow:0 1px 1px rgba(0,0,0,.4);
   }
@@ -279,8 +279,8 @@
     position:relative;
     width:100%; height:100%;
     background:
-      radial-gradient(65% 45% at 85% 92%, rgba(201,138,147,.14), transparent 60%),
-      radial-gradient(140% 90% at 50% 0%, #2f5745 0%, var(--emerald) 55%, var(--emerald-dark) 100%);
+      radial-gradient(65% 45% at 85% 92%, rgba(226,58,84,.20), transparent 60%),
+      radial-gradient(140% 90% at 50% 0%, #A21C30 0%, var(--emerald) 55%, var(--emerald-dark) 100%);
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -293,13 +293,13 @@
   .card-inner::after{
     content:"";
     position:absolute; inset:13px;
-    border:1px solid rgba(227,203,147,.32);
+    border:1px solid rgba(245,215,122,.4);
     pointer-events:none;
   }
 
   .card-inner svg.botanical{
     position:absolute;
-    opacity:.55;
+    opacity:.6;
   }
   .botanical.top-left{ top:-10px; left:-18px; width:140px; transform:rotate(-8deg);}
   .botanical.bottom-right{ bottom:-14px; right:-20px; width:150px; transform:rotate(178deg);}
@@ -321,7 +321,7 @@
     content:"";
     width:22px; height:1px;
     background:var(--gold-light);
-    opacity:.5;
+    opacity:.55;
   }
 
   /* ---- FOTO E ÇIFTIT ---- */
@@ -386,7 +386,7 @@
     display:flex; flex-direction:column; align-items:center; gap:8px;
     font-size:10px; letter-spacing:.25em; text-transform:uppercase;
     color:var(--gold-light);
-    opacity:.8;
+    opacity:.85;
   }
   .scroll-cue .chevron{
     width:9px; height:9px;
@@ -466,88 +466,6 @@
     transform:translateY(28px);
   }
 
-  /* ============ SEKSIONI: MOMENTET TONA ============ */
-
-  .moments-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 46px;
-    align-items: center;
-    margin-top: 10px;
-  }
-
-  .moment-item{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 280px;
-    width: 100%;
-  }
-
-  .polaroid-frame {
-    position: relative;
-    background: linear-gradient(180deg, #fffefb 0%, #fbf6ea 100%);
-    padding: 16px 16px 20px 16px;
-    box-shadow: 0 18px 34px -14px rgba(36, 31, 22, 0.28), 0 2px 6px rgba(36, 31, 22, 0.08);
-    border: 1px solid rgba(184, 146, 63, 0.25);
-    width: 100%;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-  }
-
-  .polaroid-frame::before,
-  .polaroid-frame::after{
-    content:"";
-    position:absolute;
-    width:13px; height:13px;
-    border:1px solid var(--gold);
-    opacity:.55;
-  }
-  .polaroid-frame::before{ top:6px; left:6px; border-right:0; border-bottom:0; }
-  .polaroid-frame::after{ bottom:6px; right:6px; border-left:0; border-top:0; }
-
-  .polaroid-frame img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit:cover;
-    display: block;
-    background: var(--cream-2);
-    filter: sepia(.12) saturate(1.08) contrast(1.02);
-  }
-
-  /* Rrotullimi i lehtë i fotove për stil sa më organik/realist */
-  .moment-item:nth-child(odd) .polaroid-frame {
-    transform: rotate(-2.2deg);
-  }
-  .moment-item:nth-child(even) .polaroid-frame {
-    transform: rotate(2.2deg);
-  }
-  .moment-item:hover .polaroid-frame {
-    transform: rotate(0deg) translateY(-4px);
-    box-shadow: 0 24px 42px -14px rgba(36, 31, 22, 0.34), 0 2px 6px rgba(36, 31, 22, 0.1);
-    z-index: 5;
-  }
-
-  .moment-caption{
-    margin-top: 16px;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 16px;
-    letter-spacing: .02em;
-    color: var(--emerald);
-    text-align: center;
-  }
-  .moment-caption .caption-num{
-    display: block;
-    font-family: var(--sans);
-    font-style: normal;
-    font-size: 9.5px;
-    letter-spacing: .32em;
-    text-transform: uppercase;
-    color: var(--Aurela);
-    margin-bottom: 5px;
-  }
-
   /* ============ SAVE THE DATE & KALENDARI ============ */
   
   .std-message {
@@ -571,7 +489,7 @@
     width: 76px;
     height: auto;
     margin: 0 auto 10px;
-    opacity: 0.85;
+    opacity: 0.9;
   }
 
   .std-title {
@@ -590,7 +508,7 @@
     height: 28px;
     background: linear-gradient(var(--gold), transparent);
     margin: 16px auto 22px;
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
   .std-month-year {
@@ -608,10 +526,10 @@
     max-width: 300px;
     margin: 0 auto;
     background: var(--cream-2);
-    border: 1px solid rgba(184, 146, 63, 0.32);
+    border: 1px solid rgba(212, 160, 23, 0.38);
     border-radius: 3px;
     padding: 26px 18px 22px;
-    box-shadow: 0 16px 34px -16px rgba(36, 31, 22, 0.22);
+    box-shadow: 0 16px 34px -16px rgba(124, 16, 36, 0.2);
   }
 
   .calendar-grid {
@@ -650,7 +568,7 @@
   }
 
   .calendar-number.highlighted-wedding-date {
-    color: var(--gold);
+    color: var(--Aurela);
     font-weight: 700;
     opacity: 1;
     z-index: 1;
@@ -662,7 +580,7 @@
     width: 38px;
     height: 34px;
     z-index: -1;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><path d='M20 2 C30 2 37 8 37 18 C37 29 28 34 19 34 C9 34 3 27 3 17 C3 7 11 2 20 2 Z' fill='none' stroke='%23B8923F' stroke-width='2.2' stroke-linecap='round'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><path d='M20 2 C30 2 37 8 37 18 C37 29 28 34 19 34 C9 34 3 27 3 17 C3 7 11 2 20 2 Z' fill='none' stroke='%23D4A017' stroke-width='2.2' stroke-linecap='round'/></svg>");
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
@@ -705,7 +623,7 @@
     letter-spacing:.16em;
     text-transform:uppercase;
     color:var(--cream-2);
-    opacity:.8;
+    opacity:.85;
   }
 
   /* ============ SCHEDULE ============ */
@@ -720,7 +638,7 @@
     left:5px; top:6px; bottom:6px;
     width:1px;
     background:linear-gradient(var(--gold), var(--Aurela));
-    opacity:.5;
+    opacity:.6;
   }
   .schedule-item{
     position:relative;
@@ -763,7 +681,7 @@
     aspect-ratio:16/10;
     border:0;
     display:block;
-    filter:saturate(.85) contrast(1.02);
+    filter:saturate(.9) contrast(1.02);
   }
   .location-body{
     padding:22px 22px 26px;
@@ -791,7 +709,7 @@
     letter-spacing:.16em;
     text-transform:uppercase;
     border-radius:999px;
-    font-weight:500;
+    font-weight:600;
     transition:transform .2s ease, background .2s ease;
   }
   .directions-btn:active{transform:scale(.96);}
@@ -802,23 +720,17 @@
     font-family:var(--serif);
     font-style:italic;
     color:var(--emerald);
-    opacity:.75;
+    opacity:.8;
     font-size:14px;
   }
 
   @media (min-width:600px){
     section.block{padding:96px 24px;}
-    .moments-grid {
-      flex-direction: row;
-      justify-content: center;
-      gap: 40px;
-    }
   }
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    .scene-hint .line, .chevron, .polaroid-frame{animation:none; transition:none;}
-    .moment-item:hover .polaroid-frame{transform:none;}
+    .scene-hint .line, .chevron{animation:none; transition:none;}
   }
 </style>
 </head>
@@ -837,24 +749,24 @@
     <div class="invitation-card" id="invitationCard">
       <div class="card-inner">
         <svg class="botanical top-left" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M4 8 C 30 20, 40 50, 30 80 C 60 60, 90 60, 110 90" fill="none" stroke="#D9BD7B" stroke-width="1.2"/>
-          <path d="M8 6 C 20 26, 18 44, 6 58" fill="none" stroke="#C98A93" stroke-width="1"/>
-          <circle cx="30" cy="80" r="3" fill="#C98A93"/>
-          <circle cx="52" cy="58" r="2.4" fill="#D9BD7B"/>
+          <path d="M4 8 C 30 20, 40 50, 30 80 C 60 60, 90 60, 110 90" fill="none" stroke="#F5D77A" stroke-width="1.2"/>
+          <path d="M8 6 C 20 26, 18 44, 6 58" fill="none" stroke="#E23A54" stroke-width="1"/>
+          <circle cx="30" cy="80" r="3" fill="#E23A54"/>
+          <circle cx="52" cy="58" r="2.4" fill="#F5D77A"/>
         </svg>
         <svg class="botanical bottom-right" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M4 8 C 30 20, 44 50, 32 84 C 62 62, 92 64, 114 92" fill="none" stroke="#D9BD7B" stroke-width="1.2"/>
-          <path d="M10 6 C 22 28, 20 46, 8 60" fill="none" stroke="#C98A93" stroke-width="1"/>
-          <circle cx="32" cy="84" r="3" fill="#C98A93"/>
-          <circle cx="55" cy="60" r="2.4" fill="#D9BD7B"/>
+          <path d="M4 8 C 30 20, 44 50, 32 84 C 62 62, 92 64, 114 92" fill="none" stroke="#F5D77A" stroke-width="1.2"/>
+          <path d="M10 6 C 22 28, 20 46, 8 60" fill="none" stroke="#E23A54" stroke-width="1"/>
+          <circle cx="32" cy="84" r="3" fill="#E23A54"/>
+          <circle cx="55" cy="60" r="2.4" fill="#F5D77A"/>
         </svg>
 
         <div class="couple-photo-wrap" id="couplePhotoWrap">
           <img id="couplePhotoImg" src="" alt="Foto e çiftit">
         </div>
-        <p class="eyebrow">Së bashku me familjet e tyre</p>
-        <h1 class="couple-names"><span id="groomName">Liridon</span><span class="amp">&amp;</span><span id="brideName">Aurela</span></h1>
-        <p class="wed-date">kanë kënaqësinë t'ju ftojnë në martesën e tyre
+        <p class="eyebrow">Ju ftojmë me kënaqësi</p>
+        <h1 class="couple-names">Kanagjegji i Aurelës</h1>
+        <p class="wed-date">kemi kënaqësinë t'ju ftojmë në kanagjegjin e Aurelës
           <strong id="weddingDateDisplay">10 Gusht, 2026</strong>
         </p>
 
@@ -876,7 +788,7 @@
   </div>
 
   <div class="scene-hint" id="sceneHint">
-    <span>Prek vulën për ta hapur</span>
+    <span>Kliko për ta hapur</span>
     <span class="line"></span>
   </div>
 </section>
@@ -884,41 +796,21 @@
 <!-- ===================== CONTENT (SCREEN 4) ===================== -->
 <div class="content">
 
-  <!-- ===================== NEW SECTION: MOMENTET TONA ===================== -->
-  <section class="block" aria-labelledby="momentsTitle">
-    <p class="kicker reveal">Kujtimet Tona</p>
-    <h2 class="block-title reveal" id="momentsTitle">Momentet Tona</h2>
-    <div class="moments-grid">
-      <div class="moment-item reveal">
-        <div class="polaroid-frame">
-          <img src="foto.jpg" alt="Momenti i parë">
-        </div>
-        <p class="moment-caption"><span class="caption-num">I.</span>Fillimi</p>
-      </div>
-      <div class="moment-item reveal">
-        <div class="polaroid-frame">
-          <img src="foto.jpg" alt="Momenti i dytë">
-        </div>
-        <p class="moment-caption"><span class="caption-num">II.</span>Sot</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ===================== SAVE THE DATE & KALENDARI ===================== -->
   <section class="block" aria-labelledby="stdTitle">
     <p class="std-message reveal">Prania juaj do të na gëzonte pa masë. Ju lutemi të konfirmoni pjesëmarrjen deri më datë 1 Gusht.</p>
     
     <div class="std-title-wrap reveal">
       <svg class="std-ornament" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M50 15 C40 15 30 12 22 6" stroke="#B8923F" stroke-width="1"/>
-        <path d="M50 15 C60 15 70 12 78 6" stroke="#B8923F" stroke-width="1"/>
-        <ellipse cx="26" cy="8" rx="3" ry="1.6" fill="#C98A93" transform="rotate(-30 26 8)"/>
-        <ellipse cx="34" cy="10" rx="3" ry="1.6" fill="#C98A93" transform="rotate(-20 34 10)"/>
-        <ellipse cx="42" cy="12" rx="3" ry="1.6" fill="#C98A93" transform="rotate(-10 42 12)"/>
-        <ellipse cx="74" cy="8" rx="3" ry="1.6" fill="#C98A93" transform="rotate(30 74 8)"/>
-        <ellipse cx="66" cy="10" rx="3" ry="1.6" fill="#C98A93" transform="rotate(20 66 10)"/>
-        <ellipse cx="58" cy="12" rx="3" ry="1.6" fill="#C98A93" transform="rotate(10 58 12)"/>
-        <circle cx="50" cy="15" r="2" fill="#B8923F"/>
+        <path d="M50 15 C40 15 30 12 22 6" stroke="#D4A017" stroke-width="1"/>
+        <path d="M50 15 C60 15 70 12 78 6" stroke="#D4A017" stroke-width="1"/>
+        <ellipse cx="26" cy="8" rx="3" ry="1.6" fill="#E23A54" transform="rotate(-30 26 8)"/>
+        <ellipse cx="34" cy="10" rx="3" ry="1.6" fill="#E23A54" transform="rotate(-20 34 10)"/>
+        <ellipse cx="42" cy="12" rx="3" ry="1.6" fill="#E23A54" transform="rotate(-10 42 12)"/>
+        <ellipse cx="74" cy="8" rx="3" ry="1.6" fill="#E23A54" transform="rotate(30 74 8)"/>
+        <ellipse cx="66" cy="10" rx="3" ry="1.6" fill="#E23A54" transform="rotate(20 66 10)"/>
+        <ellipse cx="58" cy="12" rx="3" ry="1.6" fill="#E23A54" transform="rotate(10 58 12)"/>
+        <circle cx="50" cy="15" r="2" fill="#D4A017"/>
       </svg>
       <h2 class="std-title" id="stdTitle">Save the Date</h2>
       <div class="std-divider"></div>
@@ -1037,10 +929,9 @@ var CONFIG = {
   couplePhoto: "foto.jpg",
 
   schedule: [
-    { time: "18:00", event: "Ceremonia e kurorëzimit" },
-    { time: "19:00", event: "Fotografi me çiftin" },
-    { time: "20:00", event: "Darka" },
-      ],
+    { time: "11:00", event: "Pritja" },
+    { time: "11:00", event: "Fillimi i ahengut },
+          ],
 
   venueName: "Restaurant Hareja",
   venueAddress: "Rruga Besnik Restelica, Podujevë",
@@ -1051,8 +942,6 @@ var CONFIG = {
 
 function applyConfig(cfg){
   document.title = cfg.pageTitle;
-  document.getElementById("groomName").textContent = cfg.groom;
-  document.getElementById("brideName").textContent = cfg.bride;
   document.getElementById("waxSealInitials").textContent = cfg.initials;
   document.getElementById("weddingDateDisplay").textContent = cfg.weddingDateDisplay;
   document.getElementById("envelopeMonogram").textContent = cfg.monogramLine;
