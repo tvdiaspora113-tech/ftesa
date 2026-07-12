@@ -54,13 +54,13 @@ a{color:inherit; text-decoration:none;}
 
 .reveal-content{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px; opacity:0; transition:opacity 1s ease .6s; z-index:3;}
 .reveal-content.show{opacity:1;}
-.sunburst{position:absolute; width:min(90vw,520px); aspect-ratio:1; opacity:.18; z-index:0;}
-.eyebrow2{font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold); margin-bottom:26px; position:relative; z-index:1;}
-.names2{font-family:var(--display); font-weight:600; font-size:clamp(2.4rem,10vw,3.8rem); letter-spacing:.03em; color:var(--ivory); position:relative; z-index:1;}
-.names2 .amp{display:block; color:var(--gold-bright); font-size:.5em; margin:14px 0;}
-.date-block{margin-top:34px; position:relative; z-index:1;}
-.date-block .line{width:1px; height:30px; background:var(--gold); margin:0 auto 14px;}
-.date-block strong{display:block; font-family:var(--display); font-size:22px; letter-spacing:.1em; color:var(--gold-bright);}
+.sunburst{position:absolute; width:min(88vw,460px); aspect-ratio:1; z-index:0;}
+.eyebrow2{font-size:10px; letter-spacing:.38em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; position:relative; z-index:1;}
+.names2{font-family:var(--display); font-weight:600; font-size:clamp(1.9rem,7.6vw,2.9rem); letter-spacing:.02em; color:var(--ivory); position:relative; z-index:1;}
+.names2 .amp{display:block; color:var(--gold-bright); font-size:.48em; margin:8px 0;}
+.date-block{margin-top:22px; position:relative; z-index:1;}
+.date-block .line{width:1px; height:22px; background:var(--gold); margin:0 auto 10px;}
+.date-block strong{display:block; font-family:var(--display); font-size:17px; letter-spacing:.09em; color:var(--gold-bright);}
 .scroll-cue2{position:absolute; bottom:28px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); opacity:.7; z-index:1;}
 
 /* ===== CONTENT ===== */
@@ -193,7 +193,7 @@ footer{text-align:center; padding:50px 24px 60px; font-family:var(--display); co
           <span class="df-corner tr"></span>
           <span class="df-corner bl"></span>
           <span class="df-corner br"></span>
-          <img src="github1.jpg" alt="Momenti i parë">
+          <img src="github.jpg" alt="Momenti i parë">
         </div>
         <p class="moment-caption"><span class="num">I.</span>Fillimi</p>
       </div>
@@ -368,16 +368,16 @@ document.getElementById("fanLeft").innerHTML = fanRays(20,90,10,150,11,"#C9A961"
 document.getElementById("fanRight").innerHTML = fanRays(160,90,10,150,11,"#C9A961");
 
 function sunburstRays(cx, cy, r1, r2, count, color){
-  var s="";
+  var s = '<circle cx="'+cx+'" cy="'+cy+'" r="'+r1+'" fill="none" stroke="'+color+'" stroke-width="1.1" stroke-opacity="0.5"/>';
   for(var i=0;i<count;i++){
     var a=(Math.PI*2/count)*i;
     var x1=cx+Math.cos(a)*r1, y1=cy+Math.sin(a)*r1;
     var x2=cx+Math.cos(a)*r2, y2=cy+Math.sin(a)*r2;
-    s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+color+'" stroke-width="1"/>';
+    s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+color+'" stroke-width="1" stroke-opacity="0.16"/>';
   }
-  return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r1+'" fill="none" stroke="'+color+'" stroke-width="1"/>' + s;
+  return s;
 }
-document.getElementById("sunburst").innerHTML = sunburstRays(200,200,90,195,32,"#C9A961");
+document.getElementById("sunburst").innerHTML = sunburstRays(200,200,130,190,32,"#C9A961");
 
 var gateLeft=document.getElementById("gateLeft");
 var gateRight=document.getElementById("gateRight");
