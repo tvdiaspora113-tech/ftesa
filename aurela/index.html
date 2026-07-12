@@ -764,9 +764,9 @@
         <div class="couple-photo-wrap" id="couplePhotoWrap">
           <img id="couplePhotoImg" src="" alt="Foto e çiftit">
         </div>
-        <p class="eyebrow">Kanagjegji i Aurelës</p>
-        <h1 class="couple-names"><span id="groomName">Liridon</span><span class="amp">&amp;</span><span id="brideName">Aurela</span></h1>
-        <p class="wed-date">kanë kënaqësinë t'ju ftojnë në kanagjegjin e Aurelës
+        <p class="eyebrow">Ju ftojmë me kënaqësi</p>
+        <h1 class="couple-names">Kanagjegji i Aurelës</h1>
+        <p class="wed-date">kemi kënaqësinë t'ju ftojmë në kanagjegjin e Aurelës
           <strong id="weddingDateDisplay">10 Gusht, 2026</strong>
         </p>
 
@@ -929,9 +929,9 @@ var CONFIG = {
   couplePhoto: "foto.jpg",
 
   schedule: [
-    { time: "11:00", event: "Pritja" },
-    { time: "12:00", event: "Fillon ahengu" },
-   
+    { time: "10:00", event: "Pritja" },
+    { time: "11:00", event: "2" },
+    { time: "12:00", event: "3" },
       ],
 
   venueName: "Restaurant Hareja",
@@ -943,8 +943,6 @@ var CONFIG = {
 
 function applyConfig(cfg){
   document.title = cfg.pageTitle;
-  document.getElementById("groomName").textContent = cfg.groom;
-  document.getElementById("brideName").textContent = cfg.bride;
   document.getElementById("waxSealInitials").textContent = cfg.initials;
   document.getElementById("weddingDateDisplay").textContent = cfg.weddingDateDisplay;
   document.getElementById("envelopeMonogram").textContent = cfg.monogramLine;
