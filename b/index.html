@@ -89,6 +89,65 @@ section.block{padding:88px 24px; max-width:520px; margin:0 auto;}
 .venue-address{margin-top:8px; font-size:13px; opacity:.65;}
 .directions-btn{display:inline-block; margin-top:22px; padding:13px 34px; border:1px solid var(--gold); color:var(--gold-bright); font-size:11px; letter-spacing:.24em; text-transform:uppercase;}
 
+/* ===== MOMENTET TONA ===== */
+.moments-grid{display:flex; flex-direction:column; gap:52px; align-items:center; margin-top:4px;}
+.moment-item{position:relative; max-width:250px; width:100%; display:flex; flex-direction:column; align-items:center;}
+
+.deco-frame{
+  position:relative;
+  padding:14px;
+  width:100%;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(201,169,97,.07), transparent 65%);
+  transition:transform .4s ease, border-color .4s ease;
+}
+.moment-item:hover .deco-frame{ transform:translateY(-4px); border-color:var(--gold); }
+.df-corner{position:absolute; width:16px; height:16px; border:1px solid var(--gold); opacity:.85;}
+.df-corner.tl{top:-1px; left:-1px; border-right:0; border-bottom:0;}
+.df-corner.tr{top:-1px; right:-1px; border-left:0; border-bottom:0;}
+.df-corner.bl{bottom:-1px; left:-1px; border-right:0; border-top:0;}
+.df-corner.br{bottom:-1px; right:-1px; border-left:0; border-top:0;}
+.deco-frame img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block; filter:grayscale(1) contrast(1.08) brightness(.94) sepia(.08);}
+
+.moment-caption{margin-top:20px; text-align:center; font-family:var(--display); font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-bright);}
+.moment-caption .num{display:block; font-family:var(--sans); font-size:9px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); opacity:.65; margin-bottom:8px;}
+
+@media(min-width:600px){
+  .moments-grid{flex-direction:row; justify-content:center; gap:44px;}
+}
+
+/* ===== SAVE THE DATE ===== */
+.std-message{font-size:13px; line-height:1.75; text-align:center; opacity:.65; max-width:340px; margin:-16px auto 40px;}
+
+.std-ornament{display:block; width:96px; margin:0 auto 30px; opacity:.9;}
+
+.std-month{font-size:11px; letter-spacing:.32em; text-transform:uppercase; text-align:center; color:var(--gold); margin-bottom:26px;}
+
+.calendar-card2{
+  position:relative;
+  max-width:320px;
+  margin:0 auto;
+  border:1px solid var(--line);
+  padding:30px 20px 26px;
+  background:linear-gradient(180deg, rgba(201,169,97,.05), transparent 70%);
+}
+
+.calendar-grid2{display:grid; grid-template-columns:repeat(7,1fr); row-gap:16px; column-gap:2px; text-align:center;}
+.cal-day-label{font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); opacity:.55; padding-bottom:8px;}
+.cal-num{position:relative; height:30px; display:flex; align-items:center; justify-content:center; color:var(--ivory); opacity:.7; font-size:13px;}
+.cal-num.empty{opacity:0; pointer-events:none;}
+.cal-num.wed-day{color:var(--black); font-weight:600; opacity:1;}
+.cal-num.wed-day::before{
+  content:"";
+  position:absolute;
+  width:26px; height:26px;
+  background:var(--gold-bright);
+  transform:rotate(45deg);
+  z-index:-1;
+}
+
+.calendar-note2{margin-top:26px; text-align:center; font-family:var(--display); font-size:13px; letter-spacing:.05em; color:var(--gold-bright); opacity:.9;}
+
 footer{text-align:center; padding:50px 24px 60px; font-family:var(--display); color:var(--gold); opacity:.6; font-size:13px; letter-spacing:.08em;}
 
 @media (prefers-reduced-motion:reduce){ .gate-panel{transition:none;} }
@@ -124,6 +183,104 @@ footer{text-align:center; padding:50px 24px 60px; font-family:var(--display); co
 </section>
 
 <div class="content">
+  <section class="block">
+    <p class="kicker reveal">Kujtimet Tona</p>
+    <h2 class="block-title reveal">Momentet Tona</h2>
+    <div class="moments-grid">
+      <div class="moment-item reveal">
+        <div class="deco-frame">
+          <span class="df-corner tl"></span>
+          <span class="df-corner tr"></span>
+          <span class="df-corner bl"></span>
+          <span class="df-corner br"></span>
+          <img src="foto.jpg" alt="Momenti i parë">
+        </div>
+        <p class="moment-caption"><span class="num">I.</span>Fillimi</p>
+      </div>
+      <div class="moment-item reveal">
+        <div class="deco-frame">
+          <span class="df-corner tl"></span>
+          <span class="df-corner tr"></span>
+          <span class="df-corner bl"></span>
+          <span class="df-corner br"></span>
+          <img src="foto.jpg" alt="Momenti i dytë">
+        </div>
+        <p class="moment-caption"><span class="num">II.</span>Sot</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="kicker reveal">Ruajeni Datën</p>
+    <h2 class="block-title reveal">Save the Date</h2>
+    <p class="std-message reveal">Prania juaj do të na gëzonte pa masë. Ju lutemi të konfirmoni pjesëmarrjen deri më datë 1 Gusht.</p>
+    <svg class="std-ornament reveal" viewBox="0 0 100 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="0" y1="12" x2="38" y2="12" stroke="#C9A961" stroke-width="1"/>
+      <line x1="62" y1="12" x2="100" y2="12" stroke="#C9A961" stroke-width="1"/>
+      <rect x="44" y="6" width="12" height="12" transform="rotate(45 50 12)" fill="none" stroke="#E8C874" stroke-width="1.2"/>
+      <circle cx="50" cy="12" r="2" fill="#E8C874"/>
+    </svg>
+    <p class="std-month reveal">Gusht 2026</p>
+    <div class="calendar-card2 reveal">
+      <span class="df-corner tl"></span>
+      <span class="df-corner tr"></span>
+      <span class="df-corner bl"></span>
+      <span class="df-corner br"></span>
+      <div class="calendar-grid2">
+        <div class="cal-day-label">Hë</div>
+        <div class="cal-day-label">Ma</div>
+        <div class="cal-day-label">Më</div>
+        <div class="cal-day-label">En</div>
+        <div class="cal-day-label">Pr</div>
+        <div class="cal-day-label">Sh</div>
+        <div class="cal-day-label">Di</div>
+
+        <div class="cal-num empty"></div>
+        <div class="cal-num empty"></div>
+        <div class="cal-num empty"></div>
+        <div class="cal-num empty"></div>
+        <div class="cal-num empty"></div>
+        <div class="cal-num">01</div>
+        <div class="cal-num">02</div>
+
+        <div class="cal-num">03</div>
+        <div class="cal-num">04</div>
+        <div class="cal-num">05</div>
+        <div class="cal-num">06</div>
+        <div class="cal-num">07</div>
+        <div class="cal-num">08</div>
+        <div class="cal-num">09</div>
+
+        <div class="cal-num wed-day">10</div>
+        <div class="cal-num">11</div>
+        <div class="cal-num">12</div>
+        <div class="cal-num">13</div>
+        <div class="cal-num">14</div>
+        <div class="cal-num">15</div>
+        <div class="cal-num">16</div>
+
+        <div class="cal-num">17</div>
+        <div class="cal-num">18</div>
+        <div class="cal-num">19</div>
+        <div class="cal-num">20</div>
+        <div class="cal-num">21</div>
+        <div class="cal-num">22</div>
+        <div class="cal-num">23</div>
+
+        <div class="cal-num">24</div>
+        <div class="cal-num">25</div>
+        <div class="cal-num">26</div>
+        <div class="cal-num">27</div>
+        <div class="cal-num">28</div>
+        <div class="cal-num">29</div>
+        <div class="cal-num">30</div>
+
+        <div class="cal-num">31</div>
+      </div>
+    </div>
+    <p class="calendar-note2 reveal">10 Gusht — dita jonë e madhe</p>
+  </section>
+
   <section class="block">
     <p class="kicker reveal">Dita e Madhe</p>
     <h2 class="block-title reveal">Numërojmë Mbrapsht</h2>
