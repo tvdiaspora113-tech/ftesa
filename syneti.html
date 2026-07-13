@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erin — Ftesë për Syneti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --emerald-deep:#0F3B2C;
+    --emerald:#1B5C46;
+    --emerald-pale:#DCE9E0;
+    --gold:#C9A227;
+    --gold-soft:#ECD9A0;
+    --ivory:#FBF6EA;
+    --ink:#17130D;
+    --line: rgba(23,19,13,0.14);
+    --display:'Cormorant Garamond', Georgia, serif;
+    --script:'Tangerine', cursive;
+    --body:'EB Garamond', Georgia, serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--emerald-deep);
+    color:var(--ink);
+    font-family:var(--body);
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ================= ENVELOPE ================= */
+  #envelope-stage{
+    position:fixed;inset:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(ellipse at 50% 30%, #164531 0%, #0F3B2C 60%, #0A2A20 100%);
+    transition:opacity 0.9s ease, visibility 0.9s;
+  }
+  #envelope-stage.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  #envelope-stage::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(201,162,39,0.08), transparent 40%),
+      radial-gradient(circle at 80% 75%, rgba(201,162,39,0.07), transparent 40%);
+  }
+  .env-wrap{
+    position:relative;width:min(84vw,340px);aspect-ratio:3/2;
+    cursor:pointer;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,0.45));
+  }
+  .env-body{
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,#F3ECD8,#EADFC2);
+    border:1px solid rgba(23,19,13,0.15);
+  }
+  .env-flap{
+    position:absolute;top:0;left:0;right:0;height:58%;
+    background:linear-gradient(160deg,#EADFC2,#DCCB9F);
+    clip-path:polygon(0 0, 100% 0, 50% 62%);
+    transform-origin:top center;
+    transition:transform 1s cubic-bezier(.6,-0.1,.2,1.4);
+    z-index:3;
+  }
+  .env-wrap.open .env-flap{transform:rotateX(178deg);}
+  .env-shadow-line{
+    position:absolute;left:0;right:0;bottom:0;height:60%;
+    background:linear-gradient(160deg,#EFE6CE,#E2D3A8);
+    clip-path:polygon(0 100%, 0 20%, 50% 62%, 100% 20%, 100% 100%);
+    z-index:2;
+  }
+  .env-seal{
+    position:absolute;top:50%;left:50%;
+    width:64px;height:64px;border-radius:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 55%, #8a6d18 100%);
+    display:flex;align-items:center;justify-content:center;
+    z-index:5;box-shadow:0 6px 14px rgba(0,0,0,0.35);
+    transition:transform 0.4s ease, opacity 0.6s ease;
+  }
+  .env-wrap.open .env-seal{opacity:0;transform:translate(-50%,-50%) scale(0.5);}
+  .env-seal svg{width:32px;height:32px;fill:var(--emerald-deep);}
+  .env-hint{
+    position:absolute;bottom:-46px;left:0;right:0;text-align:center;
+    color:var(--gold-soft);font-family:var(--display);font-style:italic;font-size:1rem;letter-spacing:0.03em;
+    opacity:0.85;
+  }
+  .env-card{
+    position:absolute;left:8%;right:8%;bottom:6%;top:20%;
+    background:var(--ivory);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    z-index:1;opacity:0;transition:opacity 0.6s ease 0.5s, transform 0.8s ease 0.5s;
+    transform:translateY(10px);
+    text-align:center;padding:10px;
+  }
+  .env-wrap.open .env-card{opacity:1;transform:translateY(-38%);}
+  .env-card .en-name{font-family:var(--script);font-size:2.6rem;color:var(--emerald-deep);}
+  .env-card .en-sub{font-family:var(--display);font-style:italic;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
+
+  /* ================= MAIN CONTENT ================= */
+  main{opacity:0;transition:opacity 1s ease;}
+  main.show{opacity:1;}
+
+  .wrap{max-width:640px;margin:0 auto;padding:0 28px;}
+
+  .crown{width:40px;height:40px;margin:0 auto;}
+  .crown path{fill:var(--gold);}
+
+  .ornament-rule{
+    display:flex;align-items:center;justify-content:center;gap:14px;margin:30px 0;
+  }
+  .ornament-rule .line{width:60px;height:1px;background:var(--gold);opacity:0.55;}
+  .ornament-rule .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;color:var(--ivory);position:relative;
+    padding:80px 28px 60px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.14), transparent 55%),
+      linear-gradient(180deg, var(--emerald-deep), #0C3226 70%, #0A2A20);
+  }
+  .hero .eyebrow{
+    font-family:var(--display);font-style:italic;letter-spacing:0.22em;text-transform:uppercase;
+    font-size:0.8rem;color:var(--gold-soft);margin:22px 0 6px;
+  }
+  .hero h1{
+    font-family:var(--script);font-weight:700;
+    font-size:clamp(3.6rem,14vw,5.6rem);
+    color:var(--gold-soft);
+    margin:6px 0 4px;
+    line-height:0.9;
+  }
+  .hero .event-title{
+    font-family:var(--display);font-weight:500;font-size:clamp(1.4rem,4vw,1.9rem);
+    letter-spacing:0.03em;margin:14px 0 0;color:var(--ivory);
+  }
+  .hero p.msg{
+    max-width:420px;margin:26px auto 0;font-size:1.02rem;opacity:0.85;line-height:1.75;
+  }
+  .hero .date-strip{
+    margin-top:38px;font-family:var(--display);font-size:1.15rem;letter-spacing:0.08em;
+    color:var(--gold-soft);border-top:1px solid rgba(236,217,160,0.3);border-bottom:1px solid rgba(236,217,160,0.3);
+    padding:14px 30px;
+  }
+  .scroll-cue{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-soft);opacity:0.65;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .scroll-cue .stick{width:1px;height:26px;background:var(--gold-soft);animation:pulse-stick 1.8s infinite ease-in-out;}
+  @keyframes pulse-stick{0%,100%{opacity:0.2;}50%{opacity:0.9;}}
+
+  /* COUNTDOWN */
+  .countdown-section{background:var(--ivory);padding:70px 0 60px;text-align:center;}
+  .countdown-section .eyebrow-dark{
+    font-family:var(--display);font-style:italic;color:var(--emerald);letter-spacing:0.16em;
+    text-transform:uppercase;font-size:0.82rem;
+  }
+  .countdown{
+    display:flex;justify-content:center;gap:14px;margin-top:30px;flex-wrap:wrap;
+  }
+  .count-box{
+    width:78px;background:var(--emerald-deep);color:var(--gold-soft);
+    padding:16px 0;position:relative;
+  }
+  .count-box::before, .count-box::after{
+    content:"";position:absolute;left:8px;right:8px;height:1px;background:rgba(236,217,160,0.35);
+  }
+  .count-box::before{top:6px;}
+  .count-box::after{bottom:6px;}
+  .count-box .num{font-family:var(--display);font-size:1.9rem;font-weight:600;}
+  .count-box .lbl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.75;margin-top:2px;}
+
+  /* PROGRAM TIMELINE */
+  .program{background:var(--ivory);padding:20px 0 90px;}
+  .section-title{
+    text-align:center;margin-bottom:56px;
+  }
+  .section-title .eyebrow-dark{
+    font-family:var(--display);font-style:italic;color:var(--emerald);letter-spacing:0.16em;
+    text-transform:uppercase;font-size:0.82rem;
+  }
+  .section-title h2{
+    font-family:var(--display);font-weight:500;font-size:clamp(1.7rem,4vw,2.2rem);
+    color:var(--emerald-deep);margin:8px 0 0;
+  }
+  .timeline{position:relative;padding-left:6px;}
+  .timeline::before{
+    content:"";position:absolute;left:29px;top:6px;bottom:6px;width:1px;
+    background:repeating-linear-gradient(180deg, var(--gold) 0 6px, transparent 6px 12px);
+  }
+  .t-item{display:flex;gap:26px;margin-bottom:38px;position:relative;}
+  .t-item:last-child{margin-bottom:0;}
+  .t-time{
+    font-family:var(--display);font-weight:600;color:var(--emerald-deep);font-size:1rem;
+    width:60px;flex-shrink:0;text-align:right;padding-top:2px;
+  }
+  .t-dot{
+    width:14px;height:14px;border-radius:50%;background:var(--gold);border:3px solid var(--ivory);
+    box-shadow:0 0 0 1px var(--gold);flex-shrink:0;margin-top:5px;
+  }
+  .t-body h3{margin:0 0 4px;font-family:var(--display);font-size:1.15rem;color:var(--ink);font-weight:600;}
+  .t-body p{margin:0;font-size:0.94rem;opacity:0.72;line-height:1.6;}
+
+  /* LOCATION */
+  .location{
+    background:var(--emerald-deep);color:var(--ivory);padding:80px 0;text-align:center;
+  }
+  .location .eyebrow{
+    font-family:var(--display);font-style:italic;letter-spacing:0.18em;text-transform:uppercase;
+    font-size:0.8rem;color:var(--gold-soft);
+  }
+  .location h2{font-family:var(--display);font-weight:500;font-size:1.9rem;margin:10px 0 6px;}
+  .location p.addr{opacity:0.8;margin:0 0 30px;font-size:1rem;}
+  .map-frame{
+    border:1px solid rgba(236,217,160,0.3);height:230px;
+    background:
+      linear-gradient(rgba(15,59,44,0.55),rgba(15,59,44,0.55)),
+      repeating-linear-gradient(45deg, #204d3b 0 12px, #1b4534 12px 24px);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-style:italic;color:var(--gold-soft);
+  }
+  .map-btn{
+    display:inline-block;margin-top:26px;padding:13px 32px;
+    border:1px solid var(--gold-soft);color:var(--gold-soft);
+    font-family:var(--display);letter-spacing:0.05em;font-size:0.92rem;
+    transition:all .25s;
+  }
+  .map-btn:hover{background:var(--gold-soft);color:var(--emerald-deep);}
+
+  /* RSVP */
+  .rsvp{background:var(--ivory);padding:90px 0;text-align:center;}
+  .rsvp form{
+    max-width:400px;margin:36px auto 0;display:flex;flex-direction:column;gap:16px;text-align:left;
+  }
+  .rsvp label{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--emerald);margin-bottom:6px;display:block;}
+  .rsvp input, .rsvp select{
+    width:100%;padding:12px 14px;border:1px solid var(--line);background:#fff;
+    font-family:var(--body);font-size:1rem;color:var(--ink);
+  }
+  .rsvp input:focus, .rsvp select:focus{outline:2px solid var(--gold);outline-offset:1px;}
+  .rsvp button{
+    margin-top:10px;padding:14px 0;background:var(--emerald-deep);color:var(--gold-soft);
+    border:none;font-family:var(--display);font-size:1rem;letter-spacing:0.05em;cursor:pointer;
+    transition:background .25s;
+  }
+  .rsvp button:hover{background:var(--emerald);}
+  .rsvp-confirm{
+    display:none;max-width:400px;margin:36px auto 0;padding:26px;border:1px solid var(--gold);
+    font-family:var(--display);font-style:italic;color:var(--emerald-deep);
+  }
+  .rsvp-confirm.show{display:block;}
+
+  /* CLOSING */
+  .closing{
+    background:linear-gradient(180deg, var(--emerald-deep), #0A2A20);
+    color:var(--ivory);text-align:center;padding:90px 0 70px;
+  }
+  .closing blockquote{
+    font-family:var(--display);font-style:italic;font-size:1.3rem;line-height:1.7;
+    max-width:460px;margin:20px auto;color:var(--gold-soft);
+  }
+  .closing .family{margin-top:26px;font-size:0.95rem;opacity:0.8;}
+  .closing .family strong{font-family:var(--display);font-weight:600;color:var(--ivory);font-size:1.05rem;}
+
+  footer.foot{
+    background:#0A2A20;color:rgba(251,246,234,0.5);text-align:center;
+    padding:26px 0;font-size:0.78rem;letter-spacing:0.03em;
+  }
+
+  @media (max-width:480px){
+    .countdown{gap:9px;}
+    .count-box{width:66px;padding:12px 0;}
+    .t-time{width:48px;font-size:0.88rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ENVELOPE INTRO -->
+<div id="envelope-stage">
+  <div>
+    <div class="env-wrap" id="envelope" role="button" tabindex="0" aria-label="Hap zarfin për të parë ftesën">
+      <div class="env-body"></div>
+      <div class="env-card">
+        <div class="en-sub">Ju Ftojmë</div>
+        <div class="en-name">Erin</div>
+      </div>
+      <div class="env-shadow-line"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">
+        <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4zm0 3.2 5.2 2.6v3.8c0 3.6-2.3 6.4-5.2 7.4-2.9-1-5.2-3.8-5.2-7.4V7.8L12 5.2z"/></svg>
+      </div>
+    </div>
+    <div class="env-hint">— prek vulën për të hapur —</div>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="crown" viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 40h56l4-24-16 10-16-18-16 18L0 16l4 24z"/>
+      <circle cx="32" cy="6" r="4"/>
+    </svg>
+    <div class="eyebrow">Me nderin më të madh, ju ftojmë në</div>
+    <h1>Erin</h1>
+    <div class="event-title">Synetin e tij</div>
+    <p class="msg">Një ditë gëzimi për familjen tonë. Do të na bënte kënaqësi të veçantë ta ndanim këtë moment të bukur bashkë me ju.</p>
+    <div class="date-strip">E Shtunë · 22 Gusht 2026 · Ora 13:00</div>
+    <div class="scroll-cue"><span>zbrit poshtë</span><span class="stick"></span></div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section">
+    <div class="wrap">
+      <div class="eyebrow-dark">Numërimi mbrapsht</div>
+      <div class="countdown" id="countdown">
+        <div class="count-box"><div class="num" id="cd-days">00</div><div class="lbl">ditë</div></div>
+        <div class="count-box"><div class="num" id="cd-hours">00</div><div class="lbl">orë</div></div>
+        <div class="count-box"><div class="num" id="cd-min">00</div><div class="lbl">min</div></div>
+        <div class="count-box"><div class="num" id="cd-sec">00</div><div class="lbl">sek</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section class="program">
+    <div class="wrap">
+      <div class="section-title">
+        <div class="eyebrow-dark">Programi i ditës</div>
+        <h2>Si do të zhvillohet festa</h2>
+      </div>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-time">13:00</div>
+          <div class="t-dot"></div>
+          <div class="t-body">
+            <h3>Pritja e mysafirëve</h3>
+            <p>Mirëpritje me ëmbëlsira dhe kafe në hyrje të sallës.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-time">14:00</div>
+          <div class="t-dot"></div>
+          <div class="t-body">
+            <h3>Hyrja e Erinit</h3>
+            <p>Ceremonia e hyrjes me muzikë tradicionale dhe uratë familjare.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-time">15:00</div>
+          <div class="t-dot"></div>
+          <div class="t-body">
+            <h3>Dreka festive</h3>
+            <p>Shërbimi i drekës për të gjithë të ftuarit.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-time">17:30</div>
+          <div class="t-dot"></div>
+          <div class="t-body">
+            <h3>Torta & vallëzim</h3>
+            <p>Prerja e tortës, e ndjekur nga muzikë e drejtpërdrejtë deri vonë.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location">
+    <div class="wrap">
+      <div class="eyebrow">Vendndodhja</div>
+      <h2>Pallati i Pritjeve "Ambasada"</h2>
+      <p class="addr">Rr. Nënë Tereza, Prishtinë, Kosovë</p>
+      <div class="map-frame">harta interaktive</div>
+      <a href="#" class="map-btn">Hap në Google Maps ↗</a>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp">
+    <div class="wrap">
+      <div class="section-title">
+        <div class="eyebrow-dark">Konfirmimi</div>
+        <h2>A do të na bashkoheni?</h2>
+      </div>
+      <form id="rsvp-form">
+        <div>
+          <label for="fname">Emri dhe Mbiemri</label>
+          <input type="text" id="fname" required placeholder="p.sh. Arta Krasniqi">
+        </div>
+        <div>
+          <label for="fguests">Numri i të ftuarve</label>
+          <select id="fguests">
+            <option>1 person</option>
+            <option>2 persona</option>
+            <option>3 persona</option>
+            <option>4+ persona</option>
+          </select>
+        </div>
+        <div>
+          <label for="fattend">Pjesëmarrja</label>
+          <select id="fattend">
+            <option>Po, do të vij me kënaqësi</option>
+            <option>Fatkeqësisht nuk mund të vij</option>
+          </select>
+        </div>
+        <button type="submit">Dërgo Konfirmimin</button>
+      </form>
+      <div class="rsvp-confirm" id="rsvp-confirm">Faleminderit! Konfirmimi juaj u ruajt me sukses — presim me padurim t'ju shohim.</div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="wrap">
+      <div class="ornament-rule"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+      <blockquote>"Gëzimi ynë do të jetë i plotë vetëm kur ta ndajmë me ju."</blockquote>
+      <div class="family">Me respekt dhe dashuri ju presim,<br><strong>Familja Krasniqi</strong></div>
+    </div>
+  </section>
+
+  <footer class="foot">Krijuar me kujdes nga Ftesa-Digjitale</footer>
+
+</main>
+
+<script>
+  // Envelope open interaction
+  const envelope = document.getElementById('envelope');
+  const stage = document.getElementById('envelope-stage');
+  const main = document.getElementById('main');
+
+  function openInvitation(){
+    envelope.classList.add('open');
+    setTimeout(() => {
+      stage.classList.add('hidden');
+      main.classList.add('show');
+      document.body.style.overflow = 'auto';
+    }, 1300);
+  }
+  document.body.style.overflow = 'hidden';
+  envelope.addEventListener('click', openInvitation);
+  envelope.addEventListener('keypress', (e) => { if(e.key === 'Enter' || e.key === ' ') openInvitation(); });
+
+  // Countdown
+  const eventDate = new Date('2026-08-22T13:00:00');
+  function updateCountdown(){
+    const now = new Date();
+    let diff = eventDate - now;
+    if(diff < 0) diff = 0;
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-min').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-sec').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // RSVP mock submit
+  document.getElementById('rsvp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('rsvp-confirm').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
