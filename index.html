@@ -94,17 +94,24 @@
   .mobile-menu .mobile-cta{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
   .mobile-menu .mobile-cta .btn{width:100%;text-align:center;}
 
-  /* HERO */
+  /* HERO — stacked sections: text, then phone, then buttons, in that order down the page */
   .hero{
     padding:96px 0 80px;
-    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
     position:relative;
   }
+  .hero-stack{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:44px;
+  }
+  .hero-text{max-width:640px;}
   .eyebrow{
     font-size:0.78rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--wine);
-    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+    display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px;
   }
-  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);}
+  .eyebrow::before, .eyebrow::after{content:"";width:34px;height:1px;background:var(--gold);}
   h1{
     font-family:var(--display);
     font-size:clamp(2.4rem, 4.6vw, 4rem);
@@ -114,8 +121,8 @@
     font-weight:400;
   }
   h1 em{font-style:italic;color:var(--gold);}
-  .hero p.lead{font-size:1.08rem;max-width:480px;opacity:0.85;margin-bottom:34px;}
-  .hero-actions{display:flex;gap:18px;flex-wrap:wrap;}
+  .hero p.lead{font-size:1.08rem;max-width:480px;opacity:0.85;margin:0 auto;}
+  .hero-actions{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;}
 
   .hero-visual{position:relative;display:flex;justify-content:center;}
   .phone{
@@ -218,8 +225,8 @@
     .navlinks{display:none;}
     .navcta{display:none;}
     .menu-toggle{display:block;}
-    .hero{grid-template-columns:1fr;padding-top:60px;}
-    .hero-visual{margin-top:20px;}
+    .hero{padding-top:60px;}
+    .hero-stack{gap:32px;}
     .steps{grid-template-columns:1fr 1fr;}
     .step{border-right:none;border-bottom:1px solid var(--line);padding-bottom:28px;}
     .feature-grid{grid-template-columns:1fr;}
@@ -270,15 +277,11 @@
 </header>
 
 <section class="hero">
-  <div class="wrap" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;">
-    <div>
+  <div class="wrap hero-stack">
+    <div class="hero-text">
       <div class="eyebrow">🎉 Platforma #1 për ftesa digjitale</div>
       <h1>Krijoni ftesa unike për<br><em>momentet tuaja</em> speciale.</h1>
       <p class="lead">Ftesa moderne, të ani&shy;mu&shy;ara dhe të personalizuara për Dasma, Fejesa dhe syneti. Dërgoni me një klikim te të gjithë mysafirët tuaj.</p>
-      <div class="hero-actions">
-        <a href="koleksioni.html" class="btn btn-primary">Eksploro koleksionin</a>
-        <a href="dasma3.html" target="_blank" rel="noopener" class="btn btn-ghost">Hap Shembullin ↗</a>
-      </div>
     </div>
     <div class="hero-visual">
       <div class="phone">
@@ -287,6 +290,10 @@
         </div>
         <div class="phone-badge">e drejtpërdrejtë ↗</div>
       </div>
+    </div>
+    <div class="hero-actions">
+      <a href="koleksioni.html" class="btn btn-primary">Eksploro koleksionin</a>
+      <a href="dasma3.html" target="_blank" rel="noopener" class="btn btn-ghost">Hap Shembullin ↗</a>
     </div>
   </div>
 </section>
