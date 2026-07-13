@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Endrit &amp; Sara — 19 Shtator, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16241C;
+    --paper:#F7F2E7;
+    --paper-2:#EEE4CE;
+    --emerald:#0F3D30;
+    --emerald-deep:#0A2620;
+    --emerald-soft:#1C5443;
+    --brass:#A97C3F;
+    --brass-light:#D9BA80;
+    --clay:#8C4A3A;
+    --serif:'Fraunces', serif;
+    --sans:'Public Sans', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--emerald-deep);
+    color:var(--ink);
+    font-family:var(--sans);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--brass); color:var(--emerald-deep);}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; border:none; cursor:pointer; background:none;}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+  /* ============ SCENA 1 — HYRJA (Vula e Hotelit) ============ */
+
+  .intro-scene{
+    position:relative;
+    height:100vh; height:100svh;
+    background:
+      radial-gradient(60% 42% at 50% 0%, rgba(217,186,128,.10), transparent 65%),
+      linear-gradient(180deg, var(--emerald) 0%, var(--emerald-deep) 100%);
+    overflow:hidden;
+  }
+  .intro-scene::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    opacity:.05;
+    mix-blend-mode:overlay;
+    pointer-events:none;
+    z-index:1;
+  }
+  .intro-frame{
+    position:absolute; inset:18px;
+    border:1px solid rgba(217,186,128,.22);
+    pointer-events:none;
+    z-index:2;
+  }
+  .intro-frame .corner{position:absolute; width:16px; height:16px; border:1px solid var(--brass-light); opacity:.65;}
+  .intro-frame .corner-tl{top:-1px; left:-1px; border-right:0; border-bottom:0;}
+  .intro-frame .corner-tr{top:-1px; right:-1px; border-left:0; border-bottom:0;}
+  .intro-frame .corner-bl{bottom:-1px; left:-1px; border-right:0; border-top:0;}
+  .intro-frame .corner-br{bottom:-1px; right:-1px; border-left:0; border-top:0;}
+
+  .intro-stage{
+    position:relative;
+    height:100vh; height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:34px;
+    z-index:3;
+    padding:24px;
+    text-align:center;
+  }
+
+  .intro-eyebrow{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    opacity:.85;
+  }
+
+  .intro-monogram-btn{
+    position:relative;
+    width:132px; height:132px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 34% 28%, var(--emerald-soft) 0%, var(--emerald) 46%, var(--emerald-deep) 100%);
+    border:1px solid rgba(217,186,128,.5);
+    box-shadow:
+      0 20px 44px -14px rgba(0,0,0,.6),
+      inset 0 0 0 5px rgba(10,38,32,.5),
+      inset 0 0 0 6px rgba(217,186,128,.28);
+    cursor:pointer;
+    transition:transform .4s cubic-bezier(.2,.7,.3,1);
+  }
+  .intro-monogram-btn:hover{transform:scale(1.04);}
+  .intro-monogram-btn:focus-visible{outline:2px solid var(--brass-light); outline-offset:6px;}
+  .intro-monogram-btn::before{
+    content:"";
+    position:absolute; inset:-9px;
+    border-radius:50%;
+    border:1px solid rgba(217,186,128,.3);
+  }
+  .intro-monogram-btn span{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:34px;
+    color:var(--brass-light);
+    letter-spacing:.02em;
+  }
+  .intro-monogram-btn .pulse-ring{
+    position:absolute; inset:0;
+    border-radius:50%;
+    border:1px solid var(--brass-light);
+    opacity:0;
+    animation:ringPulse 2.6s ease-out infinite;
+  }
+  @keyframes ringPulse{
+    0%{opacity:.5; transform:scale(1);}
+    100%{opacity:0; transform:scale(1.28);}
+  }
+  .envelope.is-opened .intro-monogram-btn .pulse-ring{animation:none; opacity:0;}
+
+  .intro-names{
+    font-family:var(--serif);
+    font-weight:400;
+    color:var(--paper);
+    font-size:clamp(1.9rem, 8vw, 2.6rem);
+    line-height:1.15;
+  }
+  .intro-names em{font-style:italic; color:var(--brass-light);}
+
+  .intro-hint{
+    font-family:var(--sans);
+    font-size:10.5px;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    opacity:.75;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    transition:opacity .4s ease;
+  }
+  .intro-hint.is-hidden{opacity:0; pointer-events:none;}
+  .intro-hint .line{width:1px; height:24px; background:var(--brass-light); animation:hintPulse 1.8s ease-in-out infinite;}
+  @keyframes hintPulse{0%,100%{opacity:.25; transform:scaleY(.6);} 50%{opacity:1; transform:scaleY(1);}}
+
+  .intro-scene, .intro-stage{transition:opacity .6s ease;}
+  .intro-scene.is-closed{opacity:0; pointer-events:none; position:absolute; inset:0;}
+
+  /* ============ FTESA KRYESORE (ekrani 2) ============ */
+
+  .invite-hero{
+    position:relative;
+    min-height:100vh; min-height:100svh;
+    background:
+      radial-gradient(70% 50% at 50% 0%, rgba(217,186,128,.08), transparent 60%),
+      linear-gradient(165deg, var(--emerald) 0%, var(--emerald-deep) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:64px 22px 56px;
+  }
+  .invite-hero::after{
+    content:"";
+    position:absolute; inset:16px;
+    border:1px solid rgba(217,186,128,.24);
+    pointer-events:none;
+  }
+
+  .invite-card{
+    position:relative;
+    max-width:420px;
+    width:100%;
+    text-align:center;
+    color:var(--paper);
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  .invite-card svg.botanical{position:absolute; opacity:.55;}
+  .botanical.top-left{top:-46px; left:-30px; width:120px; transform:rotate(-6deg);}
+  .botanical.bottom-right{bottom:-40px; right:-26px; width:130px; transform:rotate(174deg);}
+
+  .couple-photo-wrap{
+    display:none;
+    width:104px; height:104px;
+    border-radius:50%;
+    margin:0 auto 22px;
+    border:2px solid var(--brass-light);
+    overflow:hidden;
+    box-shadow:0 12px 28px rgba(0,0,0,.4);
+    background:rgba(255,255,255,.05);
+    align-items:center; justify-content:center;
+  }
+  .couple-photo-wrap.is-visible{display:flex;}
+  .couple-photo-wrap img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .eyebrow::before, .eyebrow::after{content:""; width:20px; height:1px; background:var(--brass-light); opacity:.5;}
+
+  .couple-names{
+    font-family:var(--serif);
+    font-weight:500;
+    line-height:1.05;
+    font-size:clamp(2.4rem, 10vw, 3.4rem);
+    color:var(--paper);
+  }
+  .couple-names .amp{
+    display:block;
+    font-style:italic;
+    color:var(--brass-light);
+    font-size:.5em;
+    margin:8px 0;
+  }
+
+  .invite-lede{
+    margin-top:22px;
+    font-size:14px;
+    line-height:1.7;
+    color:var(--paper);
+    opacity:.82;
+    max-width:300px;
+    margin-left:auto; margin-right:auto;
+  }
+
+  .wed-date{
+    margin-top:26px;
+    font-family:var(--sans);
+    font-size:12.5px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+  }
+  .wed-date strong{
+    display:block;
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:23px;
+    letter-spacing:.02em;
+    color:var(--paper);
+    margin-top:8px;
+    text-transform:none;
+  }
+
+  .wed-venue-tag{
+    display:inline-block;
+    margin-top:26px;
+    padding:11px 26px;
+    border:1px solid var(--brass-light);
+    border-radius:999px;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+  }
+
+  .scroll-cue{
+    margin-top:46px;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--brass-light); opacity:.8;
+  }
+  .scroll-cue .chevron{
+    width:8px; height:8px;
+    border-right:1px solid var(--brass-light);
+    border-bottom:1px solid var(--brass-light);
+    transform:rotate(45deg);
+    animation:chevBounce 1.6s ease-in-out infinite;
+  }
+  @keyframes chevBounce{0%,100%{transform:rotate(45deg) translate(0,0);} 50%{transform:rotate(45deg) translate(3px,3px);}}
+
+  .gold-particle{
+    position:absolute; top:0; left:0;
+    width:4px; height:4px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--brass-light) 0%, var(--brass) 70%, transparent 100%);
+    pointer-events:none;
+    z-index:5;
+    will-change:transform, opacity;
+    animation:particleFall var(--dur, 1.3s) ease-out forwards;
+  }
+  @keyframes particleFall{
+    0%{transform:translate(0,0) scale(1); opacity:1;}
+    100%{transform:translate(var(--dx,0px), var(--dy,110px)) scale(.4); opacity:0;}
+  }
+
+  /* ============ SEKSIONET E PËRBASHKËTA ============ */
+
+  .content{
+    position:relative;
+    background:var(--paper);
+    z-index:2;
+  }
+  .content::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:.045;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+
+  section.block{
+    position:relative;
+    padding:64px 24px;
+    max-width:520px;
+    margin:0 auto;
+  }
+  section.block + section.block{border-top:1px solid rgba(22,36,28,.08);}
+
+  .kicker{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--clay);
+    text-align:center;
+    margin-bottom:12px;
+  }
+  .block-title{
+    font-family:var(--serif);
+    font-size:27px;
+    font-weight:400;
+    letter-spacing:.02em;
+    text-align:center;
+    color:var(--emerald);
+    margin-bottom:30px;
+  }
+  .block-lede{
+    font-size:13.5px;
+    line-height:1.7;
+    text-align:center;
+    color:var(--ink);
+    opacity:.78;
+    max-width:340px;
+    margin:0 auto 34px;
+  }
+
+  .reveal{opacity:0; transform:translateY(26px);}
+
+  /* ---- SAVE THE DATE / KALENDARI ---- */
+  .std-ornament{display:block; width:64px; height:auto; margin:0 auto 16px; opacity:.9;}
+
+  .calendar-card{
+    background:var(--emerald);
+    border-radius:4px;
+    padding:26px 22px 22px;
+    color:var(--paper);
+  }
+  .calendar-month{
+    text-align:center;
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    margin-bottom:18px;
+  }
+  .calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:6px;
+    text-align:center;
+  }
+  .calendar-day-label{
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    opacity:.7;
+    padding-bottom:6px;
+  }
+  .calendar-number{
+    font-family:var(--sans);
+    font-size:12.5px;
+    color:var(--paper);
+    opacity:.75;
+    padding:7px 0;
+  }
+  .calendar-number.empty{opacity:0;}
+  .calendar-number.highlighted-wedding-date{
+    position:relative;
+    opacity:1;
+    font-family:var(--serif);
+    font-weight:600;
+    color:var(--emerald-deep);
+  }
+  .calendar-number.highlighted-wedding-date::before{
+    content:"";
+    position:absolute; inset:1px 3px;
+    background:var(--brass-light);
+    border-radius:50%;
+    z-index:-1;
+  }
+  .calendar-note{
+    margin-top:22px;
+    text-align:center;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:14.5px;
+    color:var(--clay);
+  }
+
+  /* ---- NUMËRIMI MBRAPSHT ---- */
+  .countdown{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:10px;
+    max-width:420px;
+    margin:0 auto;
+  }
+  .countdown-unit{
+    background:var(--paper-2);
+    border:1px solid rgba(169,124,63,.3);
+    border-radius:4px;
+    padding:18px 4px 14px;
+    text-align:center;
+  }
+  .countdown-num{
+    font-family:var(--serif);
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(1.6rem, 6.4vw, 2.1rem);
+    color:var(--emerald);
+    line-height:1;
+  }
+  .countdown-label{
+    margin-top:7px;
+    font-size:9.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--clay);
+    opacity:.85;
+  }
+
+  /* ---- PROGRAMI ---- */
+  .schedule{position:relative; padding-left:28px;}
+  .schedule::before{
+    content:"";
+    position:absolute; left:5px; top:6px; bottom:6px;
+    width:1px;
+    background:linear-gradient(var(--brass), var(--clay));
+    opacity:.5;
+  }
+  .schedule-item{position:relative; padding-bottom:32px;}
+  .schedule-item:last-child{padding-bottom:0;}
+  .schedule-item::before{
+    content:"";
+    position:absolute; left:-28px; top:4px;
+    width:11px; height:11px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--brass);
+  }
+  .schedule-time{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    color:var(--emerald);
+    margin-bottom:2px;
+  }
+  .schedule-event{font-size:13px; letter-spacing:.02em; color:var(--ink); opacity:.78;}
+
+  /* ---- KODI I VESHJES ---- */
+  .dresscode-card{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:var(--paper-2);
+    border-radius:4px;
+    padding:22px;
+    max-width:400px;
+    margin:0 auto;
+  }
+  .dresscode-icon{
+    flex:0 0 auto;
+    width:44px; height:44px;
+    color:var(--emerald);
+  }
+  .dresscode-text .dresscode-label{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    color:var(--emerald);
+  }
+  .dresscode-text p{
+    margin-top:4px;
+    font-size:12.5px;
+    line-height:1.55;
+    color:var(--ink);
+    opacity:.75;
+  }
+  .palette-swatches{display:flex; gap:8px; margin-top:12px;}
+  .palette-swatches span{
+    width:20px; height:20px;
+    border-radius:50%;
+    display:inline-block;
+    border:1px solid rgba(22,36,28,.15);
+  }
+
+  /* ---- LOKACIONI ---- */
+  .location-card{
+    background:var(--emerald);
+    border-radius:4px;
+    overflow:hidden;
+    color:var(--paper);
+  }
+  .location-map{width:100%; aspect-ratio:16/10; border:0; display:block; filter:saturate(.85) contrast(1.02);}
+  .location-body{padding:24px 22px 28px; text-align:center;}
+  .venue-name{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--brass-light);}
+  .venue-address{margin-top:6px; font-size:13px; opacity:.85; line-height:1.5;}
+  .directions-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:13px 30px;
+    background:var(--brass-light);
+    color:var(--emerald-deep);
+    font-size:11.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    border-radius:999px;
+    font-weight:600;
+    transition:transform .2s ease;
+  }
+  .directions-btn:active{transform:scale(.96);}
+
+  /* ---- KONFIRMIMI (RSVP) ---- */
+  .rsvp-card{
+    text-align:center;
+    background:var(--paper-2);
+    border-radius:4px;
+    padding:32px 24px;
+    max-width:400px;
+    margin:0 auto;
+  }
+  .rsvp-deadline{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    color:var(--clay);
+    margin-bottom:16px;
+  }
+  .rsvp-contacts{display:flex; flex-direction:column; gap:10px; font-size:13.5px;}
+  .rsvp-contacts .contact-row{display:flex; justify-content:center; gap:8px;}
+  .rsvp-contacts .contact-name{color:var(--ink); opacity:.7;}
+  .rsvp-contacts .contact-phone{color:var(--emerald); font-weight:600;}
+
+  footer{
+    text-align:center;
+    padding:44px 24px 58px;
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--emerald);
+    opacity:.8;
+    font-size:14px;
+  }
+  footer .hashtag{
+    display:block;
+    margin-top:8px;
+    font-family:var(--sans);
+    font-style:normal;
+    font-size:11px;
+    letter-spacing:.14em;
+    color:var(--clay);
+    opacity:.85;
+  }
+
+  @media (min-width:600px){
+    section.block{padding:100px 24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .intro-hint .line, .chevron, .pulse-ring{animation:none; transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== SKENA 1: HYRJA ===================== -->
+<section class="intro-scene" id="introScene" aria-label="Ftesa e dasmës">
+  <div class="intro-frame" aria-hidden="true">
+    <span class="corner corner-tl"></span>
+    <span class="corner corner-tr"></span>
+    <span class="corner corner-bl"></span>
+    <span class="corner corner-br"></span>
+  </div>
+  <div class="intro-stage">
+    <p class="intro-eyebrow">Ju ftojmë me kënaqësi</p>
+    <button class="intro-monogram-btn" id="introMonogram" aria-label="Hap ftesën">
+      <span class="pulse-ring" aria-hidden="true"></span>
+      <span id="monogramInitials">E&amp;S</span>
+    </button>
+    <p class="intro-names">Endrit <em>&amp;</em> Sara</p>
+    <div class="intro-hint" id="introHint">
+      <span>Prekni për ta hapur</span>
+      <span class="line"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKENA 2: FTESA KRYESORE ===================== -->
+<section class="invite-hero" id="inviteHero">
+  <div class="invite-card" id="inviteCard">
+    <svg class="botanical top-left" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 8 C 30 20, 40 50, 30 80 C 60 60, 90 60, 110 90" fill="none" stroke="#D9BA80" stroke-width="1.1"/>
+      <path d="M8 6 C 20 26, 18 44, 6 58" fill="none" stroke="#8C4A3A" stroke-width="1"/>
+      <circle cx="30" cy="80" r="2.6" fill="#8C4A3A"/>
+      <circle cx="52" cy="58" r="2.2" fill="#D9BA80"/>
+    </svg>
+    <svg class="botanical bottom-right" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 8 C 30 20, 44 50, 32 84 C 62 62, 92 64, 114 92" fill="none" stroke="#D9BA80" stroke-width="1.1"/>
+      <path d="M10 6 C 22 28, 20 46, 8 60" fill="none" stroke="#8C4A3A" stroke-width="1"/>
+      <circle cx="32" cy="84" r="2.6" fill="#8C4A3A"/>
+      <circle cx="55" cy="60" r="2.2" fill="#D9BA80"/>
+    </svg>
+
+    <div class="couple-photo-wrap" id="couplePhotoWrap">
+      <img id="couplePhotoImg" src="" alt="Fotoja e çiftit">
+    </div>
+
+    <p class="eyebrow">Kanë kënaqësinë t'ju ftojnë</p>
+    <h1 class="couple-names">Endrit<span class="amp">&amp;</span>Sara</h1>
+    <p class="invite-lede">Në ditën kur do të bashkojmë jetët tona, dëshirojmë që edhe ju të jeni pjesë e këtij çasti.</p>
+
+    <p class="wed-date">Data e Dasmës
+      <strong id="weddingDateDisplay">19 Shtator, 2026</strong>
+    </p>
+
+    <span class="wed-venue-tag" id="venueTag">Hotel Emerald</span>
+
+    <div class="scroll-cue">
+      <span>Shfleto</span>
+      <span class="chevron"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PËRMBAJTJA ===================== -->
+<div class="content">
+
+  <!-- ===================== SAVE THE DATE & KALENDARI ===================== -->
+  <section class="block" aria-labelledby="stdTitle">
+    <p class="kicker reveal">Shënojeni Datën</p>
+    <h2 class="block-title reveal" id="stdTitle">Save the Date</h2>
+    <p class="block-lede reveal">Prania juaj do të na gëzonte pa masë. Ju lutemi na konfirmoni pjesëmarrjen deri më datë 5 Shtator.</p>
+
+    <div class="calendar-card reveal">
+      <p class="calendar-month">Shtator 2026</p>
+      <div class="calendar-grid">
+        <div class="calendar-day-label">Hë</div>
+        <div class="calendar-day-label">Ma</div>
+        <div class="calendar-day-label">Më</div>
+        <div class="calendar-day-label">En</div>
+        <div class="calendar-day-label">Pr</div>
+        <div class="calendar-day-label">Sh</div>
+        <div class="calendar-day-label">Di</div>
+
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number">01</div>
+        <div class="calendar-number">02</div>
+        <div class="calendar-number">03</div>
+        <div class="calendar-number">04</div>
+        <div class="calendar-number">05</div>
+        <div class="calendar-number">06</div>
+
+        <div class="calendar-number">07</div>
+        <div class="calendar-number">08</div>
+        <div class="calendar-number">09</div>
+        <div class="calendar-number">10</div>
+        <div class="calendar-number">11</div>
+        <div class="calendar-number">12</div>
+        <div class="calendar-number">13</div>
+
+        <div class="calendar-number">14</div>
+        <div class="calendar-number">15</div>
+        <div class="calendar-number">16</div>
+        <div class="calendar-number">17</div>
+        <div class="calendar-number">18</div>
+        <div class="calendar-number highlighted-wedding-date">19</div>
+        <div class="calendar-number">20</div>
+
+        <div class="calendar-number">21</div>
+        <div class="calendar-number">22</div>
+        <div class="calendar-number">23</div>
+        <div class="calendar-number">24</div>
+        <div class="calendar-number">25</div>
+        <div class="calendar-number">26</div>
+        <div class="calendar-number">27</div>
+
+        <div class="calendar-number">28</div>
+        <div class="calendar-number">29</div>
+        <div class="calendar-number">30</div>
+      </div>
+    </div>
+    <p class="calendar-note reveal">19 Shtator — dita jonë e madhe</p>
+  </section>
+
+  <!-- ===================== NUMËRIMI MBRAPSHT ===================== -->
+  <section class="block" aria-labelledby="countdownTitle">
+    <p class="kicker reveal">Dita e Madhe</p>
+    <h2 class="block-title reveal" id="countdownTitle">Numërojmë Mbrapsht së Bashku</h2>
+    <div class="countdown reveal" id="countdown" aria-live="polite">
+      <div class="countdown-unit"><div class="countdown-num" id="cd-days">00</div><div class="countdown-label">Ditë</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-label">Orë</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-label">Minuta</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-label">Sekonda</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== PROGRAMI ===================== -->
+  <section class="block" aria-labelledby="scheduleTitle">
+    <p class="kicker reveal">Agjenda e Mbrëmjes</p>
+    <h2 class="block-title reveal" id="scheduleTitle">Programi</h2>
+    <div class="schedule" id="scheduleList"></div>
+  </section>
+
+  <!-- ===================== KODI I VESHJES ===================== -->
+  <section class="block" aria-labelledby="dresscodeTitle">
+    <p class="kicker reveal">Elegancë e Rekomanduar</p>
+    <h2 class="block-title reveal" id="dresscodeTitle">Kodi i Veshjes</h2>
+    <div class="dresscode-card reveal">
+      <svg class="dresscode-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M17 6 L24 12 L31 6 L31 10 L36 16 L31 20 L31 42 L17 42 L17 20 L12 16 L17 10 Z" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <path d="M22 12 L24 15 L26 12" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      </svg>
+      <div class="dresscode-text">
+        <p class="dresscode-label">Formale / Cocktail</p>
+        <p>Ju ftojmë të vishni veshje elegante në nuancat e gjelbra, ariu dhe bezhë, në harmoni me mbrëmjen tonë.</p>
+        <div class="palette-swatches" aria-hidden="true">
+          <span style="background:#0F3D30"></span>
+          <span style="background:#A97C3F"></span>
+          <span style="background:#F7F2E7; border-color:#c9bfa4"></span>
+          <span style="background:#8C4A3A"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LOKACIONI ===================== -->
+  <section class="block" aria-labelledby="locationTitle">
+    <p class="kicker reveal">Na Gjeni Këtu</p>
+    <h2 class="block-title reveal" id="locationTitle">Lokacioni</h2>
+    <div class="location-card reveal">
+      <iframe class="location-map" id="locationMap" loading="lazy" title="Harta drejt lokacionit" src=""></iframe>
+      <div class="location-body">
+        <p class="venue-name" id="venueName">Hotel Emerald</p>
+        <p class="venue-address" id="venueAddress">Sallë Ahengjesh, Prishtinë</p>
+        <a class="directions-btn" id="directionsLink" href="#" target="_blank" rel="noopener">Merr Udhëzime</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KONFIRMIMI (RSVP) ===================== -->
+  <section class="block" aria-labelledby="rsvpTitle">
+    <p class="kicker reveal">Konfirmimi i Pjesëmarrjes</p>
+    <h2 class="block-title reveal" id="rsvpTitle">RSVP</h2>
+    <div class="rsvp-card reveal">
+      <p class="rsvp-deadline">Deri më 5 Shtator, 2026</p>
+      <div class="rsvp-contacts">
+        <div class="contact-row"><span class="contact-name">Endrit</span><span class="contact-phone">044 000 000</span></div>
+        <div class="contact-row"><span class="contact-name">Sara</span><span class="contact-phone">044 111 111</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footerSignature">Me dashuri, Endrit &amp; Sara
+    <span class="hashtag" id="hashtagLine">#EndritSara2026</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+/* ======================================================
+   KONFIGURIMI — ndryshoni këtu emrat, datën, lokacionin
+   ====================================================== */
+var CONFIG = {
+  groom: "Endrit",
+  bride: "Sara",
+  initials: "E&S",
+  weddingDateDisplay: "19 Shtator, 2026",
+  weddingDateISO: "2026-09-19T18:00:00",
+
+  couplePhoto: "",   // p.sh. "foto.jpg" — lëreni bosh nëse nuk keni foto
+
+  schedule: [
+    { time: "18:00", event: "Mirëseardhja e të ftuarve" },
+    { time: "19:00", event: "Hyrja e çiftit" },
+    { time: "20:00", event: "Darka" },
+    { time: "21:30", event: "Prerja e tortës" },
+    { time: "22:00", event: "Vallëzimi dhe festa" }
+  ],
+
+  venueName: "Hotel Emerald",
+  venueAddress: "Rruga e Hotelit, Prishtinë",
+  mapQuery: "Hotel Emerald, Prishtinë",
+  directionsQuery: "Hotel Emerald, Prishtinë",
+  hashtag: "#EndritSara2026",
+  pageTitle: "Endrit & Sara — 19 Shtator, 2026"
+};
+
+function applyConfig(cfg){
+  document.title = cfg.pageTitle;
+  document.getElementById("monogramInitials").textContent = cfg.initials;
+  document.getElementById("weddingDateDisplay").textContent = cfg.weddingDateDisplay;
+  document.getElementById("venueTag").textContent = cfg.venueName;
+
+  var photoWrap = document.getElementById("couplePhotoWrap");
+  var photoImg = document.getElementById("couplePhotoImg");
+  if (cfg.couplePhoto) {
+    photoImg.src = cfg.couplePhoto;
+    photoWrap.classList.add("is-visible");
+  } else {
+    photoWrap.classList.remove("is-visible");
+  }
+
+  var scheduleEl = document.getElementById("scheduleList");
+  scheduleEl.innerHTML = "";
+  cfg.schedule.forEach(function(item){
+    var row = document.createElement("div");
+    row.className = "schedule-item reveal";
+    row.innerHTML =
+      '<div class="schedule-time">' + item.time + '</div>' +
+      '<div class="schedule-event">' + item.event + '</div>';
+    scheduleEl.appendChild(row);
+  });
+
+  document.getElementById("venueName").textContent = cfg.venueName;
+  document.getElementById("venueAddress").textContent = cfg.venueAddress;
+  document.getElementById("locationMap").src =
+    "https://maps.google.com/maps?q=" + encodeURIComponent(cfg.mapQuery) + "&t=&z=15&ie=UTF8&iwloc=&output=embed";
+  document.getElementById("directionsLink").href =
+    "https://maps.google.com/maps?daddr=" + encodeURIComponent(cfg.directionsQuery);
+
+  document.getElementById("footerSignature").firstChild.textContent = "Me dashuri, " + cfg.groom + " & " + cfg.bride + " ";
+  document.getElementById("hashtagLine").textContent = cfg.hashtag;
+}
+
+applyConfig(CONFIG);
+
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var introMonogram = document.getElementById("introMonogram");
+  var introScene = document.getElementById("introScene");
+  var introHint = document.getElementById("introHint");
+  var inviteCard = document.getElementById("inviteCard");
+  var opened = false;
+
+  function spawnGoldDust(){
+    var stage = document.querySelector(".intro-stage");
+    var btn = introMonogram;
+    if (!stage || !btn) return;
+    var btnRect = btn.getBoundingClientRect();
+    var stageRect = stage.getBoundingClientRect();
+    var originX = btnRect.left - stageRect.left + btnRect.width / 2;
+    var originY = btnRect.top - stageRect.top + btnRect.height / 2;
+
+    var count = 14;
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement("span");
+      p.className = "gold-particle";
+      var angle = Math.random() * Math.PI * 2;
+      var distance = 36 + Math.random() * 80;
+      var dx = Math.cos(angle) * distance;
+      var dy = Math.sin(angle) * distance - 26;
+      var dur = 0.9 + Math.random() * 0.8;
+      p.style.left = originX + "px";
+      p.style.top = originY + "px";
+      p.style.setProperty("--dx", dx.toFixed(1) + "px");
+      p.style.setProperty("--dy", dy.toFixed(1) + "px");
+      p.style.setProperty("--dur", dur.toFixed(2) + "s");
+      stage.appendChild(p);
+      (function(el, life){ setTimeout(function(){ el.remove(); }, life * 1000 + 100); })(p, dur);
+    }
+  }
+
+  function openInvitation(){
+    if (opened) return;
+    opened = true;
+
+    if (window.navigator && window.navigator.vibrate) {
+      try { navigator.vibrate(15); } catch (e) {}
+    }
+
+    spawnGoldDust();
+    introHint.classList.add("is-hidden");
+    introMonogram.querySelector(".pulse-ring").style.animation = "none";
+
+    if (reduceMotion || !window.gsap) {
+      introScene.classList.add("is-closed");
+      inviteCard.style.opacity = "1";
+      inviteCard.style.transform = "none";
+      return;
+    }
+
+    var tl = gsap.timeline();
+    tl.to(introMonogram, { scale: 1.12, duration: 0.22, ease: "power1.out" })
+      .to(introMonogram, { scale: 0.9, opacity: 0, duration: 0.3, ease: "power1.in" }, "-=0.02")
+      .to(introScene, { opacity: 0, duration: 0.45, ease: "power1.inOut", onComplete: function(){ introScene.classList.add("is-closed"); } }, "-=0.15")
+      .fromTo(inviteCard,
+        { y: 34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.3");
+  }
+
+  introMonogram.addEventListener("click", openInvitation);
+  introMonogram.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openInvitation(); }
+  });
+
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry, i){
+        if (entry.isIntersecting) {
+          entry.target.style.transition = "opacity .7s ease " + (i%6)*0.05 + "s, transform .7s cubic-bezier(.2,.7,.3,1) " + (i%6)*0.05 + "s";
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.style.opacity = "1"; el.style.transform = "none"; });
+  }
+
+  var WEDDING_DATE = new Date(CONFIG.weddingDateISO);
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function updateCountdown(){
+    var now = new Date();
+    var diff = WEDDING_DATE - now;
+    if (diff < 0) diff = 0;
+    var days = Math.floor(diff / (1000*60*60*24));
+    var hours = Math.floor((diff / (1000*60*60)) % 24);
+    var mins = Math.floor((diff / (1000*60)) % 60);
+    var secs = Math.floor((diff / 1000) % 60);
+    document.getElementById("cd-days").textContent = days;
+    document.getElementById("cd-hours").textContent = pad(hours);
+    document.getElementById("cd-mins").textContent = pad(mins);
+    document.getElementById("cd-secs").textContent = pad(secs);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+
+</body>
+</html>
