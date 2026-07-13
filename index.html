@@ -134,7 +134,7 @@
   .phone-screen{width:100%;height:100%;border-radius:24px;overflow:hidden;background:var(--wine-deep);}
   .phone-screen iframe{
     width:225%;height:225%;transform:scale(0.444);transform-origin:top left;border:0;
-    pointer-events:none; /* stops the scaled preview from trapping page-scroll touches in Safari */
+    touch-action:manipulation; /* allows tapping the seal without the scaled iframe trapping page-scroll gestures */
   }
   .phone-badge{
     position:absolute;bottom:-16px;right:-14px;
