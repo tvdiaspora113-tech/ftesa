@@ -55,8 +55,13 @@
     flex-shrink:0;
   }
   .navlinks{display:flex;gap:34px;font-size:0.92rem;letter-spacing:0.02em;}
-  .navlinks a{position:relative;color:var(--ink);opacity:0.8;transition:opacity .2s;}
+  .navlinks a{position:relative;color:var(--ink);opacity:0.8;transition:opacity .2s;padding-bottom:2px;}
+  .navlinks a::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--gold);
+    transform:scaleX(0);transform-origin:right;transition:transform .3s ease;
+  }
   .navlinks a:hover{opacity:1;}
+  .navlinks a:hover::after{transform:scaleX(1);transform-origin:left;}
   .navcta{display:flex;gap:14px;align-items:center;}
   .btn{
     display:inline-block;padding:12px 26px;font-size:0.88rem;letter-spacing:0.04em;
@@ -67,9 +72,9 @@
     touch-action:manipulation;
   }
   .btn-primary{background:var(--wine-deep);color:var(--ivory);}
-  .btn-primary:hover{background:var(--wine);}
+  .btn-primary:hover{background:var(--wine);transform:translateY(-2px);box-shadow:0 10px 20px -8px rgba(76,20,28,0.5);}
   .btn-ghost{border-color:var(--line);color:var(--ink);}
-  .btn-ghost:hover{border-color:var(--wine-deep);}
+  .btn-ghost:hover{border-color:var(--wine-deep);transform:translateY(-2px);}
   .menu-toggle{
     display:none;background:none;border:none;font-size:1.6rem;color:var(--wine-deep);
     cursor:pointer;touch-action:manipulation;-webkit-appearance:none;appearance:none;
@@ -125,6 +130,8 @@
   .hero-actions{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;}
 
   .hero-visual{position:relative;display:flex;justify-content:center;}
+  .hero-stack .reveal:nth-child(2){transition-delay:.12s;}
+  .hero-stack .reveal:nth-child(3){transition-delay:.24s;}
   .phone{
     position:relative;width:min(78vw,300px);aspect-ratio:9/19;
     background:var(--ink);border-radius:34px;
@@ -148,7 +155,14 @@
     background:var(--gold);color:var(--wine-deep);
     font-family:var(--display);font-style:italic;font-size:0.85rem;
     padding:9px 18px;border-radius:2px;box-shadow:0 10px 20px rgba(76,20,28,0.35);
-    transform:rotate(4deg);
+    animation:badge-float 3.6s ease-in-out infinite;
+  }
+  @keyframes badge-float{
+    0%,100%{transform:rotate(4deg) translateY(0);}
+    50%{transform:rotate(4deg) translateY(-6px);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .phone-badge{animation:none;transform:rotate(4deg);}
   }
 
   section{padding:96px 0;}
@@ -156,6 +170,16 @@
   .section-head .eyebrow{margin-bottom:16px;}
   h2{font-family:var(--display);font-size:clamp(1.9rem,3vw,2.7rem);font-weight:400;color:var(--wine-deep);margin:0 0 14px;}
   .section-head p{opacity:0.75;font-size:1.02rem;margin:0;}
+
+  /* Scroll reveal: elements fade + rise into place as the visitor scrolls to them */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+  .feature-grid .reveal:nth-child(2), .steps .reveal:nth-child(2), .pricing .reveal:nth-child(2){transition-delay:.08s;}
+  .feature-grid .reveal:nth-child(3), .steps .reveal:nth-child(3), .pricing .reveal:nth-child(3){transition-delay:.16s;}
+  .steps .reveal:nth-child(4){transition-delay:.24s;}
 
   /* STEPS */
   .steps{
@@ -170,8 +194,15 @@
 
   /* FEATURES */
   .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .feature{background:var(--paper);padding:34px 28px;}
-  .feature .icon{width:34px;height:34px;margin-bottom:18px;color:var(--wine);}
+  .feature{background:var(--paper);padding:34px 28px;transition:background .25s ease;}
+  .feature:hover{background:var(--ivory);}
+  .feature .icon{
+    width:44px;height:44px;margin-bottom:18px;color:var(--wine);
+    border:1px solid var(--gold-soft);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--ivory);
+  }
+  .feature .icon svg{width:20px;height:20px;}
   .feature h3{font-size:1.02rem;margin:0 0 8px;font-weight:700;}
   .feature p{font-size:0.9rem;opacity:0.72;margin:0;}
 
@@ -278,12 +309,12 @@
 
 <section class="hero">
   <div class="wrap hero-stack">
-    <div class="hero-text">
+    <div class="hero-text reveal">
       <div class="eyebrow">🎉 Platforma #1 për ftesa digjitale</div>
       <h1>Krijoni ftesa unike për<br><em>momentet tuaja</em> speciale.</h1>
       <p class="lead">Ftesa moderne, të ani&shy;mu&shy;ara dhe të personalizuara për Dasma, Fejesa dhe syneti. Dërgoni me një klikim te të gjithë mysafirët tuaj.</p>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual reveal">
       <div class="phone">
         <div class="phone-screen">
           <iframe src="dasma3.html" title="Shembull ftese digjitale" loading="lazy"></iframe>
@@ -291,7 +322,7 @@
         <div class="phone-badge">e drejtpërdrejtë ↗</div>
       </div>
     </div>
-    <div class="hero-actions">
+    <div class="hero-actions reveal">
       <a href="koleksioni.html" class="btn btn-primary">Eksploro koleksionin</a>
       <a href="dasma3.html" target="_blank" rel="noopener" class="btn btn-ghost">Hap Shembullin ↗</a>
     </div>
@@ -300,21 +331,24 @@
 
 <section id="veçorite">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Për çdo gëzim familjar</div>
       <h2>Zgjidhni kategorinë e eventit tuaj</h2>
       <p>Modele të krijuara me kujdes për t'iu përshtatur në mënyrë të përsosur festës suaj.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature">
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/></svg></div>
         <h3>Dasma & Fejesa</h3>
         <p>Modele elegante dhe romantike që shprehin dashurinë tuaj me stil.</p>
       </div>
-      <div class="feature">
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3a7 7 0 1 0 6 11.2A9 9 0 0 1 14 3z"/><path d="M18 3l.6 1.4L20 5l-1.4.6L18 7l-.6-1.4L16 5l1.4-.6z"/></svg></div>
         <h3>Syneti</h3>
         <p>Dizajne të gëzueshme dhe festive për princin tuaj të vogël.</p>
       </div>
-      <div class="feature">
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c-2 0-3.5 1.6-3.5 3.5S10 10 12 10s3.5-1.6 3.5-3.5S14 3 12 3z"/><path d="M12 10v7"/><path d="M9.5 21h5l-1-4h-3z"/></svg></div>
         <h3>Ditëlindje & Evente</h3>
         <p>Ftesa kreative për çdo festë tjetër të rëndësishme.</p>
       </div>
@@ -324,28 +358,28 @@
 
 <section id="si-funksionon">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">— Si funksionon</div>
       <h2>Katër hapa të thjeshtë</h2>
       <p>Një proces i lehtë dhe i shpejtë për të krijuar dhe shpërndarë ftesën tuaj.</p>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step reveal">
         <div class="num">01</div>
         <h3>Zgjidh dizajnin</h3>
-        <p>Shfleto koleksionin tonë editorial për çdo lloj eventi.</p>
+        <p>Shfleto koleksioni.htmln tonë editorial të kuruar për çdo lloj eventi.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="num">02</div>
         <h3>Personalizo</h3>
         <p>Plotëso emrat, datën, programin, galerinë dhe muzikën në kohë reale.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="num">03</div>
         <h3>Konfirmo & paguaj</h3>
         <p>Studioja jonë e shqyrton dhe konfirmon ftesën para se të publikohet.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="num">04</div>
         <h3>Ndaj me të ftuarit</h3>
         <p>Dërgo lidhjen unike, mblidh RSVP-të dhe menaxho gjithçka nga paneli.</p>
@@ -356,13 +390,13 @@
 
 <section id="cmimet">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Çmimet</div>
       <h2>Dy paketa. Pa surpriza.</h2>
       <p>Paguani një herë — ftesa juaj qëndron online sa kohë të doni, pa abonim mujor.</p>
     </div>
     <div class="pricing">
-      <div class="price-card">
+      <div class="price-card reveal">
         <div class="kicker">Çdo gjë esenciale</div>
         <h3>Ekonomike</h3>
         <div class="amount">29.99€ <span>një herë</span></div>
@@ -375,7 +409,7 @@
         </ul>
         <a href="#kontakt" class="btn btn-ghost" style="width:100%;text-align:center;">Zgjidh Ekonomike</a>
       </div>
-      <div class="price-card featured">
+      <div class="price-card featured reveal">
         <div class="price-tag">Më e zgjedhura</div>
         <div class="kicker">Eksperienca e plotë</div>
         <h3>Premium</h3>
@@ -396,13 +430,13 @@
 
 <section id="krahasimi">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Krahasimi</div>
       <h2>Letër & Stampë vs. digjitale</h2>
       <p>Pse gjithnjë e më shumë çifte dhe familje po zgjedhin ftesat digjitale për ditën e tyre të madhe.</p>
     </div>
     <div class="compare">
-      <div class="compare-col trad">
+      <div class="compare-col trad reveal">
         <div class="kicker">Letër & Stampë</div>
         <h3>Ftesa Tradicionale</h3>
         <ul>
@@ -413,7 +447,7 @@
         </ul>
       </div>
       <div class="compare-vs">vs</div>
-      <div class="compare-col digi">
+      <div class="compare-col digi reveal">
         <div class="kicker">Ftesa-Digjitale</div>
         <h3>Ftesa digjitale</h3>
         <ul>
@@ -493,6 +527,25 @@
         toggle.textContent = '☰';
       }
     });
+  })();
+
+  // Scroll reveal: fade + rise elements into view as the visitor scrolls to them
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if(!items.length) return;
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(el){ observer.observe(el); });
   })();
 </script>
 
