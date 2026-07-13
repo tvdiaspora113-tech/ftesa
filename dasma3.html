@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Redon &amp; Elira — 17 Tetor, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2A1116;
+    --paper:#FBF3E6;
+    --paper-2:#F1E1CC;
+    --wine:#3D0F1F;
+    --wine-deep:#220810;
+    --wine-soft:#5C1B2E;
+    --gold:#C9A24B;
+    --gold-light:#E8CC8C;
+    --rose:#A85D6C;
+    --serif:'Cormorant Garamond', serif;
+    --sans:'Jost', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--wine-deep);
+    color:var(--ink);
+    font-family:var(--sans);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold); color:var(--wine-deep);}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; border:none; cursor:pointer; background:none;}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+  /* ============ SKENA 1 — HYRJA ============ */
+
+  .intro-scene{
+    position:relative;
+    height:100vh; height:100svh;
+    background:
+      radial-gradient(60% 42% at 50% 0%, rgba(232,204,140,.10), transparent 65%),
+      linear-gradient(180deg, var(--wine-soft) 0%, var(--wine-deep) 100%);
+    overflow:hidden;
+  }
+  .intro-scene::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    opacity:.05;
+    mix-blend-mode:overlay;
+    pointer-events:none;
+    z-index:1;
+  }
+  .intro-frame{
+    position:absolute; inset:16px;
+    border:1px solid rgba(232,204,140,.24);
+    pointer-events:none;
+    z-index:2;
+  }
+  .intro-frame::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid rgba(232,204,140,.14);
+  }
+  .intro-frame .corner{position:absolute; width:20px; height:20px; border:1px solid var(--gold-light); opacity:.7;}
+  .intro-frame .corner-tl{top:-1px; left:-1px; border-right:0; border-bottom:0;}
+  .intro-frame .corner-tr{top:-1px; right:-1px; border-left:0; border-bottom:0;}
+  .intro-frame .corner-bl{bottom:-1px; left:-1px; border-right:0; border-top:0;}
+  .intro-frame .corner-br{bottom:-1px; right:-1px; border-left:0; border-top:0;}
+
+  .intro-stage{
+    position:relative;
+    height:100vh; height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:32px;
+    z-index:3;
+    padding:24px;
+    text-align:center;
+  }
+
+  .intro-eyebrow{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:11px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    opacity:.85;
+  }
+
+  /* Monogram — rotated diamond frame instead of a plain circle */
+  .intro-monogram-btn{
+    position:relative;
+    width:126px; height:126px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:transform .4s cubic-bezier(.2,.7,.3,1);
+  }
+  .intro-monogram-btn:hover{transform:scale(1.045);}
+  .intro-monogram-btn:focus-visible{outline:2px solid var(--gold-light); outline-offset:8px;}
+  .intro-monogram-btn .diamond-face{
+    position:absolute; inset:0;
+    transform:rotate(45deg);
+    border:1px solid rgba(232,204,140,.55);
+    background:
+      radial-gradient(circle at 32% 26%, var(--wine-soft) 0%, var(--wine) 48%, var(--wine-deep) 100%);
+    box-shadow:
+      0 20px 44px -14px rgba(0,0,0,.6),
+      inset 0 0 0 5px rgba(34,8,16,.5),
+      inset 0 0 0 6px rgba(232,204,140,.24);
+  }
+  .intro-monogram-btn .diamond-face::before{
+    content:"";
+    position:absolute; inset:9px;
+    border:1px solid rgba(232,204,140,.35);
+  }
+  .intro-monogram-btn span.letters{
+    position:relative;
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:32px;
+    color:var(--gold-light);
+    letter-spacing:.02em;
+  }
+  .intro-monogram-btn .pulse-ring{
+    position:absolute; inset:0;
+    transform:rotate(45deg);
+    border:1px solid var(--gold-light);
+    opacity:0;
+    animation:ringPulse 2.6s ease-out infinite;
+  }
+  @keyframes ringPulse{
+    0%{opacity:.5; transform:rotate(45deg) scale(1);}
+    100%{opacity:0; transform:rotate(45deg) scale(1.32);}
+  }
+  .envelope.is-opened .intro-monogram-btn .pulse-ring{animation:none; opacity:0;}
+
+  .intro-names{
+    font-family:var(--serif);
+    font-weight:400;
+    color:var(--paper);
+    font-size:clamp(1.9rem, 8vw, 2.6rem);
+    line-height:1.15;
+  }
+  .intro-names em{font-style:italic; color:var(--gold-light);}
+
+  .intro-hint{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:10.5px;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    opacity:.75;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    transition:opacity .4s ease;
+  }
+  .intro-hint.is-hidden{opacity:0; pointer-events:none;}
+  .intro-hint .line{width:1px; height:24px; background:var(--gold-light); animation:hintPulse 1.8s ease-in-out infinite;}
+  @keyframes hintPulse{0%,100%{opacity:.25; transform:scaleY(.6);} 50%{opacity:1; transform:scaleY(1);}}
+
+  .intro-scene, .intro-stage{transition:opacity .6s ease;}
+  .intro-scene.is-closed{opacity:0; pointer-events:none; position:absolute; inset:0;}
+
+  /* ============ FTESA KRYESORE (ekrani 2) ============ */
+
+  .invite-hero{
+    position:relative;
+    min-height:100vh; min-height:100svh;
+    background:
+      radial-gradient(70% 50% at 50% 0%, rgba(232,204,140,.08), transparent 60%),
+      linear-gradient(165deg, var(--wine-soft) 0%, var(--wine-deep) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:64px 22px 56px;
+  }
+  .invite-hero::after{
+    content:"";
+    position:absolute; inset:16px;
+    border:1px solid rgba(232,204,140,.26);
+    pointer-events:none;
+  }
+
+  .invite-card{
+    position:relative;
+    max-width:420px;
+    width:100%;
+    text-align:center;
+    color:var(--paper);
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  .invite-card svg.botanical{position:absolute; opacity:.6;}
+  .botanical.top-left{top:-46px; left:-30px; width:120px; transform:rotate(-6deg);}
+  .botanical.bottom-right{bottom:-40px; right:-26px; width:130px; transform:rotate(174deg);}
+
+  .couple-photo-wrap{
+    display:none;
+    width:104px; height:104px;
+    border-radius:50%;
+    margin:0 auto 22px;
+    border:2px solid var(--gold-light);
+    overflow:hidden;
+    box-shadow:0 12px 28px rgba(0,0,0,.4);
+    background:rgba(255,255,255,.05);
+    align-items:center; justify-content:center;
+  }
+  .couple-photo-wrap.is-visible{display:flex;}
+  .couple-photo-wrap img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  .eyebrow{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .eyebrow::before, .eyebrow::after{content:""; width:20px; height:1px; background:var(--gold-light); opacity:.5;}
+
+  .couple-names{
+    font-family:var(--serif);
+    font-weight:500;
+    line-height:1.05;
+    font-size:clamp(2.5rem, 10vw, 3.5rem);
+    color:var(--paper);
+  }
+  .couple-names .amp{
+    display:block;
+    font-style:italic;
+    color:var(--gold-light);
+    font-size:.5em;
+    margin:10px 0;
+  }
+
+  .invite-lede{
+    margin-top:22px;
+    font-size:14px;
+    line-height:1.75;
+    color:var(--paper);
+    opacity:.82;
+    max-width:300px;
+    margin-left:auto; margin-right:auto;
+  }
+
+  .wed-date{
+    margin-top:26px;
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:12.5px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+  .wed-date strong{
+    display:block;
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:23px;
+    letter-spacing:.02em;
+    color:var(--paper);
+    margin-top:8px;
+    text-transform:none;
+  }
+
+  .wed-venue-tag{
+    display:inline-block;
+    margin-top:26px;
+    padding:11px 26px;
+    border:1px solid var(--gold-light);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+
+  .scroll-cue{
+    margin-top:46px;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--gold-light); opacity:.8;
+  }
+  .scroll-cue .chevron{
+    width:8px; height:8px;
+    border-right:1px solid var(--gold-light);
+    border-bottom:1px solid var(--gold-light);
+    transform:rotate(45deg);
+    animation:chevBounce 1.6s ease-in-out infinite;
+  }
+  @keyframes chevBounce{0%,100%{transform:rotate(45deg) translate(0,0);} 50%{transform:rotate(45deg) translate(3px,3px);}}
+
+  .gold-particle{
+    position:absolute; top:0; left:0;
+    width:4px; height:4px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--gold-light) 0%, var(--gold) 70%, transparent 100%);
+    pointer-events:none;
+    z-index:5;
+    will-change:transform, opacity;
+    animation:particleFall var(--dur, 1.3s) ease-out forwards;
+  }
+  @keyframes particleFall{
+    0%{transform:translate(0,0) scale(1); opacity:1;}
+    100%{transform:translate(var(--dx,0px), var(--dy,110px)) scale(.4); opacity:0;}
+  }
+
+  /* ============ SEKSIONET E PËRBASHKËTA ============ */
+
+  .content{
+    position:relative;
+    background:var(--paper);
+    z-index:2;
+  }
+  .content::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:.045;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+
+  section.block{
+    position:relative;
+    padding:64px 24px;
+    max-width:520px;
+    margin:0 auto;
+  }
+  section.block + section.block{border-top:1px solid rgba(42,17,22,.09);}
+
+  .divider-motif{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .divider-motif::before, .divider-motif::after{content:""; height:1px; width:44px; background:var(--gold); opacity:.55;}
+  .divider-motif span{
+    width:6px; height:6px; transform:rotate(45deg);
+    background:var(--gold); opacity:.8;
+  }
+
+  .kicker{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--rose);
+    text-align:center;
+    margin-bottom:12px;
+  }
+  .block-title{
+    font-family:var(--serif);
+    font-size:28px;
+    font-weight:400;
+    letter-spacing:.02em;
+    text-align:center;
+    color:var(--wine);
+    margin-bottom:30px;
+  }
+  .block-lede{
+    font-size:13.5px;
+    line-height:1.75;
+    text-align:center;
+    color:var(--ink);
+    opacity:.78;
+    max-width:340px;
+    margin:0 auto 34px;
+  }
+
+  .reveal{opacity:0; transform:translateY(26px);}
+
+  /* ---- EPIGRAF (citim) ---- */
+  .epigraph{
+    max-width:460px;
+    margin:0 auto;
+    padding:56px 24px;
+    text-align:center;
+  }
+  .epigraph p{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.15rem, 4.6vw, 1.5rem);
+    line-height:1.5;
+    color:var(--wine);
+  }
+  .epigraph .attribution{
+    margin-top:16px;
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:10.5px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--rose);
+  }
+
+  /* ---- SAVE THE DATE / KALENDARI ---- */
+  .calendar-card{
+    background:var(--wine);
+    padding:26px 22px 22px;
+    color:var(--paper);
+    position:relative;
+  }
+  .calendar-card::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid rgba(232,204,140,.25);
+    pointer-events:none;
+  }
+  .calendar-month{
+    text-align:center;
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:12px;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:18px;
+  }
+  .calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:6px;
+    text-align:center;
+  }
+  .calendar-day-label{
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    opacity:.7;
+    padding-bottom:6px;
+  }
+  .calendar-number{
+    font-family:var(--sans);
+    font-size:12.5px;
+    color:var(--paper);
+    opacity:.75;
+    padding:7px 0;
+  }
+  .calendar-number.empty{opacity:0;}
+  .calendar-number.highlighted-wedding-date{
+    position:relative;
+    opacity:1;
+    font-family:var(--serif);
+    font-weight:600;
+    color:var(--wine-deep);
+  }
+  .calendar-number.highlighted-wedding-date::before{
+    content:"";
+    position:absolute; inset:1px 3px;
+    background:var(--gold-light);
+    z-index:-1;
+  }
+  .calendar-note{
+    margin-top:22px;
+    text-align:center;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:14.5px;
+    color:var(--rose);
+  }
+
+  /* ---- NUMËRIMI MBRAPSHT ---- */
+  .countdown{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:10px;
+    max-width:420px;
+    margin:0 auto;
+  }
+  .countdown-unit{
+    background:var(--paper-2);
+    border:1px solid rgba(201,162,75,.35);
+    padding:18px 4px 14px;
+    text-align:center;
+  }
+  .countdown-num{
+    font-family:var(--serif);
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(1.6rem, 6.4vw, 2.1rem);
+    color:var(--wine);
+    line-height:1;
+  }
+  .countdown-label{
+    margin-top:7px;
+    font-size:9.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--rose);
+    opacity:.9;
+  }
+
+  /* ---- PROGRAMI ---- */
+  .schedule{max-width:400px; margin:0 auto;}
+  .schedule-item{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:16px;
+    align-items:baseline;
+    padding:14px 0;
+    border-bottom:1px solid rgba(42,17,22,.08);
+  }
+  .schedule-item:last-child{border-bottom:0;}
+  .schedule-time{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:16px;
+    color:var(--wine);
+    text-align:right;
+  }
+  .schedule-event{
+    font-size:13.5px;
+    color:var(--ink);
+    opacity:.82;
+  }
+
+  /* ---- KODI I VESHJES ---- */
+  .dresscode-card{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+    max-width:400px;
+    margin:0 auto;
+    padding:26px;
+    background:var(--paper-2);
+  }
+  .dresscode-icon{width:38px; height:38px; flex-shrink:0; color:var(--wine); margin-top:2px;}
+  .dresscode-label{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    color:var(--wine);
+  }
+  .dresscode-text p{
+    margin-top:4px;
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--ink);
+    opacity:.75;
+  }
+  .palette-swatches{display:flex; gap:8px; margin-top:12px;}
+  .palette-swatches span{
+    width:20px; height:20px;
+    border-radius:50%;
+    display:inline-block;
+    border:1px solid rgba(42,17,22,.15);
+  }
+
+  /* ---- AKOMODIMI ---- */
+  .stay-card{
+    max-width:400px;
+    margin:0 auto;
+    padding:28px 26px;
+    background:var(--wine);
+    color:var(--paper);
+    text-align:center;
+  }
+  .stay-card .stay-hotel{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:20px;
+    color:var(--gold-light);
+  }
+  .stay-card p{
+    margin-top:10px;
+    font-size:12.5px;
+    line-height:1.65;
+    opacity:.85;
+  }
+  .stay-card .stay-code{
+    display:inline-block;
+    margin-top:16px;
+    padding:8px 18px;
+    border:1px solid var(--gold-light);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+
+  /* ---- LOKACIONI ---- */
+  .location-card{
+    background:var(--wine);
+    overflow:hidden;
+    color:var(--paper);
+    border:1px solid rgba(232,204,140,.3);
+  }
+  .location-map{width:100%; aspect-ratio:16/10; border:0; display:block; filter:saturate(.85) contrast(1.02);}
+  .location-body{padding:24px 22px 28px; text-align:center;}
+  .venue-name{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--gold-light);}
+  .venue-address{margin-top:6px; font-size:13px; opacity:.85; line-height:1.5;}
+  .directions-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:13px 30px;
+    background:var(--gold-light);
+    color:var(--wine-deep);
+    font-size:11.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    transition:transform .2s ease;
+  }
+  .directions-btn:active{transform:scale(.96);}
+
+  /* ---- DHURATA (SHËNIM) ---- */
+  .note-card{
+    max-width:400px;
+    margin:0 auto;
+    text-align:center;
+    padding:8px 12px;
+  }
+  .note-card p{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:16.5px;
+    line-height:1.6;
+    color:var(--wine);
+  }
+
+  /* ---- KONFIRMIMI (RSVP) ---- */
+  .rsvp-card{
+    text-align:center;
+    background:var(--paper-2);
+    padding:32px 24px;
+    max-width:400px;
+    margin:0 auto;
+    border:1px solid rgba(201,162,75,.4);
+  }
+  .rsvp-deadline{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    color:var(--rose);
+    margin-bottom:16px;
+  }
+  .rsvp-contacts{display:flex; flex-direction:column; gap:10px; font-size:13.5px;}
+  .rsvp-contacts .contact-row{display:flex; justify-content:center; gap:8px;}
+  .rsvp-contacts .contact-name{color:var(--ink); opacity:.7;}
+  .rsvp-contacts .contact-phone{color:var(--wine); font-weight:600;}
+
+  footer{
+    text-align:center;
+    padding:44px 24px 58px;
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--wine);
+    opacity:.85;
+    font-size:14px;
+  }
+  footer .hashtag{
+    display:block;
+    margin-top:8px;
+    font-family:var(--sans);
+    font-weight:300;
+    font-style:normal;
+    font-size:11px;
+    letter-spacing:.14em;
+    color:var(--rose);
+    opacity:.9;
+  }
+
+  @media (min-width:600px){
+    section.block{padding:100px 24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .intro-hint .line, .chevron, .pulse-ring{animation:none; transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== SKENA 1: HYRJA ===================== -->
+<section class="intro-scene" id="introScene" aria-label="Ftesa e dasmës">
+  <div class="intro-frame" aria-hidden="true">
+    <span class="corner corner-tl"></span>
+    <span class="corner corner-tr"></span>
+    <span class="corner corner-bl"></span>
+    <span class="corner corner-br"></span>
+  </div>
+  <div class="intro-stage">
+    <p class="intro-eyebrow">Ju ftojmë me kënaqësi</p>
+    <button class="intro-monogram-btn" id="introMonogram" aria-label="Hap ftesën">
+      <span class="pulse-ring" aria-hidden="true"></span>
+      <span class="diamond-face" aria-hidden="true"></span>
+      <span class="letters" id="monogramInitials">R&amp;E</span>
+    </button>
+    <p class="intro-names">Redon <em>&amp;</em> Elira</p>
+    <div class="intro-hint" id="introHint">
+      <span>Prekni për ta hapur</span>
+      <span class="line"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKENA 2: FTESA KRYESORE ===================== -->
+<section class="invite-hero" id="inviteHero">
+  <div class="invite-card" id="inviteCard">
+    <svg class="botanical top-left" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 8 C 30 20, 40 50, 30 80 C 60 60, 90 60, 110 90" fill="none" stroke="#E8CC8C" stroke-width="1.1"/>
+      <path d="M8 6 C 20 26, 18 44, 6 58" fill="none" stroke="#A85D6C" stroke-width="1"/>
+      <circle cx="30" cy="80" r="2.6" fill="#A85D6C"/>
+      <circle cx="52" cy="58" r="2.2" fill="#E8CC8C"/>
+    </svg>
+    <svg class="botanical bottom-right" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 8 C 30 20, 44 50, 32 84 C 62 62, 92 64, 114 92" fill="none" stroke="#E8CC8C" stroke-width="1.1"/>
+      <path d="M10 6 C 22 28, 20 46, 8 60" fill="none" stroke="#A85D6C" stroke-width="1"/>
+      <circle cx="32" cy="84" r="2.6" fill="#A85D6C"/>
+      <circle cx="55" cy="60" r="2.2" fill="#E8CC8C"/>
+    </svg>
+
+    <div class="couple-photo-wrap" id="couplePhotoWrap">
+      <img id="couplePhotoImg" src="" alt="Fotoja e çiftit">
+    </div>
+
+    <p class="eyebrow">Kanë kënaqësinë t'ju ftojnë</p>
+    <h1 class="couple-names">Redon<span class="amp">&amp;</span>Elira</h1>
+    <p class="invite-lede">Në ditën kur do të bashkojmë jetët tona, dëshirojmë që edhe ju të jeni pjesë e këtij çasti të veçantë.</p>
+
+    <p class="wed-date">Data e Dasmës
+      <strong id="weddingDateDisplay">17 Tetor, 2026</strong>
+    </p>
+
+    <span class="wed-venue-tag" id="venueTag">Hotel Prishtina</span>
+
+    <div class="scroll-cue">
+      <span>Shfleto</span>
+      <span class="chevron"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PËRMBAJTJA ===================== -->
+<div class="content">
+
+  <!-- ===================== EPIGRAF ===================== -->
+  <section class="epigraph">
+    <p class="reveal">"Dashuria nuk gjendet duke shikuar njëri-tjetrin, por duke shikuar në të njëjtin drejtim."</p>
+    <p class="attribution reveal">— Antoine de Saint-Exupéry</p>
+  </section>
+
+  <!-- ===================== SAVE THE DATE & KALENDARI ===================== -->
+  <section class="block" aria-labelledby="stdTitle">
+    <p class="kicker reveal">Shënojeni Datën</p>
+    <h2 class="block-title reveal" id="stdTitle">Save the Date</h2>
+    <p class="block-lede reveal">Prania juaj do të na gëzonte pa masë. Ju lutemi na konfirmoni pjesëmarrjen deri më datë 3 Tetor.</p>
+
+    <div class="calendar-card reveal">
+      <p class="calendar-month">Tetor 2026</p>
+      <div class="calendar-grid">
+        <div class="calendar-day-label">Hë</div>
+        <div class="calendar-day-label">Ma</div>
+        <div class="calendar-day-label">Më</div>
+        <div class="calendar-day-label">En</div>
+        <div class="calendar-day-label">Pr</div>
+        <div class="calendar-day-label">Sh</div>
+        <div class="calendar-day-label">Di</div>
+
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number empty"></div>
+        <div class="calendar-number">01</div>
+        <div class="calendar-number">02</div>
+        <div class="calendar-number">03</div>
+        <div class="calendar-number">04</div>
+
+        <div class="calendar-number">05</div>
+        <div class="calendar-number">06</div>
+        <div class="calendar-number">07</div>
+        <div class="calendar-number">08</div>
+        <div class="calendar-number">09</div>
+        <div class="calendar-number">10</div>
+        <div class="calendar-number">11</div>
+
+        <div class="calendar-number">12</div>
+        <div class="calendar-number">13</div>
+        <div class="calendar-number">14</div>
+        <div class="calendar-number">15</div>
+        <div class="calendar-number">16</div>
+        <div class="calendar-number highlighted-wedding-date">17</div>
+        <div class="calendar-number">18</div>
+
+        <div class="calendar-number">19</div>
+        <div class="calendar-number">20</div>
+        <div class="calendar-number">21</div>
+        <div class="calendar-number">22</div>
+        <div class="calendar-number">23</div>
+        <div class="calendar-number">24</div>
+        <div class="calendar-number">25</div>
+
+        <div class="calendar-number">26</div>
+        <div class="calendar-number">27</div>
+        <div class="calendar-number">28</div>
+        <div class="calendar-number">29</div>
+        <div class="calendar-number">30</div>
+        <div class="calendar-number">31</div>
+        <div class="calendar-number empty"></div>
+      </div>
+    </div>
+    <p class="calendar-note reveal">17 Tetor — dita jonë e madhe</p>
+  </section>
+
+  <!-- ===================== NUMËRIMI MBRAPSHT ===================== -->
+  <section class="block" aria-labelledby="countdownTitle">
+    <p class="kicker reveal">Dita e Madhe</p>
+    <h2 class="block-title reveal" id="countdownTitle">Numërojmë Mbrapsht së Bashku</h2>
+    <div class="countdown reveal" id="countdown" aria-live="polite">
+      <div class="countdown-unit"><div class="countdown-num" id="cd-days">00</div><div class="countdown-label">Ditë</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-label">Orë</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-label">Minuta</div></div>
+      <div class="countdown-unit"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-label">Sekonda</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== PROGRAMI ===================== -->
+  <section class="block" aria-labelledby="scheduleTitle">
+    <p class="kicker reveal">Agjenda e Mbrëmjes</p>
+    <h2 class="block-title reveal" id="scheduleTitle">Programi</h2>
+    <div class="schedule" id="scheduleList"></div>
+  </section>
+
+  <!-- ===================== KODI I VESHJES ===================== -->
+  <section class="block" aria-labelledby="dresscodeTitle">
+    <p class="kicker reveal">Elegancë e Rekomanduar</p>
+    <h2 class="block-title reveal" id="dresscodeTitle">Kodi i Veshjes</h2>
+    <div class="dresscode-card reveal">
+      <svg class="dresscode-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M17 6 L24 12 L31 6 L31 10 L36 16 L31 20 L31 42 L17 42 L17 20 L12 16 L17 10 Z" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <path d="M22 12 L24 15 L26 12" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      </svg>
+      <div class="dresscode-text">
+        <p class="dresscode-label">Formale / Cocktail</p>
+        <p>Ju ftojmë të vishni veshje elegante në nuancat e bordosë, arit dhe krem, në harmoni me mbrëmjen tonë.</p>
+        <div class="palette-swatches" aria-hidden="true">
+          <span style="background:#3D0F1F"></span>
+          <span style="background:#C9A24B"></span>
+          <span style="background:#FBF3E6; border-color:#c9bfa4"></span>
+          <span style="background:#A85D6C"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AKOMODIMI ===================== -->
+  <section class="block" aria-labelledby="stayTitle">
+    <p class="kicker reveal">Për të Ftuarit nga Jashtë Qytetit</p>
+    <h2 class="block-title reveal" id="stayTitle">Akomodimi</h2>
+    <div class="stay-card reveal">
+      <p class="stay-hotel">Hotel Prishtina</p>
+      <p>Kemi rezervuar një numër dhomash me çmim të veçantë për të ftuarit tanë. Ju lutemi kontaktoni recepsionin dhe përmendni emrin e dasmës.</p>
+      <span class="stay-code">Kodi: REDON&amp;ELIRA</span>
+    </div>
+  </section>
+
+  <!-- ===================== LOKACIONI ===================== -->
+  <section class="block" aria-labelledby="locationTitle">
+    <p class="kicker reveal">Na Gjeni Këtu</p>
+    <h2 class="block-title reveal" id="locationTitle">Lokacioni</h2>
+    <div class="location-card reveal">
+      <iframe class="location-map" id="locationMap" loading="lazy" title="Harta drejt lokacionit" src=""></iframe>
+      <div class="location-body">
+        <p class="venue-name" id="venueName">Hotel Prishtina</p>
+        <p class="venue-address" id="venueAddress">Sheshi Zahir Pajaziti, Prishtinë</p>
+        <a class="directions-btn" id="directionsLink" href="#" target="_blank" rel="noopener">Merr Udhëzime</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SHËNIM PËR DHURATAT ===================== -->
+  <section class="block" aria-labelledby="noteTitle">
+    <p class="kicker reveal">Një Fjalë e Vogël</p>
+    <h2 class="block-title reveal" id="noteTitle">Dhurata</h2>
+    <div class="note-card reveal">
+      <p>Prania juaj në këtë ditë është dhurata më e madhe për ne. Nëse dëshironi të na e shprehni dashurinë edhe ndryshe, një zarf do të vlerësohej pafundësisht.</p>
+    </div>
+  </section>
+
+  <!-- ===================== KONFIRMIMI (RSVP) ===================== -->
+  <section class="block" aria-labelledby="rsvpTitle">
+    <p class="kicker reveal">Konfirmimi i Pjesëmarrjes</p>
+    <h2 class="block-title reveal" id="rsvpTitle">RSVP</h2>
+    <div class="rsvp-card reveal">
+      <p class="rsvp-deadline">Deri më 3 Tetor, 2026</p>
+      <div class="rsvp-contacts">
+        <div class="contact-row"><span class="contact-name">Redon</span><span class="contact-phone">044 000 000</span></div>
+        <div class="contact-row"><span class="contact-name">Elira</span><span class="contact-phone">044 111 111</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footerSignature">Me dashuri, Redon &amp; Elira
+    <span class="hashtag" id="hashtagLine">#RedonElira2026</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+/* ======================================================
+   KONFIGURIMI — ndryshoni këtu emrat, datën, lokacionin
+   ====================================================== */
+var CONFIG = {
+  groom: "Redon",
+  bride: "Elira",
+  initials: "R&E",
+  weddingDateDisplay: "17 Tetor, 2026",
+  weddingDateISO: "2026-10-17T18:00:00",
+
+  couplePhoto: "",   // p.sh. "foto.jpg" — lëreni bosh nëse nuk keni foto
+
+  schedule: [
+    { time: "18:00", event: "Mirëseardhja e të ftuarve" },
+    { time: "19:00", event: "Hyrja e çiftit" },
+    { time: "20:00", event: "Darka" },
+    { time: "21:30", event: "Prerja e tortës" },
+    { time: "22:00", event: "Vallëzimi dhe festa" }
+  ],
+
+  venueName: "Hotel Prishtina",
+  venueAddress: "Sheshi Zahir Pajaziti, Prishtinë",
+  mapQuery: "Hotel Prishtina, Prishtinë",
+  directionsQuery: "Hotel Prishtina, Prishtinë",
+  hashtag: "#RedonElira2026",
+  pageTitle: "Redon & Elira — 17 Tetor, 2026"
+};
+
+function applyConfig(cfg){
+  document.title = cfg.pageTitle;
+  document.getElementById("monogramInitials").textContent = cfg.initials;
+  document.getElementById("weddingDateDisplay").textContent = cfg.weddingDateDisplay;
+  document.getElementById("venueTag").textContent = cfg.venueName;
+
+  var photoWrap = document.getElementById("couplePhotoWrap");
+  var photoImg = document.getElementById("couplePhotoImg");
+  if (cfg.couplePhoto) {
+    photoImg.src = cfg.couplePhoto;
+    photoWrap.classList.add("is-visible");
+  } else {
+    photoWrap.classList.remove("is-visible");
+  }
+
+  var scheduleEl = document.getElementById("scheduleList");
+  scheduleEl.innerHTML = "";
+  cfg.schedule.forEach(function(item){
+    var row = document.createElement("div");
+    row.className = "schedule-item reveal";
+    row.innerHTML =
+      '<div class="schedule-time">' + item.time + '</div>' +
+      '<div class="schedule-event">' + item.event + '</div>';
+    scheduleEl.appendChild(row);
+  });
+
+  document.getElementById("venueName").textContent = cfg.venueName;
+  document.getElementById("venueAddress").textContent = cfg.venueAddress;
+  document.getElementById("locationMap").src =
+    "https://maps.google.com/maps?q=" + encodeURIComponent(cfg.mapQuery) + "&t=&z=15&ie=UTF8&iwloc=&output=embed";
+  document.getElementById("directionsLink").href =
+    "https://maps.google.com/maps?daddr=" + encodeURIComponent(cfg.directionsQuery);
+
+  document.getElementById("footerSignature").firstChild.textContent = "Me dashuri, " + cfg.groom + " & " + cfg.bride + " ";
+  document.getElementById("hashtagLine").textContent = cfg.hashtag;
+}
+
+applyConfig(CONFIG);
+
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var introMonogram = document.getElementById("introMonogram");
+  var introScene = document.getElementById("introScene");
+  var introHint = document.getElementById("introHint");
+  var inviteCard = document.getElementById("inviteCard");
+  var opened = false;
+
+  function spawnGoldDust(){
+    var stage = document.querySelector(".intro-stage");
+    var btn = introMonogram;
+    if (!stage || !btn) return;
+    var btnRect = btn.getBoundingClientRect();
+    var stageRect = stage.getBoundingClientRect();
+    var originX = btnRect.left - stageRect.left + btnRect.width / 2;
+    var originY = btnRect.top - stageRect.top + btnRect.height / 2;
+
+    var count = 14;
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement("span");
+      p.className = "gold-particle";
+      var angle = Math.random() * Math.PI * 2;
+      var distance = 36 + Math.random() * 80;
+      var dx = Math.cos(angle) * distance;
+      var dy = Math.sin(angle) * distance - 26;
+      var dur = 0.9 + Math.random() * 0.8;
+      p.style.left = originX + "px";
+      p.style.top = originY + "px";
+      p.style.setProperty("--dx", dx.toFixed(1) + "px");
+      p.style.setProperty("--dy", dy.toFixed(1) + "px");
+      p.style.setProperty("--dur", dur.toFixed(2) + "s");
+      stage.appendChild(p);
+      (function(el, life){ setTimeout(function(){ el.remove(); }, life * 1000 + 100); })(p, dur);
+    }
+  }
+
+  function openInvitation(){
+    if (opened) return;
+    opened = true;
+
+    if (window.navigator && window.navigator.vibrate) {
+      try { navigator.vibrate(15); } catch (e) {}
+    }
+
+    spawnGoldDust();
+    introHint.classList.add("is-hidden");
+    introMonogram.querySelector(".pulse-ring").style.animation = "none";
+
+    if (reduceMotion || !window.gsap) {
+      introScene.classList.add("is-closed");
+      inviteCard.style.opacity = "1";
+      inviteCard.style.transform = "none";
+      return;
+    }
+
+    var tl = gsap.timeline();
+    tl.to(introMonogram, { scale: 1.12, duration: 0.22, ease: "power1.out" })
+      .to(introMonogram, { scale: 0.9, opacity: 0, duration: 0.3, ease: "power1.in" }, "-=0.02")
+      .to(introScene, { opacity: 0, duration: 0.45, ease: "power1.inOut", onComplete: function(){ introScene.classList.add("is-closed"); } }, "-=0.15")
+      .fromTo(inviteCard,
+        { y: 34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.3");
+  }
+
+  introMonogram.addEventListener("click", openInvitation);
+  introMonogram.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openInvitation(); }
+  });
+
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry, i){
+        if (entry.isIntersecting) {
+          entry.target.style.transition = "opacity .7s ease " + (i%6)*0.05 + "s, transform .7s cubic-bezier(.2,.7,.3,1) " + (i%6)*0.05 + "s";
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.style.opacity = "1"; el.style.transform = "none"; });
+  }
+
+  var WEDDING_DATE = new Date(CONFIG.weddingDateISO);
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function updateCountdown(){
+    var now = new Date();
+    var diff = WEDDING_DATE - now;
+    if (diff < 0) diff = 0;
+    var days = Math.floor(diff / (1000*60*60*24));
+    var hours = Math.floor((diff / (1000*60*60)) % 24);
+    var mins = Math.floor((diff / (1000*60)) % 60);
+    var secs = Math.floor((diff / 1000) % 60);
+    document.getElementById("cd-days").textContent = days;
+    document.getElementById("cd-hours").textContent = pad(hours);
+    document.getElementById("cd-mins").textContent = pad(mins);
+    document.getElementById("cd-secs").textContent = pad(secs);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+
+</body>
+</html>
