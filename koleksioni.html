@@ -2,7 +2,7 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Shfletoni koleksionin e ftesave digjitale — dasma, kanagjeqe, syneti dhe ditëlindje. Shikoni animacionet dhe eksperiencën e plotë direkt në ekran.">
 <title>Koleksioni i Ftesave Digjitale — Ftesa-Digjitale</title>
 <style>
@@ -17,9 +17,17 @@
     --line: rgba(36,28,21,0.14);
     --serif: 'Iowan Old Style','Palatino Linotype', Georgia, 'Times New Roman', serif;
     --display: 'Didot','Bodoni MT','Playfair Display', Georgia, serif;
+    --vh100: 100vh; /* overwritten to 100dvh below where supported */
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  @supports (height: 100dvh){
+    :root{ --vh100: 100dvh; }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  html,body{
+    max-width:100%;
+    overflow-x:hidden; /* stops any stray element from creating a horizontal scrollbar on iPhone Safari */
+  }
   body{
     margin:0;
     background:var(--ivory);
@@ -27,9 +35,17 @@
     font-family:var(--serif);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    min-height:100vh;
+    min-height:var(--vh100);
     display:flex;
     flex-direction:column;
+  }
+  /* Locks background scroll on iOS while the fullscreen preview modal is open
+     (iOS Safari ignores overflow:hidden on body alone) */
+  body.modal-open{
+    position:fixed;
+    inset:0;
+    width:100%;
+    overflow:hidden;
   }
   a{color:inherit;text-decoration:none;}
   main{flex:1;}
@@ -40,8 +56,10 @@
   header{
     position:sticky;top:0;z-index:50;
     background:rgba(247,241,230,0.92);
+    -webkit-backdrop-filter:blur(8px);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top);
   }
   nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;position:relative;}
   .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:1.3rem;letter-spacing:0.03em;color:var(--wine-deep);}
@@ -59,6 +77,8 @@
     display:inline-block;padding:12px 26px;font-size:0.88rem;letter-spacing:0.04em;
     border-radius:2px;border:1px solid transparent;cursor:pointer;transition:all .25s;
     font-family:var(--serif);
+    -webkit-appearance:none;appearance:none;
+    touch-action:manipulation;
   }
   .btn-primary{background:var(--wine-deep);color:var(--ivory);}
   .btn-primary:hover, .btn-primary:focus-visible{background:var(--wine);}
@@ -69,6 +89,7 @@
   .menu-toggle{
     display:none;background:none;border:1px solid var(--line);border-radius:2px;
     font-size:1.1rem;padding:8px 14px;cursor:pointer;color:var(--wine-deep);
+    -webkit-appearance:none;appearance:none;touch-action:manipulation;
   }
 
   /* HEAD */
@@ -141,6 +162,9 @@
     overflow:hidden;
     background:var(--paper);
     box-shadow:0 0 0 2px #000 inset;
+    /* helps Safari commit the rounded-corner clip to its own layer instead of
+       recalculating it every frame while the nested iframe scrolls */
+    -webkit-mask-image:-webkit-radial-gradient(#fff, #000);
   }
 
   /* IFRAME + SCROLL BEHAVIOR */
@@ -150,7 +174,6 @@
     height:100%;
     border:0;
     background:var(--paper);
-    -webkit-overflow-scrolling:touch;
   }
 
   /* Loading state, shown until iframe fires onload */
@@ -192,6 +215,7 @@
   .link-view{
     font-size:0.82rem;letter-spacing:0.04em;color:var(--wine);
     border-bottom:1px solid var(--gold-soft);padding-bottom:2px;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--serif);
+    -webkit-appearance:none;appearance:none;touch-action:manipulation;
   }
   .link-view:hover, .link-view:focus-visible{color:var(--wine-deep);border-color:var(--gold);}
 
@@ -218,8 +242,16 @@
   .price-card ul li{padding:6px 0;border-top:1px solid var(--line);}
   .price-card ul li:first-child{border-top:none;}
 
-  .compare-table{width:100%;border-collapse:collapse;font-size:0.92rem;}
-  .compare-table th, .compare-table td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;}
+  /* Comparison table: wrapped so a wide table scrolls inside its own box
+     on narrow iPhones instead of stretching the whole page sideways */
+  .compare-table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:4px;
+  }
+  .compare-table{width:100%;min-width:480px;border-collapse:collapse;font-size:0.92rem;}
+  .compare-table th, .compare-table td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap;}
   .compare-table th{color:var(--wine-deep);font-family:var(--display);font-weight:400;font-size:1rem;}
   .compare-table td.yes{color:var(--wine);}
   .compare-table td.no{opacity:.45;}
@@ -229,6 +261,7 @@
   .contact-form input, .contact-form textarea{
     font-family:var(--serif);font-size:0.95rem;padding:12px 14px;border:1px solid var(--line);
     border-radius:3px;background:var(--paper);color:var(--ink);
+    -webkit-appearance:none;appearance:none;
   }
   .contact-form textarea{resize:vertical;min-height:110px;}
   .contact-details p{margin:0 0 10px;font-size:0.95rem;}
@@ -239,11 +272,12 @@
     position:fixed;inset:0;background:rgba(36,28,21,0.75);
     display:flex;align-items:center;justify-content:center;
     z-index:200;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s ease;
+    height:var(--vh100);
   }
   .preview-overlay.is-open{opacity:1;pointer-events:auto;}
   .preview-panel{
     background:var(--ink);border-radius:34px;padding:14px;width:min(360px,92vw);
-    height:min(760px,88vh);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.5);
+    height:min(760px,80dvh,80vh);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.5);
   }
   .preview-panel::before{
     content:"";position:absolute;top:26px;left:50%;transform:translateX(-50%);
@@ -254,11 +288,12 @@
   .preview-close{
     position:absolute;top:-46px;right:0;background:var(--ivory);border:none;
     width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;color:var(--wine-deep);
+    -webkit-appearance:none;appearance:none;touch-action:manipulation;
   }
   .preview-close:hover, .preview-close:focus-visible{background:var(--gold-soft);}
 
   /* FOOTER */
-  footer{background:var(--wine-deep);color:var(--ivory);padding:40px 0 30px;}
+  footer{background:var(--wine-deep);color:var(--ivory);padding:40px 0 30px;padding-bottom:calc(30px + env(safe-area-inset-bottom));}
   .footer-bottom{display:flex;justify-content:space-between;font-size:0.82rem;opacity:0.6;flex-wrap:wrap;gap:10px;}
 
   @media (max-width: 900px){
@@ -483,18 +518,20 @@
     <div class="wrap">
       <h2>Pse ftesë digjitale</h2>
       <p class="section-lead">Krahasuar me ftesat e printuara, versioni digjital kursen kohë dhe kosto pa hequr dorë nga eleganca.</p>
-      <table class="compare-table">
-        <thead>
-          <tr><th></th><th>Digjitale</th><th>E printuar</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Koha e dorëzimit</td><td class="yes">Brenda 24 orësh</td><td class="no">1–2 javë</td></tr>
-          <tr><td>Ndryshime pas dërgimit</td><td class="yes">Falas dhe të menjëhershme</td><td class="no">Ribotim me kosto</td></tr>
-          <tr><td>Muzikë dhe animacion</td><td class="yes">Po</td><td class="no">Jo</td></tr>
-          <tr><td>Konfirmim i pjesëmarrjes</td><td class="yes">Automatik (RSVP)</td><td class="no">Me telefon</td></tr>
-          <tr><td>Kosto mesatare</td><td class="yes">15–49€</td><td class="no">150€+</td></tr>
-        </tbody>
-      </table>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th></th><th>Digjitale</th><th>E printuar</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Koha e dorëzimit</td><td class="yes">Brenda 24 orësh</td><td class="no">1–2 javë</td></tr>
+            <tr><td>Ndryshime pas dërgimit</td><td class="yes">Falas dhe të menjëhershme</td><td class="no">Ribotim me kosto</td></tr>
+            <tr><td>Muzikë dhe animacion</td><td class="yes">Po</td><td class="no">Jo</td></tr>
+            <tr><td>Konfirmim i pjesëmarrjes</td><td class="yes">Automatik (RSVP)</td><td class="no">Me telefon</td></tr>
+            <tr><td>Kosto mesatare</td><td class="yes">15–49€</td><td class="no">150€+</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -577,18 +614,31 @@
   const previewFrame = document.getElementById('previewFrame');
   const previewClose = document.getElementById('previewClose');
 
-  document.querySelectorAll('.link-view').forEach(btn => {
-    btn.addEventListener('click', () => {
-      previewFrame.src = btn.dataset.src;
-      overlay.classList.add('is-open');
-      previewClose.focus();
-    });
-  });
+  // Remembers the page scroll position so we can restore it exactly
+  // after unlocking the body (iOS Safari scroll-lock technique).
+  let savedScrollY = 0;
+
+  function openPreview(src){
+    savedScrollY = window.scrollY;
+    previewFrame.src = src;
+    overlay.classList.add('is-open');
+    document.body.classList.add('modal-open');
+    document.body.style.top = `-${savedScrollY}px`;
+    previewClose.focus();
+  }
 
   function closePreview(){
     overlay.classList.remove('is-open');
     previewFrame.src = 'about:blank';
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    window.scrollTo(0, savedScrollY);
   }
+
+  document.querySelectorAll('.link-view').forEach(btn => {
+    btn.addEventListener('click', () => openPreview(btn.dataset.src));
+  });
+
   previewClose.addEventListener('click', closePreview);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closePreview(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePreview(); });
