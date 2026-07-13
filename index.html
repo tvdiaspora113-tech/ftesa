@@ -2,7 +2,7 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ftesa-Digjitale — Ftesa Digjitale për Dasma, Fejesa</title>
 <meta name="description" content="Krijo ftesa digjitale unike për dasma, fejesa, syneti e kanagjeqe. Zarf me vulë, muzikë, RSVP dhe galeri — gjithçka në një link.">
 <style>
@@ -18,8 +18,12 @@
     --serif: 'Iowan Old Style','Palatino Linotype', Georgia, 'Times New Roman', serif;
     --display: 'Didot','Bodoni MT','Playfair Display', Georgia, serif;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  html,body{
+    max-width:100%;
+    overflow-x:hidden; /* prevents the rotated phone mockup from creating horizontal scroll on iPhone Safari */
+  }
   body{
     margin:0;
     background:var(--ivory);
@@ -37,10 +41,12 @@
   header{
     position:sticky;top:0;z-index:50;
     background:rgba(247,241,230,0.92);
+    -webkit-backdrop-filter:blur(8px);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top); /* iPhone notch/Dynamic Island */
   }
-  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;position:relative;}
   .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:1.3rem;letter-spacing:0.03em;color:var(--wine-deep);}
   .brand .seal{
     width:28px;height:28px;border-radius:50%;
@@ -56,12 +62,37 @@
     display:inline-block;padding:12px 26px;font-size:0.88rem;letter-spacing:0.04em;
     border-radius:2px;border:1px solid transparent;cursor:pointer;transition:all .25s;
     font-family:var(--serif);
+    -webkit-appearance:none;
+    appearance:none;
+    touch-action:manipulation;
   }
   .btn-primary{background:var(--wine-deep);color:var(--ivory);}
   .btn-primary:hover{background:var(--wine);}
   .btn-ghost{border-color:var(--line);color:var(--ink);}
   .btn-ghost:hover{border-color:var(--wine-deep);}
-  .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;color:var(--wine-deep);cursor:pointer;}
+  .menu-toggle{
+    display:none;background:none;border:none;font-size:1.6rem;color:var(--wine-deep);
+    cursor:pointer;touch-action:manipulation;-webkit-appearance:none;appearance:none;
+    padding:6px 4px;line-height:1;
+  }
+
+  /* Mobile dropdown menu (built from the same .navlinks/.navcta, shown via .menu-open) */
+  .mobile-menu{
+    display:none;
+    position:absolute;
+    top:100%;left:0;right:0;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 20px 30px -20px rgba(36,28,21,0.25);
+    padding:8px 32px 20px;
+  }
+  .mobile-menu.open{display:block;}
+  .mobile-menu a{
+    display:block;padding:14px 0;font-size:1rem;border-bottom:1px solid var(--line);color:var(--ink);
+  }
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu .mobile-cta{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+  .mobile-menu .mobile-cta .btn{width:100%;text-align:center;}
 
   /* HERO */
   .hero{
@@ -101,7 +132,10 @@
     width:60px;height:6px;border-radius:4px;background:#0a0806;z-index:2;
   }
   .phone-screen{width:100%;height:100%;border-radius:24px;overflow:hidden;background:var(--wine-deep);}
-  .phone-screen iframe{width:225%;height:225%;transform:scale(0.444);transform-origin:top left;border:0;}
+  .phone-screen iframe{
+    width:225%;height:225%;transform:scale(0.444);transform-origin:top left;border:0;
+    pointer-events:none; /* stops the scaled preview from trapping page-scroll touches in Safari */
+  }
   .phone-badge{
     position:absolute;bottom:-16px;right:-14px;
     background:var(--gold);color:var(--wine-deep);
@@ -171,7 +205,7 @@
   .cta-final h2{margin-bottom:10px;}
   .cta-final p{opacity:0.75;margin-bottom:34px;}
 
-  footer{background:var(--wine-deep);color:var(--ivory);padding:60px 0 30px;}
+  footer{background:var(--wine-deep);color:var(--ivory);padding:60px 0 30px;padding-bottom:calc(30px + env(safe-area-inset-bottom));}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:40px;}
   footer .brand{color:var(--gold-soft);}
   footer p{opacity:0.65;font-size:0.92rem;max-width:340px;}
@@ -182,8 +216,10 @@
 
   @media (max-width: 900px){
     .navlinks{display:none;}
+    .navcta{display:none;}
     .menu-toggle{display:block;}
     .hero{grid-template-columns:1fr;padding-top:60px;}
+    .hero-visual{margin-top:20px;}
     .steps{grid-template-columns:1fr 1fr;}
     .step{border-right:none;border-bottom:1px solid var(--line);padding-bottom:28px;}
     .feature-grid{grid-template-columns:1fr;}
@@ -192,6 +228,11 @@
     .compare-vs{padding:16px 0;border:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
     .footer-grid{grid-template-columns:1fr;}
   }
+
+  @media (max-width: 480px){
+    .wrap{padding:0 20px;}
+    .phone{width:min(70vw,260px);}
+  }
 </style>
 </head>
 <body>
@@ -199,7 +240,7 @@
 <header>
   <div class="wrap">
     <nav>
-  <a href="https://www.albtv.online" class="brand"><span class="seal"></span>Ftesa-Digjitale</a>
+      <a href="https://www.albtv.online" class="brand"><span class="seal"></span>Ftesa-Digjitale</a>
       <div class="navlinks">
         <a href="koleksioni.html">Ftesat Tona</a>
         <a href="#si-funksionon">Si Funksionon</a>
@@ -211,7 +252,19 @@
         <a href="koleksioni.html" class="btn btn-ghost">Ftesat Tona</a>
         <a href="koleksioni.html" class="btn btn-primary">Ftesa tjera</a>
       </div>
-      <button class="menu-toggle">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Hap menynë" aria-expanded="false">☰</button>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="koleksioni.html">Ftesat Tona</a>
+        <a href="#si-funksionon">Si Funksionon</a>
+        <a href="#cmimet">Çmimet</a>
+        <a href="#krahasimi">Pse digjitale</a>
+        <a href="#kontakt">Kontakt</a>
+        <div class="mobile-cta">
+          <a href="koleksioni.html" class="btn btn-ghost">Ftesat Tona</a>
+          <a href="koleksioni.html" class="btn btn-primary">Ftesa tjera</a>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
@@ -404,6 +457,37 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Mobile menu toggle (the hamburger button previously had no behavior on small screens)
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    if(!toggle || !menu) return;
+
+    toggle.addEventListener('click', function(){
+      var isOpen = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.textContent = isOpen ? '✕' : '☰';
+    });
+
+    // Close the menu after tapping a link, and on outside tap
+    menu.addEventListener('click', function(e){
+      if(e.target.tagName === 'A'){
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = '☰';
+      }
+    });
+    document.addEventListener('click', function(e){
+      if(!menu.contains(e.target) && e.target !== toggle && menu.classList.contains('open')){
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = '☰';
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
