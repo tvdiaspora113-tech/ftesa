@@ -475,8 +475,8 @@
       statusi: document.getElementById('fattend').value
     };
 
-    // KUJDES: Këtu vendos URL-në që e ke marrë nga Google Apps Script
-    const WEBHOOK_URL = 'VENDO_URL_E_WEBHOOK_KETU'; 
+   // Kjo është forma e saktë:
+    const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxOV3vqEFiVNMdzq3sJPDPyvx_1zb3KK_3SNrdbWpkdHsx0kLxH1jkWK0Uu_oIudXAsfA/exec'; 
 
     fetch(WEBHOOK_URL, {
       method: 'POST',
