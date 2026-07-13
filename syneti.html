@@ -219,13 +219,11 @@
   }
   .location h2{font-family:var(--display);font-weight:500;font-size:1.9rem;margin:10px 0 6px;}
   .location p.addr{opacity:0.8;margin:0 0 30px;font-size:1rem;}
-  .map-frame{
-    border:1px solid rgba(236,217,160,0.3);height:230px;
-    background:
-      linear-gradient(rgba(15,59,44,0.55),rgba(15,59,44,0.55)),
-      repeating-linear-gradient(45deg, #204d3b 0 12px, #1b4534 12px 24px);
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--display);font-style:italic;color:var(--gold-soft);
+ .map-frame{
+    border: 1px solid rgba(236,217,160,0.3);
+    height: 300px; /* E rritëm pak lartësinë që harta të jetë më e lexueshme */
+    overflow: hidden;
+    margin-bottom: 10px;
   }
   .map-btn{
     display:inline-block;margin-top:26px;padding:13px 32px;
@@ -376,14 +374,28 @@
     </div>
   </section>
 
-  <!-- LOCATION -->
+<!-- LOCATION -->
   <section class="location">
     <div class="wrap">
       <div class="eyebrow">Vendndodhja</div>
       <h2>Pallati i Pritjeve "Ambasada"</h2>
       <p class="addr">Rr. Nënë Tereza, Prishtinë, Kosovë</p>
-      <div class="map-frame">harta interaktive</div>
-      <a href="#" class="map-btn">Hap në Google Maps ↗</a>
+      
+      <!-- HARTA INTERAKTIVE E RE -->
+      <div class="map-frame">
+        <iframe
+          src="https://maps.google.com/maps?q=Pallati%20i%20Pritjeve%20Ambasada,%20Prishtina&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          width="100%" 
+          height="100%" 
+          style="border:0; display:block;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          title="Pallati i Pritjeve Ambasada Map">
+        </iframe>
+      </div>
+      
+      <!-- BUTONI PËR NAVIGIM DIRECT -->
+      <a href="https://maps.google.com/maps?daddr=Pallati+i+Pritjeve+Ambasada,+Prishtina" target="_blank" rel="noopener" class="map-btn">Hap në Google Maps ↗</a>
     </div>
   </section>
 
