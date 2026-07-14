@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Getoariiiiii — Ftesë për Ditëlindje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF6E8;
+    --paper:#FFFFFF;
+    --ink:#2B2118;
+    --coral:#FF6B4A;
+    --coral-deep:#E14F30;
+    --turquoise:#12A594;
+    --sunshine:#FFC93C;
+    --grape:#6C4AB6;
+    --line: rgba(43,33,24,0.12);
+    --display:'Baloo 2', 'Trebuchet MS', sans-serif;
+    --body:'Nunito', 'Trebuchet MS', sans-serif;
+    --vh100:100vh;
+  }
+  @supports (height:100dvh){ :root{ --vh100:100dvh; } }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{
+    margin:0;background:var(--cream);color:var(--ink);
+    font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  a{color:inherit;}
+  .wrap{max-width:560px;margin:0 auto;padding:0 22px;}
+
+  /* ============ INTRO: POP THE BALLOON ============ */
+  #intro-stage{
+    position:fixed;inset:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,201,60,0.35), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(18,165,148,0.28), transparent 50%),
+      linear-gradient(180deg, var(--cream), #FFEBD2 100%);
+    transition:opacity .7s ease, visibility .7s;
+    padding:24px;
+    height:var(--vh100);
+  }
+  #intro-stage.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  .balloon-wrap{
+    position:relative;text-align:center;cursor:pointer;
+    padding:10px;background:none;border:none;font-family:inherit;
+    touch-action:manipulation;
+  }
+  .balloon{
+    position:relative;width:120px;height:150px;margin:0 auto;
+    transition:transform .12s ease;
+  }
+  .balloon svg{width:100%;height:100%;filter:drop-shadow(0 18px 22px rgba(225,79,48,0.28));}
+  .balloon-wrap:active .balloon{transform:scale(0.94);}
+  #intro-stage.popping .balloon{animation:pop-shake .35s ease;}
+  #intro-stage.popping .balloon svg{animation:pop-fade .28s ease forwards;}
+  @keyframes pop-shake{
+    0%,100%{transform:rotate(0deg) scale(1);}
+    30%{transform:rotate(-6deg) scale(1.04);}
+    60%{transform:rotate(5deg) scale(1.08);}
+  }
+  @keyframes pop-fade{
+    0%{opacity:1;transform:scale(1);}
+    100%{opacity:0;transform:scale(1.5);}
+  }
+  .balloon-wrap .instruction{
+    margin-top:26px;font-family:var(--display);font-weight:700;letter-spacing:0.03em;
+    font-size:0.95rem;color:var(--grape);text-transform:uppercase;letter-spacing:0.12em;
+  }
+  .balloon-wrap .intro-name{
+    font-family:var(--display);font-weight:800;font-size:1.9rem;color:var(--coral-deep);margin-top:10px;
+  }
+  .confetti-piece{
+    position:fixed;top:-20px;z-index:110;border-radius:2px;pointer-events:none;
+    animation:confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall{
+    to{transform:translateY(115vh) rotate(540deg);opacity:0.9;}
+  }
+
+  main{opacity:0;transition:opacity .9s ease;}
+  main.show{opacity:1;}
+
+  .ornament-rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:26px 0;}
+  .ornament-rule .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);}
+  .ornament-rule .dot:nth-child(2){background:var(--sunshine);}
+  .ornament-rule .dot:nth-child(3){background:var(--turquoise);}
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:var(--vh100);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;position:relative;padding:64px 22px 56px;
+    background:
+      radial-gradient(circle at 14% 12%, rgba(255,201,60,0.4), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(255,107,74,0.28), transparent 42%),
+      radial-gradient(circle at 80% 88%, rgba(18,165,148,0.25), transparent 45%),
+      var(--paper);
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    font-family:var(--display);font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+    font-size:0.78rem;color:var(--turquoise);margin-bottom:14px;
+  }
+  .hero .age-numeral{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(5.5rem,32vw,9rem);
+    line-height:0.82;position:relative;display:inline-block;
+    background:linear-gradient(160deg, var(--coral) 0%, var(--sunshine) 55%, var(--turquoise) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero h1{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(2.1rem,8vw,3.1rem);
+    color:var(--ink);margin:6px 0 4px;letter-spacing:0.01em;
+  }
+  .hero .event-title{
+    font-family:var(--body);font-weight:600;font-style:italic;font-size:1.02rem;
+    color:var(--coral-deep);margin:0;
+  }
+  .hero p.msg{
+    max-width:380px;margin:22px auto 0;font-size:1rem;opacity:0.82;line-height:1.75;
+  }
+  .hero .date-strip{
+    margin-top:30px;font-family:var(--display);font-weight:700;font-size:0.95rem;letter-spacing:0.03em;
+    color:var(--paper);background:var(--grape);
+    border-radius:100px;padding:12px 26px;
+  }
+  .scroll-cue{
+    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--grape);opacity:0.6;
+    display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--display);font-weight:600;
+  }
+  .scroll-cue .stick{width:16px;height:16px;border-right:2px solid var(--grape);border-bottom:2px solid var(--grape);transform:rotate(45deg);animation:bob 1.6s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0);}50%{transform:rotate(45deg) translate(4px,4px);}}
+
+  /* ============ COUNTDOWN ============ */
+  .countdown-section{background:var(--grape);padding:56px 0 50px;text-align:center;color:var(--paper);}
+  .eyebrow-light{
+    font-family:var(--display);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+    font-size:0.76rem;color:var(--sunshine);
+  }
+  .countdown-section h2{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,5vw,1.8rem);margin:8px 0 0;}
+  .countdown{display:flex;justify-content:center;gap:10px;margin-top:28px;flex-wrap:wrap;}
+  .count-box{
+    width:72px;background:rgba(255,255,255,0.1);color:var(--paper);border-radius:16px;
+    padding:14px 0;border:1px solid rgba(255,255,255,0.18);
+  }
+  .count-box .num{font-family:var(--display);font-size:1.7rem;font-weight:800;color:var(--sunshine);}
+  .count-box .lbl{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.75;margin-top:2px;}
+
+  /* ============ PROGRAM ============ */
+  .program{background:var(--cream);padding:60px 0 20px;}
+  .section-title{text-align:center;margin-bottom:44px;}
+  .section-title h2{
+    font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,5vw,2rem);
+    color:var(--ink);margin:8px 0 0;
+  }
+  .t-item{
+    display:flex;gap:16px;margin-bottom:16px;position:relative;
+    background:var(--paper);border-radius:18px;padding:18px 18px;border:1px solid var(--line);
+    box-shadow:0 8px 20px -14px rgba(43,33,24,0.25);
+  }
+  .t-time{
+    font-family:var(--display);font-weight:800;color:var(--paper);font-size:0.92rem;
+    width:58px;flex-shrink:0;text-align:center;align-self:flex-start;
+    background:var(--coral);border-radius:10px;padding:8px 0;
+  }
+  .t-body h3{margin:0 0 4px;font-family:var(--display);font-size:1.06rem;color:var(--ink);font-weight:700;}
+  .t-body p{margin:0;font-size:0.9rem;opacity:0.68;line-height:1.55;}
+
+  /* ============ VENUE ============ */
+  .venue{background:var(--paper);padding:64px 0;text-align:center;}
+  .venue .venue-name{
+    font-family:var(--display);font-weight:800;font-size:1.7rem;margin:10px 0 4px;color:var(--ink);
+  }
+  .venue p.addr{opacity:0.65;margin:0 0 24px;font-size:0.98rem;}
+  .venue-frame{
+    height:280px;border-radius:20px;border:1px solid var(--line);
+    overflow:hidden;margin-bottom:8px;
+  }
+  .map-btn{
+    display:inline-block;margin-top:22px;padding:14px 30px;
+    background:var(--turquoise);color:var(--paper);border-radius:100px;
+    font-family:var(--display);font-weight:700;letter-spacing:0.02em;font-size:0.9rem;
+    transition:all .22s;min-height:44px;
+  }
+  .map-btn:hover, .map-btn:active{background:#0d8377;}
+
+  /* ============ DRESS CODE ============ */
+  .dresscode{background:var(--cream);padding:56px 0;text-align:center;}
+  .dresscode .swatches{display:flex;justify-content:center;gap:16px;margin-top:24px;flex-wrap:wrap;}
+  .swatch{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .swatch .sw{width:46px;height:46px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 4px 10px rgba(43,33,24,0.15);}
+  .swatch span{font-size:0.74rem;letter-spacing:0.03em;opacity:0.75;font-weight:600;}
+
+  /* ============ RSVP ============ */
+  .rsvp{background:var(--paper);padding:64px 0;text-align:center;}
+  .rsvp form{max-width:380px;margin:32px auto 0;display:flex;flex-direction:column;gap:14px;text-align:left;}
+  .rsvp label{font-size:0.74rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--grape);margin-bottom:5px;display:block;font-weight:700;}
+  .rsvp input, .rsvp select{
+    width:100%;padding:13px 14px;border:2px solid var(--line);background:var(--cream);
+    border-radius:12px;font-family:var(--body);font-size:1rem;color:var(--ink);
+    min-height:44px;-webkit-appearance:none;appearance:none;
+  }
+  .rsvp input:focus, .rsvp select:focus{outline:none;border-color:var(--turquoise);}
+  .rsvp button{
+    margin-top:6px;padding:14px 0;background:var(--coral);color:var(--paper);
+    border:none;border-radius:100px;font-family:var(--display);font-size:0.96rem;font-weight:700;
+    letter-spacing:0.03em;cursor:pointer;transition:background .22s;min-height:48px;
+  }
+  .rsvp button:hover, .rsvp button:active{background:var(--coral-deep);}
+  .rsvp-confirm{
+    display:none;max-width:380px;margin:32px auto 0;padding:24px;border-radius:16px;
+    background:var(--grape);color:var(--paper);
+    font-family:var(--display);font-weight:600;font-size:1.02rem;
+  }
+  .rsvp-confirm.show{display:block;}
+
+  /* ============ CLOSING ============ */
+  .closing{
+    background:linear-gradient(180deg, var(--cream), #FFE7CB);
+    color:var(--ink);text-align:center;padding:70px 0 56px;
+  }
+  .closing blockquote{
+    font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.6;
+    max-width:420px;margin:16px auto;color:var(--coral-deep);font-style:italic;
+  }
+  .closing .signoff{margin-top:22px;font-size:0.94rem;opacity:0.75;}
+  .closing .signoff strong{font-family:var(--display);font-weight:800;color:var(--ink);font-size:1.15rem;}
+
+  footer.foot{
+    background:var(--grape);color:rgba(255,246,232,0.65);text-align:center;
+    padding:22px 0;padding-bottom:calc(22px + env(safe-area-inset-bottom));
+    font-size:0.75rem;letter-spacing:0.02em;
+  }
+
+  @media (max-width:420px){
+    .countdown{gap:8px;}
+    .count-box{width:64px;padding:12px 0;}
+    .t-time{width:52px;font-size:0.84rem;}
+    .dresscode .swatches{gap:10px;}
+    .wrap{padding:0 18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- INTRO: POP THE BALLOON -->
+<div id="intro-stage">
+  <button class="balloon-wrap" id="balloon" aria-label="Prek balonën për të hapur ftesën">
+    <div class="balloon">
+      <svg viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="balloonGrad" cx="35%" cy="28%" r="75%">
+            <stop offset="0%" stop-color="#FFD98C"/>
+            <stop offset="45%" stop-color="#FF6B4A"/>
+            <stop offset="100%" stop-color="#C9422A"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="60" cy="66" rx="52" ry="60" fill="url(#balloonGrad)"/>
+        <path d="M52 122 L60 134 L68 122 Z" fill="#C9422A"/>
+        <path d="M60 134 C 40 150, 80 155, 60 168" stroke="#6C4AB6" stroke-width="2" fill="none"/>
+        <ellipse cx="42" cy="42" rx="12" ry="18" fill="rgba(255,255,255,0.35)"/>
+      </svg>
+    </div>
+    <div class="instruction">Prek Balonën</div>
+    <div class="intro-name">Getoariiiiii mbush 25</div>
+  </button>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Ju ftojmë me kënaqësi në</div>
+    <div class="age-numeral">25</div>
+    <h1>Getoariiiiii</h1>
+    <div class="event-title">— një festë e çmendur për 25 vjetorin —</div>
+    <p class="msg">Njëzet e pesë vjet aventura, qeshje dhe kujtime të paharrueshme. Ejani ta hapim këtë kapitull të ri bashkë, me muzikë, torte dhe shumë surpriza!</p>
+    <div class="date-strip">E Shtunë · 19 Shtator 2026 · Ora 21:00</div>
+    <div class="scroll-cue"><span>zbrit poshtë</span><span class="stick"></span></div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section">
+    <div class="wrap">
+      <div class="eyebrow-light">Numërimi mbrapsht</div>
+      <h2>Sa kohë ka mbetur?</h2>
+      <div class="countdown" id="countdown">
+        <div class="count-box"><div class="num" id="cd-days">00</div><div class="lbl">ditë</div></div>
+        <div class="count-box"><div class="num" id="cd-hours">00</div><div class="lbl">orë</div></div>
+        <div class="count-box"><div class="num" id="cd-min">00</div><div class="lbl">min</div></div>
+        <div class="count-box"><div class="num" id="cd-sec">00</div><div class="lbl">sek</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section class="program">
+    <div class="wrap">
+      <div class="section-title">
+        <div class="eyebrow-light" style="color:var(--turquoise);">Programi i mbrëmjes</div>
+        <h2>Si do të kalojë nata</h2>
+      </div>
+      <div class="t-item">
+        <div class="t-time">21:00</div>
+        <div class="t-body">
+          <h3>Mirëpritja</h3>
+          <p>Pritje me kokteje dhe muzikë në hyrje të lokalit.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">22:00</div>
+        <div class="t-body">
+          <h3>Darka</h3>
+          <p>Darkë live me miqtë dhe familjen në sallën kryesore.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">23:00</div>
+        <div class="t-body">
+          <h3>Torta & surprizat</h3>
+          <p>Prerja e tortës dhe ndonjë surprizë e vogël për të ftuarit.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">23:30</div>
+        <div class="t-body">
+          <h3>Festa vazhdon</h3>
+          <p>DJ live dhe pistë vallëzimi hapur deri vonë natën.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section class="venue">
+    <div class="wrap">
+      <div class="eyebrow-light" style="color:var(--coral-deep);">Vendndodhja</div>
+      <div class="venue-name">Sky Lounge, Prishtinë</div>
+      <p class="addr">Rr. Bill Clinton, 10000 Prishtinë, Kosovë</p>
+      <div class="venue-frame">
+        <iframe
+          src="https://maps.google.com/maps?q=Prishtina&t=&z=14&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0; display:block;"
+          allowfullscreen=""
+          loading="lazy"
+          title="Harta e vendndodhjes">
+        </iframe>
+      </div>
+      <a href="https://maps.google.com/maps?daddr=Prishtina" target="_blank" rel="noopener" class="map-btn">Hap në Google Maps ↗</a>
+    </div>
+  </section>
+
+  <!-- DRESS CODE -->
+  <section class="dresscode">
+    <div class="wrap">
+      <div class="eyebrow-light" style="color:var(--grape);">Kodi i veshjes</div>
+      <div class="venue-name" style="font-size:1.35rem;">Casual chic — ngjyra të gëzueshme</div>
+      <div class="swatches">
+        <div class="swatch"><div class="sw" style="background:#FF6B4A;"></div><span>Coral</span></div>
+        <div class="swatch"><div class="sw" style="background:#FFC93C;"></div><span>Sunshine</span></div>
+        <div class="swatch"><div class="sw" style="background:#12A594;"></div><span>Turquoise</span></div>
+        <div class="swatch"><div class="sw" style="background:#6C4AB6;"></div><span>Grape</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp">
+    <div class="wrap">
+      <div class="section-title">
+        <div class="eyebrow-light" style="color:var(--turquoise);">Konfirmimi</div>
+        <h2>A do të na bashkoheni?</h2>
+      </div>
+      <form id="rsvp-form">
+        <div>
+          <label for="fname">Emri dhe Mbiemri</label>
+          <input type="text" id="fname" required placeholder="p.sh. Dritan Hoxha">
+        </div>
+        <div>
+          <label for="fguests">Numri i të ftuarve</label>
+          <select id="fguests">
+            <option>1 person</option>
+            <option>2 persona</option>
+            <option>3 persona</option>
+            <option>4+ persona</option>
+          </select>
+        </div>
+        <div>
+          <label for="fattend">Pjesëmarrja</label>
+          <select id="fattend">
+            <option>Po, do të vij me kënaqësi</option>
+            <option>Fatkeqësisht nuk mund të vij</option>
+          </select>
+        </div>
+        <button type="submit">Dërgo Konfirmimin</button>
+      </form>
+      <div class="rsvp-confirm" id="rsvp-confirm">Faleminderit! Konfirmimi juaj u ruajt me sukses — presim me padurim t'ju shohim në festë. 🎉</div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="wrap">
+      <div class="ornament-rule"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <blockquote>"25 vjet janë vetëm pjesa e parë e aventurës."</blockquote>
+      <div class="signoff">Me shumë dashuri ju pres,<br><strong>Getoariiiiii</strong></div>
+    </div>
+  </section>
+
+  <footer class="foot">Krijuar me kujdes nga Ftesa-Digjitale</footer>
+
+</main>
+
+<script>
+  const balloon = document.getElementById('balloon');
+  const stage = document.getElementById('intro-stage');
+  const main = document.getElementById('main');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function spawnConfetti(){
+    if(reduceMotion) return;
+    const colors = ['#FF6B4A','#FFC93C','#12A594','#6C4AB6'];
+    for(let i=0;i<26;i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      const size = 6 + Math.random()*6;
+      piece.style.width = size + 'px';
+      piece.style.height = (size*0.4) + 'px';
+      piece.style.left = Math.random()*100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.animationDuration = (1.6 + Math.random()*1.2) + 's';
+      piece.style.animationDelay = (Math.random()*0.3) + 's';
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 3200);
+    }
+  }
+
+  function openInvitation(){
+    stage.classList.add('popping');
+    spawnConfetti();
+    setTimeout(() => {
+      stage.classList.add('hidden');
+      main.classList.add('show');
+      document.body.style.overflow = 'auto';
+    }, 500);
+  }
+  document.body.style.overflow = 'hidden';
+  balloon.addEventListener('click', openInvitation);
+  balloon.addEventListener('keypress', (e) => { if(e.key === 'Enter' || e.key === ' ') openInvitation(); });
+
+  // Countdown
+  const eventDate = new Date('2026-09-19T21:00:00');
+  function updateCountdown(){
+    const now = new Date();
+    let diff = eventDate - now;
+    if(diff < 0) diff = 0;
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-min').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-sec').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // RSVP — integrim me Google Sheets
+  document.getElementById('rsvp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('button');
+    submitBtn.textContent = 'Duke dërguar...';
+    submitBtn.disabled = true;
+
+    const formData = {
+      emri: document.getElementById('fname').value,
+      mysafire: document.getElementById('fguests').value,
+      statusi: document.getElementById('fattend').value
+    };
+
+    // KUJDES: Këtu vendos URL-në që e ke marrë nga Google Apps Script
+    const WEBHOOK_URL = 'VENDO_URL_E_WEBHOOK_KETU';
+
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(() => {
+      document.getElementById('rsvp-form').style.display = 'none';
+      document.getElementById('rsvp-confirm').classList.add('show');
+    })
+    .catch(error => {
+      console.error('Gabim:', error);
+      alert('Ndodhi një problem në dërgim. Ju lutem provoni përsëri.');
+      submitBtn.textContent = 'Dërgo Konfirmimin';
+      submitBtn.disabled = false;
+    });
+  });
+</script>
+
+</body>
+</html>
