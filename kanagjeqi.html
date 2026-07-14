@@ -556,8 +556,6 @@ applyConfig(CONFIG);
     if (e.key === "Enter" || e.key === " "){ e.preventDefault(); openBundle(); }
   });
 
-  setTimeout(openBundle, 1100);
-
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window){
     var io = new IntersectionObserver(function(entries){

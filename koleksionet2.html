@@ -236,7 +236,7 @@
   .step h3{font-size:1.02rem;color:var(--wine-deep);margin:0 0 8px;font-weight:600;}
   .step p{font-size:0.9rem;opacity:.75;margin:0;}
 
-  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:640px;margin:0 auto;}
   .price-card{
     background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:30px 24px;text-align:center;
     transition:box-shadow .25s ease, transform .25s ease;
@@ -312,6 +312,18 @@
     color:var(--ivory);font-size:0.8rem;letter-spacing:0.04em;opacity:.85;
   }
 
+  .cta-final{
+    background:linear-gradient(160deg,var(--wine-deep),var(--wine) 120%);
+    color:var(--ivory);text-align:center;padding:64px 0;
+  }
+  .cta-final h2{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.4rem);font-weight:400;margin:0 0 14px;color:var(--ivory);}
+  .cta-final p{font-size:1rem;opacity:.82;max-width:440px;margin:0 auto 30px;}
+  .cta-final .btn-primary{
+    background:var(--gold);color:var(--wine-deep);border-color:var(--gold);
+    padding:15px 32px;font-size:0.92rem;
+  }
+  .cta-final .btn-primary:hover, .cta-final .btn-primary:focus-visible{background:var(--gold-soft);}
+
   footer{background:var(--wine-deep);color:var(--ivory);padding:36px 0 26px;padding-bottom:calc(26px + env(safe-area-inset-bottom));}
   .footer-bottom{display:flex;justify-content:space-between;font-size:0.78rem;opacity:0.6;flex-wrap:wrap;gap:8px;}
 
@@ -342,6 +354,8 @@
     .section p.section-lead{margin-bottom:32px;}
     .price-card{padding:26px 20px;}
     .scroll-fade-hint{display:block;}
+    .cta-final{padding:48px 0;}
+    .cta-final .btn-primary{width:100%;max-width:320px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -386,10 +400,11 @@
     <nav class="category-nav" role="tablist" aria-label="Kategoritë e ftesave">
       <div class="category-nav-inner">
         <button class="cat-tab" role="tab" data-target="dasma" aria-selected="true">Dasma <span class="count">3</span></button>
-        <button class="cat-tab is-empty" role="tab" data-target="fejesa" aria-selected="false">Fejesa <span class="count">0</span></button>
+        <button class="cat-tab" role="tab" data-target="fejesa" aria-selected="false">Fejesa <span class="count">1</span></button>
         <button class="cat-tab" role="tab" data-target="ditelindje" aria-selected="false">Ditëlindje <span class="count">2</span></button>
         <button class="cat-tab" role="tab" data-target="syneti" aria-selected="false">Syneti <span class="count">1</span></button>
-        <button class="cat-tab is-empty" role="tab" data-target="kanagjeqe" aria-selected="false">Kanagjeqe <span class="count">0</span></button>
+        <button class="cat-tab" role="tab" data-target="baby" aria-selected="false">Baby Shower <span class="count">1</span></button>
+        <button class="cat-tab" role="tab" data-target="kanagjeqe" aria-selected="false">Kanagjeqe <span class="count">1</span></button>
       </div>
     </nav>
 
@@ -439,17 +454,27 @@
       </div>
     </div>
 
-    <!-- FEJESA (placeholder — no example uploaded yet) -->
+    <!-- FEJESA -->
     <div class="category-panel" id="panel-fejesa" role="tabpanel" hidden>
       <div class="panel-head">
         <h2>Koleksioni Fejesa</h2>
-        <p>Modele të reja për fejesa po përgatiten.</p>
+        <p>Modele të reja dhe elegante për ngjarjen tuaj speciale.</p>
       </div>
-      <div class="coming-soon">
-        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/></svg></div>
-        <h3>Së shpejti</h3>
-        <p>Koleksioni i fejesave është duke u krijuar. Ndërkohë, na kontaktoni për një dizajn të personalizuar.</p>
-        <a href="#kontakt" class="btn btn-ghost">Kërko dizajn të personalizuar</a>
+      <div class="phone-grid" style="grid-template-columns:1fr;max-width:270px;margin:0 auto;">
+        <div class="phone-item">
+          <h3 class="phone-title">Elegante</h3>
+          <p class="phone-subtitle">Dizajn i personalizuar</p>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-loader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="scroll-hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg><span>Rrëshqit poshtë</span></div>
+              <iframe src="fejesa.html" title="Koleksioni Fejesa — Elegante" loading="lazy" scrolling="yes"></iframe>
+            </div>
+          </div>
+          <div class="phone-actions">
+            <button class="link-view" data-src="fejesa.html" data-label="Koleksioni Fejesa — Elegante">Shiko në ekran të plotë ↗</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -509,17 +534,47 @@
       </div>
     </div>
 
-    <!-- KANAGJEQE (placeholder — no example uploaded yet) -->
+    <!-- BABY SHOWER -->
+<div class="category-panel" id="panel-baby" role="tabpanel" hidden>
+  <div class="panel-head">
+    <h2>Koleksioni Baby Shower</h2>
+    <p>Dizajn i butë dhe elegant për të pritur foshnjën tuaj.</p>
+  </div>
+  <div class="phone-grid" style="grid-template-columns:1fr;max-width:270px;margin:0 auto;">
+    <div class="phone-item">
+      <h3 class="phone-title">Model 01</h3>
+      <p class="phone-subtitle">I butë & elegant</p>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-loader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="scroll-hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg><span>Rrëshqit poshtë</span></div>
+          <iframe src="baby.html" title="Baby Shower — Model 01" loading="lazy" scrolling="yes"></iframe>
+        </div>
+      </div>
+      <div class="phone-actions"><button class="link-view" data-src="baby.html" data-label="Baby Shower — Model 01">Shiko në ekran të plotë ↗</button></div>
+    </div>
+  </div>
+</div>
+
+    <!-- KANAGJEQE -->
     <div class="category-panel" id="panel-kanagjeqe" role="tabpanel" hidden>
       <div class="panel-head">
         <h2>Koleksioni Kanagjeqe</h2>
-        <p>Ruajtje e traditës me dizajn modern — po vjen së shpejti.</p>
+        <p>Ruajtje e traditës me dizajn modern.</p>
       </div>
-      <div class="coming-soon">
-        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z"/></svg></div>
-        <h3>Së shpejti</h3>
-        <p>Koleksioni i kanagjeqeve është duke u krijuar. Ndërkohë, na kontaktoni për një dizajn të personalizuar.</p>
-        <a href="#kontakt" class="btn btn-ghost">Kërko dizajn të personalizuar</a>
+      <div class="phone-grid" style="grid-template-columns:1fr;max-width:270px;margin:0 auto;">
+        <div class="phone-item">
+          <h3 class="phone-title">Model 01</h3>
+          <p class="phone-subtitle">Tradicionale & Moderne</p>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-loader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="scroll-hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg><span>Rrëshqit poshtë</span></div>
+              <iframe src="kanagjeqi.html" title="Kanagjeqe — Model 01" loading="lazy" scrolling="yes"></iframe>
+            </div>
+          </div>
+          <div class="phone-actions"><button class="link-view" data-src="kanagjeqi.html" data-label="Kanagjeqe — Model 01">Shiko në ekran të plotë ↗</button></div>
+        </div>
       </div>
     </div>
 
@@ -554,16 +609,6 @@
       <h2>Çmimet</h2>
       <p class="section-lead">Zgjidhni paketën që ju përshtatet — pa kosto të fshehura.</p>
       <div class="pricing">
-        <div class="price-card">
-          <h3>Bazë</h3>
-          <div class="amount">25.99€</div>
-          <ul>
-            <li>1 model nga koleksioni</li>
-            <li>Personalizim teksti</li>
-            <li>Lidhje për ndarje</li>
-          </ul>
-          <a href="#kontakt" class="btn btn-ghost">Zgjidh</a>
-        </div>
         <div class="price-card featured">
           <h3>Premium</h3>
           <div class="amount">29.99€</div>
@@ -608,26 +653,13 @@
     </div>
   </section>
 
-  <section class="section" id="kontakt">
-    <div class="wrap">
-      <h2>Na kontaktoni</h2>
-      <p class="section-lead">Na shkruani për të filluar ftesën tuaj, ose kërkoni një model të personalizuar.</p>
-      <div class="contact-grid">
-        <form class="contact-form" onsubmit="return false;">
-          <input type="text" placeholder="Emri dhe mbiemri" required>
-          <input type="email" placeholder="Email-i" required>
-          <input type="tel" placeholder="Numri i telefonit">
-          <textarea placeholder="Më tregoni për festën tuaj..."></textarea>
-          <button type="submit" class="btn btn-primary">Dërgo mesazhin</button>
-        </form>
-        <div class="contact-details">
-          <p><span class="label">Email</span>info@ftesa-digjitale.com</p>
-          <p><span class="label">Telefon</span>+383 44 000 000</p>
-          <p><span class="label">Orari</span>E Hënë – E Shtunë, 09:00–18:00</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="cta-final" id="kontakt">
+  <div class="wrap">
+    <h2>Filloni historinë tuaj.</h2>
+    <p>Zgjidhni një dizajn, personalizojeni, dhe ndajeni me të ftuarit tuaj.</p>
+    <a href="https://wa.me/38348414980" class="btn btn-primary" target="_blank" rel="noopener">Na kontaktoni /WhatsApp</a>
+  </div>
+</section>
 </main>
 
 <footer>
