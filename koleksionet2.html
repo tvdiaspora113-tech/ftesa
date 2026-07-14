@@ -42,11 +42,10 @@
   }
   nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;position:relative;gap:12px;}
   .brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-size:1.2rem;letter-spacing:0.03em;color:var(--wine-deep);white-space:nowrap;}
-  .brand .seal{
-    width:26px;height:26px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 60%, var(--wine-deep) 100%);
-    box-shadow:0 1px 3px rgba(0,0,0,0.25) inset;flex-shrink:0;
-  }
+  .brand-mark{flex-shrink:0;display:block;}
+  .brand-word{display:flex;flex-direction:column;line-height:1;}
+  .brand-word .name{font-family:var(--display);font-size:1.15rem;letter-spacing:0.02em;color:var(--wine-deep);white-space:nowrap;}
+  .brand-word .name .amp{color:var(--gold);font-style:italic;}
   .navlinks{display:flex;gap:30px;font-size:0.9rem;letter-spacing:0.02em;}
   .navlinks a{position:relative;color:var(--ink);opacity:0.78;transition:opacity .2s;padding:6px 0;}
   .navlinks a:hover, .navlinks a:focus-visible{opacity:1;}
@@ -324,13 +323,22 @@
   }
   .cta-final .btn-primary:hover, .cta-final .btn-primary:focus-visible{background:var(--gold-soft);}
 
-  footer{background:var(--wine-deep);color:var(--ivory);padding:36px 0 26px;padding-bottom:calc(26px + env(safe-area-inset-bottom));}
-  .footer-bottom{display:flex;justify-content:space-between;font-size:0.78rem;opacity:0.6;flex-wrap:wrap;gap:8px;}
+  footer{background:var(--wine-deep);color:var(--ivory);padding:48px 0 26px;padding-bottom:calc(26px + env(safe-area-inset-bottom));}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:34px;}
+  footer .brand{color:var(--gold-soft);margin-bottom:14px;}
+  footer .brand-word .name{color:var(--gold-soft);}
+  footer .brand-mark{filter:brightness(1.15);}
+  footer p{opacity:0.65;font-size:0.9rem;max-width:320px;margin:0;}
+  footer h4{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;margin:0 0 14px;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{margin-bottom:9px;font-size:0.9rem;opacity:0.85;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.15);padding-top:20px;display:flex;justify-content:space-between;font-size:0.78rem;opacity:0.6;flex-wrap:wrap;gap:8px;}
 
   @media (max-width: 900px){
     .phone-grid{grid-template-columns:1fr 1fr;gap:44px 24px;}
     .steps, .pricing{grid-template-columns:1fr;max-width:420px;margin:0 auto;}
     .contact-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:26px;}
     .wrap{padding:0 22px;}
   }
   @media (max-width: 600px){
@@ -371,17 +379,38 @@
 <header>
   <div class="wrap">
     <nav>
-      <a href="https://www.ftesat.online" class="brand"><span class="seal"></span>Ftesa-Digjitale</a>
+      <a href="index.html" class="brand" aria-label="Ftesa-Digjitale — faqja kryesore">
+        <svg class="brand-mark" width="32" height="32" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <defs>
+            <radialGradient id="sealShine" cx="35%" cy="28%" r="75%">
+              <stop offset="0%" stop-color="#F3DDA6"/>
+              <stop offset="45%" stop-color="#B8863B"/>
+              <stop offset="100%" stop-color="#4C141C"/>
+            </radialGradient>
+            <linearGradient id="sealRing" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E4C88A"/>
+              <stop offset="100%" stop-color="#8C6326"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30.5" fill="url(#sealShine)"/>
+          <circle cx="32" cy="32" r="30.5" fill="none" stroke="url(#sealRing)" stroke-width="1.4"/>
+          <circle cx="32" cy="32" r="25.5" fill="none" stroke="#4C141C" stroke-width="0.6" opacity="0.5"/>
+          <text x="32" y="39" text-anchor="middle" font-family="'Didot','Bodoni MT','Playfair Display',Georgia,serif" font-size="22" fill="#F7F1E6" font-style="italic">F</text>
+          <path d="M18 46 Q32 52 46 46" fill="none" stroke="#F7F1E6" stroke-width="1" opacity="0.55"/>
+        </svg>
+        <span class="brand-word"><span class="name">Ftesa<span class="amp">-</span>Digjitale</span></span>
+      </a>
       <div class="navlinks" id="navlinks">
-        <a href="koleksioni.html">Ftesat Tona</a>
+        <a href="index.html">Kryefaqja</a>
+        <a href="koleksioni.html">Koleksioni Klasik</a>
         <a href="#si-funksionon">Si Funksionon</a>
         <a href="#cmimet">Çmimet</a>
         <a href="#krahasimi">Pse digjitale</a>
         <a href="#kontakt">Kontakt</a>
       </div>
       <div class="navcta">
-        <a href="#kontakt" class="btn btn-ghost">Hyrja</a>
-        <a href="#cmimet" class="btn btn-primary">Krijo Ftesë</a>
+        <a href="koleksioni.html" class="btn btn-ghost">Koleksioni Klasik</a>
+        <a href="#kontakt" class="btn btn-primary">Na Kontaktoni</a>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navlinks" aria-label="Hap menynë">☰</button>
     </nav>
@@ -607,27 +636,32 @@
   <section class="section" id="cmimet">
     <div class="wrap">
       <h2>Çmimet</h2>
-      <p class="section-lead">Zgjidhni paketën që ju përshtatet — pa kosto të fshehura.</p>
+      <p class="section-lead">Dy paketa. Pa surpriza. Paguani një herë — ftesa juaj qëndron online sa kohë të doni, pa abonim mujor.</p>
       <div class="pricing">
-        <div class="price-card featured">
-          <h3>Premium</h3>
+        <div class="price-card">
+          <h3>Ekonomike</h3>
           <div class="amount">29.99€</div>
           <ul>
-            <li>Çdo model nga koleksioni</li>
-            <li>Muzikë dhe animacione</li>
-            <li>Numërues i të ftuarve (RSVP)</li>
+            <li>Dizajn elegant, i personalizueshëm</li>
+            <li>Zarf me vulë</li>
+            <li>RSVP me konfirmim</li>
+            <li>Lista e të ftuarve</li>
+            <li>Link i personalizuar</li>
           </ul>
-          <a href="#kontakt" class="btn btn-primary">Zgjidh</a>
+          <a href="#kontakt" class="btn btn-ghost">Zgjidh Ekonomike</a>
         </div>
-        <div class="price-card">
-          <h3>Ekskluzive</h3>
+        <div class="price-card featured">
+          <h3>Premium</h3>
           <div class="amount">49.99€</div>
           <ul>
-            <li>Dizajn krejtësisht i personalizuar</li>
-            <li>Galeri fotosh dhe hartë</li>
-            <li>Suport prioritar</li>
+            <li>Gjithçka në Ekonomike</li>
+            <li>Muzikë në sfond</li>
+            <li>Galeri editoriale</li>
+            <li>Programi i ditës & countdown</li>
+            <li>Lokacioni në hartë</li>
+            <li>Statistika të RSVP-ve</li>
           </ul>
-          <a href="#kontakt" class="btn btn-ghost">Zgjidh</a>
+          <a href="#kontakt" class="btn btn-primary">Zgjidh Premium</a>
         </div>
       </div>
     </div>
@@ -664,6 +698,36 @@
 
 <footer>
   <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand" aria-label="Ftesa-Digjitale">
+          <svg class="brand-mark" width="36" height="36" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <circle cx="32" cy="32" r="30.5" fill="url(#sealShine)"/>
+            <circle cx="32" cy="32" r="30.5" fill="none" stroke="url(#sealRing)" stroke-width="1.4"/>
+            <circle cx="32" cy="32" r="25.5" fill="none" stroke="#4C141C" stroke-width="0.6" opacity="0.5"/>
+            <text x="32" y="39" text-anchor="middle" font-family="'Didot','Bodoni MT','Playfair Display',Georgia,serif" font-size="22" fill="#F7F1E6" font-style="italic">F</text>
+            <path d="M18 46 Q32 52 46 46" fill="none" stroke="#F7F1E6" stroke-width="1" opacity="0.55"/>
+          </svg>
+          <span class="brand-word"><span class="name">Ftesa<span class="amp">-</span>Digjitale</span></span>
+        </a>
+        <p>Ftesa digjitale për dasma, fejesa, syneti dhe kanagjeqe. Për momentet që meritojnë më shumë.</p>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="koleksioni.html">Koleksioni Klasik</a></li>
+          <li><a href="#si-funksionon">Si funksionon</a></li>
+          <li><a href="#cmimet">Çmimet</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Lidhje</h4>
+        <ul>
+          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html">Kryefaqja</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="footer-bottom">
       <span>© 2026 Ftesa-Digjitale. Të gjitha të drejtat e rezervuara.</span>
       <span>Bërë me kujdes në Kosovë</span>
