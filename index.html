@@ -46,14 +46,22 @@
     border-bottom:1px solid var(--line);
     padding-top:env(safe-area-inset-top); /* iPhone notch/Dynamic Island */
   }
-  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;position:relative;}
-  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:1.3rem;letter-spacing:0.03em;color:var(--wine-deep);}
-  .brand .seal{
-    width:28px;height:28px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 60%, var(--wine-deep) 100%);
-    box-shadow:0 1px 3px rgba(0,0,0,0.25) inset;
-    flex-shrink:0;
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;position:relative;}
+
+  /* LOGO */
+  .brand{display:flex;align-items:center;gap:12px;color:var(--wine-deep);}
+  .brand-mark{flex-shrink:0;display:block;}
+  .brand-word{display:flex;flex-direction:column;line-height:1;}
+  .brand-word .name{
+    font-family:var(--display);font-size:1.32rem;letter-spacing:0.02em;
+    color:var(--wine-deep);white-space:nowrap;
   }
+  .brand-word .name .amp{color:var(--gold);font-style:italic;}
+  .brand-word .tagline{
+    font-family:var(--serif);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+    color:var(--gold);opacity:0.85;margin-top:4px;
+  }
+
   .navlinks{display:flex;gap:34px;font-size:0.92rem;letter-spacing:0.02em;}
   .navlinks a{position:relative;color:var(--ink);opacity:0.8;transition:opacity .2s;padding-bottom:2px;}
   .navlinks a::after{
@@ -246,6 +254,9 @@
   footer{background:var(--wine-deep);color:var(--ivory);padding:60px 0 30px;padding-bottom:calc(30px + env(safe-area-inset-bottom));}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:40px;}
   footer .brand{color:var(--gold-soft);}
+  footer .brand-word .name{color:var(--gold-soft);}
+  footer .brand-word .tagline{color:var(--ivory);opacity:0.55;}
+  footer .brand-mark{filter:brightness(1.15);}
   footer p{opacity:0.65;font-size:0.92rem;max-width:340px;}
   footer h4{font-size:0.82rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;margin:0 0 16px;}
   footer ul{list-style:none;padding:0;margin:0;}
@@ -270,6 +281,9 @@
   @media (max-width: 480px){
     .wrap{padding:0 20px;}
     .phone{width:min(70vw,260px);}
+    .brand-word .name{font-size:1.12rem;}
+    .brand-word .tagline{font-size:0.52rem;letter-spacing:0.22em;}
+    .brand-mark{width:38px;height:38px;}
   }
 </style>
 </head>
@@ -278,7 +292,30 @@
 <header>
   <div class="wrap">
     <nav>
-      <a href="https://www.ftesat.online" class="brand"><span class="seal"></span>Ftesa-Digjitale</a>
+      <a href="https://www.ftesat.online" class="brand" aria-label="Ftesa-Digjitale — faqja kryesore">
+        <svg class="brand-mark" width="44" height="44" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <defs>
+            <radialGradient id="sealShine" cx="35%" cy="28%" r="75%">
+              <stop offset="0%" stop-color="#F3DDA6"/>
+              <stop offset="45%" stop-color="#B8863B"/>
+              <stop offset="100%" stop-color="#4C141C"/>
+            </radialGradient>
+            <linearGradient id="sealRing" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E4C88A"/>
+              <stop offset="100%" stop-color="#8C6326"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30.5" fill="url(#sealShine)"/>
+          <circle cx="32" cy="32" r="30.5" fill="none" stroke="url(#sealRing)" stroke-width="1.4"/>
+          <circle cx="32" cy="32" r="25.5" fill="none" stroke="#4C141C" stroke-width="0.6" opacity="0.5"/>
+          <text x="32" y="39" text-anchor="middle" font-family="'Didot','Bodoni MT','Playfair Display',Georgia,serif" font-size="22" fill="#F7F1E6" font-style="italic">F</text>
+          <path d="M18 46 Q32 52 46 46" fill="none" stroke="#F7F1E6" stroke-width="1" opacity="0.55"/>
+        </svg>
+        <span class="brand-word">
+          <span class="name">Ftesa<span class="amp">-</span>Digjitale</span>
+          <span class="tagline">Studio Ftesash</span>
+        </span>
+      </a>
       <div class="navlinks">
         <a href="koleksioni.html">Ftesat tona</a>
         <a href="#si-funksionon">Si funksionon</a>
@@ -473,7 +510,19 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="brand" style="margin-bottom:14px;">Ftesa-Digjitale</div>
+        <a href="https://www.ftesat.online" class="brand" style="margin-bottom:14px;" aria-label="Ftesa-Digjitale">
+          <svg class="brand-mark" width="40" height="40" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <circle cx="32" cy="32" r="30.5" fill="url(#sealShine)"/>
+            <circle cx="32" cy="32" r="30.5" fill="none" stroke="url(#sealRing)" stroke-width="1.4"/>
+            <circle cx="32" cy="32" r="25.5" fill="none" stroke="#4C141C" stroke-width="0.6" opacity="0.5"/>
+            <text x="32" y="39" text-anchor="middle" font-family="'Didot','Bodoni MT','Playfair Display',Georgia,serif" font-size="22" fill="#F7F1E6" font-style="italic">F</text>
+            <path d="M18 46 Q32 52 46 46" fill="none" stroke="#F7F1E6" stroke-width="1" opacity="0.55"/>
+          </svg>
+          <span class="brand-word">
+            <span class="name">Ftesa<span class="amp">-</span>Digjitale</span>
+            <span class="tagline">Studio Ftesash</span>
+          </span>
+        </a>
         <p>Ftesa digjitale për dasma, fejesa, syneti dhe kanagjeqe. Për momentet që meritojnë më shumë.</p>
       </div>
       <div>
